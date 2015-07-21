@@ -4,7 +4,7 @@
   <subtitle><![CDATA[幽幽一缕香，飘在深深旧梦中，宛如挥手袖底风，淡淡回首，也无风雨也无晴。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.liuhaiming.me/"/>
-  <updated>2015-03-26T02:36:43.000Z</updated>
+  <updated>2015-07-21T18:01:14.000Z</updated>
   <id>http://www.liuhaiming.me/</id>
   
   <author>
@@ -15,11 +15,37 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[setImmediate,setTimeout,nextTick的区别是什么]]></title>
+    <link href="http://www.liuhaiming.me/2015/07/22/nexttick_immediate/"/>
+    <id>http://www.liuhaiming.me/2015/07/22/nexttick_immediate/</id>
+    <published>2015-07-21T16:00:00.000Z</published>
+    <updated>2015-07-21T18:01:14.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="区别">区别</h2><p>1、nextTick和setImmediate主要的区别在于任务插入的位置nextTick的插入位置是在当前帧的末尾、io回调之前，如果nextTick过多，会导致io回调不断延后setImmediate的插入位置是在下一帧，不会影响io回调。</p>
+<p>2、Nodejs的特点是事件驱动，异步I/O产生的高并发，产生此特点的引擎是事件循环，事件被分门别类地归到对应的事件观察者上，比如idle观察者，定时器观察者，I/O观察者等等，事件循环每次循环称为Tick，每次Tick按照先后顺序从事件观察者中取出事件进行处理。<br>调用setTimeout()时创建的计时器会被放入定时器观察者内部的红黑树中，每次Tick时，会从该红黑树中检查定时器是否超过定时时间，超过的话，就立即执行对应的回调函数。由于定时器是超时触发，这会导致触发精确度降低。</p>
+<h2 id="代码例子">代码例子</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nextTick</span><span class="params">(msg, cb)</span> </span>&#123;</span><br><span class="line">  process.nextTick(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'tick: '</span> + msg);</span><br><span class="line">    <span class="keyword">if</span> (cb) &#123;</span><br><span class="line">      cb();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">immediate</span><span class="params">(msg, cb)</span> </span>&#123;</span><br><span class="line">  setImmediate(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'immediate : '</span> + msg);</span><br><span class="line">    <span class="keyword">if</span> (cb) &#123;</span><br><span class="line">      cb();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">nextTick(<span class="string">'1'</span>);</span><br><span class="line">nextTick(<span class="string">'2'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  nextTick(<span class="string">'10'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">immediate(<span class="string">'3'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  nextTick(<span class="string">'5'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">nextTick(<span class="string">'7'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  immediate(<span class="string">'9'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">immediate(<span class="string">'4'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  nextTick(<span class="string">'8'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> n = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> timer = setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  n++;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'interval:'</span>, n);</span><br><span class="line">  nextTick(<span class="string">'tick from interval: '</span> +  n);</span><br><span class="line">  nextTick(<span class="string">'another tick from interval: '</span> +  n);</span><br><span class="line">  immediate(<span class="string">'immediate from interval: '</span> + n);</span><br><span class="line">  immediate(<span class="string">'another immediate from interval: '</span> + n);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( n === <span class="number">3</span> ) &#123;</span><br><span class="line">    clearInterval(timer);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'the last line of the program.'</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="结果">结果</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">the last line of the program.</span><br><span class="line"><span class="string">tick:</span> <span class="number">1</span></span><br><span class="line"><span class="string">tick:</span> <span class="number">2</span></span><br><span class="line"><span class="string">tick:</span> <span class="number">7</span></span><br><span class="line"><span class="string">tick:</span> <span class="number">10</span></span><br><span class="line"><span class="string">interval:</span> <span class="number">1</span></span><br><span class="line"><span class="string">tick:</span> tick from <span class="string">interval:</span> <span class="number">1</span></span><br><span class="line"><span class="string">tick:</span> another tick from <span class="string">interval:</span> <span class="number">1</span></span><br><span class="line"><span class="string">immediate :</span> <span class="number">3</span></span><br><span class="line"><span class="string">immediate :</span> <span class="number">4</span></span><br><span class="line"><span class="string">immediate :</span> <span class="number">9</span></span><br><span class="line"><span class="string">immediate :</span> immediate from <span class="string">interval:</span> <span class="number">1</span></span><br><span class="line"><span class="string">immediate :</span> another immediate from <span class="string">interval:</span> <span class="number">1</span></span><br><span class="line"><span class="string">tick:</span> <span class="number">5</span></span><br><span class="line"><span class="string">tick:</span> <span class="number">8</span></span><br><span class="line"><span class="string">interval:</span> <span class="number">2</span></span><br><span class="line"><span class="string">tick:</span> tick from <span class="string">interval:</span> <span class="number">2</span></span><br><span class="line"><span class="string">tick:</span> another tick from <span class="string">interval:</span> <span class="number">2</span></span><br><span class="line"><span class="string">immediate :</span> immediate from <span class="string">interval:</span> <span class="number">2</span></span><br><span class="line"><span class="string">immediate :</span> another immediate from <span class="string">interval:</span> <span class="number">2</span></span><br><span class="line"><span class="string">interval:</span> <span class="number">3</span></span><br><span class="line"><span class="string">tick:</span> tick from <span class="string">interval:</span> <span class="number">3</span></span><br><span class="line"><span class="string">tick:</span> another tick from <span class="string">interval:</span> <span class="number">3</span></span><br><span class="line"><span class="string">immediate :</span> immediate from <span class="string">interval:</span> <span class="number">3</span></span><br><span class="line"><span class="string">immediate :</span> another immediate from <span class="string">interval:</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h2 id="Maximum_call_stack_size_exceeded错误的原因">Maximum call stack size exceeded错误的原因</h2><p>之所以会发生Maximum call stack size exceeded,因为process.maxTickDepth的缺省值是1000，如果递归调用nextTick只能调用1000次，超过1000就会报这个错，但并不是真正栈溢出，只是想给你一个提示不希望你递归调用nextTick太多次，如果nextTick递归调用，那么其他的回调事件就会等待，会造成event loop饥饿，所以官方推荐用setImmediate作为递归调用</p>
+<h2 id="资料来源">资料来源</h2><p><a href="https://cnodejs.org/topic/519b523c63e9f8a5429b25e3" target="_blank" rel="external">求科普setImmediate API</a><br><a href="http://www.cnblogs.com/kongxianghai/p/3942226.html" target="_blank" rel="external">setTimeout，setInterval，process.nextTick，setImmediate in Nodejs</a></p>
+<p><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="区别">区别</h2><p>1、nextTick和setImmediate主要的区别在于任务插入的位置nextTick的插入位置是在当前帧的末尾、io回调之前，如果nextTick过多，会导致io回调不断延后setImmediate的插入位置是在下一帧，不会影响i]]>
+    </summary>
+    
+      <category term="js" scheme="http://www.liuhaiming.me/tags/js/"/>
+    
+      <category term="node" scheme="http://www.liuhaiming.me/tags/node/"/>
+    
+      <category term="node" scheme="http://www.liuhaiming.me/categories/node/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[项目总结]]></title>
     <link href="http://www.liuhaiming.me/2015/03/26/summary/"/>
     <id>http://www.liuhaiming.me/2015/03/26/summary/</id>
     <published>2015-03-25T16:00:00.000Z</published>
-    <updated>2015-03-26T02:36:43.000Z</updated>
+    <updated>2015-07-21T18:00:00.000Z</updated>
     <content type="html"><![CDATA[<p>来现在这个公司已经大半年了，做了许多工作，也学习到许多新的知识，一直处在忙忙碌碌工作中，前端后端都做了一些，要学习的东西感觉太多。最近几天工作相对轻松些，准备花点时间整理一下自己的知识，在这篇文章中先大概整理一下工作中所用到的知识及技术，然后再抽空进行细化的整理，希望通过这次反省找到自己得薄弱和不足，并进行针对性的补充和学习。</p>
 <p>整体项目结构是进行前后端分离的，这样既能让前后端人员各司其职提高工作效率，也能使后端同时给多个前端提供数据支持（微信，WEB，APP共用一个后端）</p>
 <h2 id="后端">后端</h2><h3 id="项目：ycombo">项目：ycombo</h3><pre><code>作用：通过RESTFUL的方式对外提供接口
@@ -43,7 +69,8 @@
 工具：Sublime
 </code></pre><h3 id="项目名：app">项目名：app</h3><pre><code>作用：iOSAPP
 使用技术：未知
-</code></pre>]]></content>
+</code></pre><p><br></p>
+]]></content>
     <summary type="html">
     <![CDATA[<p>来现在这个公司已经大半年了，做了许多工作，也学习到许多新的知识，一直处在忙忙碌碌工作中，前端后端都做了一些，要学习的东西感觉太多。最近几天工作相对轻松些，准备花点时间整理一下自己的知识，在这篇文章中先大概整理一下工作中所用到的知识及技术，然后再抽空进行细化的整理，希望通过这]]>
     </summary>
@@ -59,15 +86,15 @@
     <link href="http://www.liuhaiming.me/2015/03/10/web-sit/"/>
     <id>http://www.liuhaiming.me/2015/03/10/web-sit/</id>
     <published>2015-03-09T16:00:00.000Z</published>
-    <updated>2015-03-19T15:13:29.000Z</updated>
+    <updated>2015-07-21T17:54:57.000Z</updated>
     <content type="html"><![CDATA[<p>记录自己收集的一些网站资源，便于查阅</p>
-<h2 id="博客">博客</h2><h3 id="寻梦的尕柳"><a href="http://www.liuhaiming.me" target="_blank" rel="external">寻梦的尕柳</a></h3><pre><code>地址：<span class="string">http:</span><span class="comment">//www.liuhaiming.me</span>
-备注：我自己得个人博客，记录学习以及生活
-</code></pre><h3 id="粉丝日志"><a href="http://blog.fens.me" target="_blank" rel="external">粉丝日志</a></h3><pre><code>地址：http:<span class="comment">//blog.fens.me</span>
-备注：跨界的IT博客<span class="string">|Hadoop家族, R, RHadoop, Nodejs, AngularJS, KVM, NoSQL, IT金融</span>
-</code></pre><h3 id="当然我在扯淡"><a href="http://www.yinwang.org" target="_blank" rel="external">当然我在扯淡</a></h3><pre><code>地址：<span class="string">http:</span><span class="comment">//www.yinwang.org</span>
-备注：王垠的博客                
-</code></pre><p><br></p>
+<h2 id="博客">博客</h2><h3 id="寻梦的尕柳"><a href="http://www.liuhaiming.me" target="_blank" rel="external">寻梦的尕柳</a></h3><p>地址：<a href="http://www.liuhaiming.me" target="_blank" rel="external">http://www.liuhaiming.me</a><br>备注：我自己得个人博客，记录学习以及生活</p>
+<hr>
+<h3 id="粉丝日志"><a href="http://blog.fens.me" target="_blank" rel="external">粉丝日志</a></h3><p>地址：<a href="http://blog.fens.me" target="_blank" rel="external">http://blog.fens.me</a><br>备注：跨界的IT博客|Hadoop家族, R, RHadoop, Nodejs, AngularJS, KVM, NoSQL, IT金融</p>
+<hr>
+<h3 id="当然我在扯淡"><a href="http://www.yinwang.org" target="_blank" rel="external">当然我在扯淡</a></h3><p>地址：<a href="http://www.yinwang.org" target="_blank" rel="external">http://www.yinwang.org</a><br>备注：王垠的博客                </p>
+<hr>
+<p><br></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>记录自己收集的一些网站资源，便于查阅</p>
