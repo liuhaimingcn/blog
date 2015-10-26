@@ -4,7 +4,7 @@
   <subtitle><![CDATA[幽幽一缕香，飘在深深旧梦中，宛如挥手袖底风，淡淡回首，也无风雨也无晴。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.liuhaiming.me/"/>
-  <updated>2015-07-21T18:01:14.000Z</updated>
+  <updated>2015-10-26T15:20:40.000Z</updated>
   <id>http://www.liuhaiming.me/</id>
   
   <author>
@@ -13,6 +13,116 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[ES6-字符串的扩展]]></title>
+    <link href="http://www.liuhaiming.me/2015/10/26/es6-string/"/>
+    <id>http://www.liuhaiming.me/2015/10/26/es6-string/</id>
+    <published>2015-10-25T16:00:00.000Z</published>
+    <updated>2015-10-26T15:20:40.000Z</updated>
+    <content type="html"><![CDATA[<p>读阮一峰老师《ECMAScript6入门》一书的笔记</p>
+<h2 id="字符的Unicode表示法">字符的Unicode表示法</h2><p>   之前不识别在“\u”后面跟上超过0xFFFF的数值（比如\u20BB7），现在用只要将码点放入大括号中就能识别了（比如\u{20BB7}）<br>   所以现在JavaScript共有6种方法可以表示一个字符</p>
+<pre><code><span class="string">'\z'</span> === <span class="string">'z'</span>  <span class="comment">// true  </span>
+<span class="string">'\172'</span> === <span class="string">'z'</span> <span class="comment">// true  </span>
+<span class="string">'\x7A'</span> === <span class="string">'z'</span> <span class="comment">// true  </span>
+<span class="string">'\u007A'</span> === <span class="string">'z'</span> <span class="comment">// true  </span>
+<span class="string">'\u{7A}'</span> === <span class="string">'z'</span> <span class="comment">// true        </span>
+</code></pre><h2 id="codePointAt()_//_?">codePointAt() // ?</h2><p>   JavaScript内部，字符以UTF-16的格式储存，每个字符固定为2个字节。对于那些需要4个字节储存的字符（Unicode码点大于0xFFFF的字符），JavaScript会认为它们是两个字符。</p>
+<pre><code><span class="keyword">var</span> s = <span class="string">"𠮷"</span>;
+s.length <span class="comment">// 2</span>
+s.charAt(<span class="number">0</span>) <span class="comment">// ''</span>
+s.charAt(<span class="number">1</span>) <span class="comment">// ''</span>
+s.charCodeAt(<span class="number">0</span>) <span class="comment">// 55362</span>
+s.charCodeAt(<span class="number">1</span>) <span class="comment">// 57271</span>
+</code></pre><p>   ES6提供了codePointAt方法，能够正确处理4个字节储存的字符，返回一个字符的码点。</p>
+<h2 id="String-fromCodePoint()">String.fromCodePoint()</h2><p>   ES5提供String.fromCharCode方法，用于从码点返回对应字符，但是这个方法不能识别辅助平面的字符（编号大于0xFFFF）。</p>
+<pre><code>String.<span class="function"><span class="title">fromCharCode</span><span class="params">(<span class="number">0</span>x20BB7)</span></span> <span class="comment">// "ஷ"</span>
+</code></pre><p>   ES6提供了String.fromCodePoint方法，可以识别0xFFFF的字符，弥补了String.fromCharCode方法的不足。</p>
+<pre><code>String.<span class="function"><span class="title">fromCodePoint</span><span class="params">(<span class="number">0</span>x20BB7)</span></span> <span class="comment">// "𠮷"</span>
+</code></pre><h2 id="字符串的遍历器接口">字符串的遍历器接口</h2><p>   ES6为字符串添加了遍历器接口，使得字符串可以被for…of循环遍历。<br>   除了遍历字符串，这个遍历器最大的优点是可以识别大于0xFFFF的码点，传统的for循环无法识别这样的码点。</p>
+<h2 id="at()_//_ES7">at() // ES7</h2><p>   ES5对字符串对象提供charAt方法，返回字符串给定位置的字符。该方法不能识别码点大于0xFFFF的字符。<br>   ES7提供了字符串实例的at方法，可以识别Unicode编号大于0xFFFF的字符，返回正确的字符。</p>
+<h2 id="normalize()_//_?">normalize() // ?</h2><p>   ES6提供String.prototype.normalize()方法，用来将字符的不同表示方法统一为同样的形式，这称为Unicode正规化。</p>
+<h2 id="includes(),_startsWith(),_endsWith()">includes(), startsWith(), endsWith()</h2><p>   传统上，JavaScript只有indexOf方法，可以用来确定一个字符串是否包含在另一个字符串中。ES6又提供了三种新方法。  </p>
+<pre><code><span class="function"><span class="title">includes</span><span class="params">()</span></span>：返回布尔值，表示是否找到了参数字符串。
+<span class="function"><span class="title">startsWith</span><span class="params">()</span></span>：返回布尔值，表示参数字符串是否在源字符串的头部。
+<span class="function"><span class="title">endsWith</span><span class="params">()</span></span>：返回布尔值，表示参数字符串是否在源字符串的尾部。
+</code></pre><p>   这三个方法都支持第二个参数，endsWith的第二个参数表示它针对前n个字符，而其他两个方法针对从第n个位置直到字符串结束。</p>
+<pre><code>var s = <span class="string">'Hello world!'</span>;
+s.<span class="keyword">startsWith</span>(<span class="string">'world'</span>, <span class="number">6</span>) <span class="comment">// true</span>
+s.<span class="keyword">endsWith</span>(<span class="string">'Hello'</span>, <span class="number">5</span>) <span class="comment">// true</span>
+s.includes(<span class="string">'Hello'</span>, <span class="number">6</span>) <span class="comment">// false</span>
+</code></pre><h2 id="repeat()">repeat()</h2><p>   repeat方法返回一个新字符串，表示将原字符串重复n次。</p>
+<pre><code><span class="string">'hello'</span>.<span class="function"><span class="title">repeat</span><span class="params">(<span class="number">2</span>)</span></span> <span class="comment">// "hellohello"</span>
+<span class="string">'na'</span>.<span class="function"><span class="title">repeat</span><span class="params">(<span class="number">0</span>)</span></span> <span class="comment">// ""</span>
+</code></pre><p>   参数如果是小数，会被取整。<br>   如果repeat的参数是负数或者Infinity，会报错。<br>   但是，如果参数是0到-1之间的小数，则等同于0，这是因为会先进行取整运算。0到-1之间的小数，取整以后等于-0，repeat视同为0。<br>   参数NaN等同于0。<br>   如果repeat的参数是字符串，则会先转换成数字。</p>
+<h2 id="模板字符串">模板字符串</h2><p>   模板字符串（template string）是增强版的字符串，用反引号（`）标识。它可以当作普通字符串使用，也可以用来定义多行字符串，或者在字符串中嵌入变量。<br>   如果在模板字符串中需要使用反引号，则前面要用反斜杠转义。<br>   如果使用模板字符串表示多行字符串，所有的空格和缩进都会被保留在输出之中。<br>   模板字符串中嵌入变量，需要将变量名写在${}之中。<br>   大括号内部可以放入任意的JavaScript表达式，可以进行运算，以及引用对象属性。<br>   模板字符串之中还能调用函数。<br>   如果大括号中的值不是字符串，将按照一般的规则转为字符串。比如，大括号中是一个对象，将默认调用对象的toString方法。<br>   如果模板字符串中的变量没有声明，将报错。<br>   由于模板字符串的大括号内部，就是执行JavaScript代码，因此如果大括号内部是一个字符串，将会原样输出。</p>
+<h2 id="标签模板">标签模板</h2><p>   模板字符串可以紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串。这被称为“标签模板”功能（tagged template）。<br>   tag函数的第一个参数是一个数组，该数组的成员是模板字符串中那些没有变量替换的部分，其他参数，都是模板字符串各个变量被替换后的值。</p>
+<pre><code><span class="reserved">var</span> a = <span class="number">5</span>;
+<span class="reserved">var</span> b = <span class="number">10</span>;
+<span class="reserved">function</span> tag(s, v1, v2) {
+  <span class="built_in">console</span>.log(s[<span class="number">0</span>]); <span class="regexp">//</span> <span class="string">"Hello "</span>
+  <span class="built_in">console</span>.log(s[<span class="number">1</span>]); <span class="regexp">//</span> <span class="string">" world "</span>
+  <span class="built_in">console</span>.log(s[<span class="number">2</span>]); <span class="regexp">//</span> <span class="string">""</span>
+  <span class="built_in">console</span>.log(v1); <span class="regexp">//</span> <span class="number">15</span>
+  <span class="built_in">console</span>.log(v2); <span class="regexp">//</span> <span class="number">50</span>
+  <span class="keyword">return</span> <span class="string">"OK"</span>;
+}
+tag`<span class="javascript">Hello ${ a + b } world ${ a * b}</span>`; <span class="regexp">//</span> <span class="string">"OK"</span>  等同于 tag([<span class="string">'Hello '</span>, <span class="string">' world '</span>, <span class="string">''</span>], <span class="number">15</span>, <span class="number">50</span>)
+</code></pre><p>   “标签模板”的一个重要应用，就是过滤HTML字符串，防止用户输入恶意内容。</p>
+<pre><code><span class="keyword">var</span> message = SaferHTML`&lt;p&gt;${sender} has sent you a message.&lt;/p&gt;`;
+<span class="function"><span class="keyword">function</span> <span class="title">SaferHTML</span><span class="params">(templateData)</span> </span>{
+  <span class="keyword">var</span> s = templateData[<span class="number">0</span>];
+  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; arguments.length; i++) {
+    <span class="keyword">var</span> arg = String(arguments[i]);
+    <span class="comment">// Escape special characters in the substitution.</span>
+    s += arg.replace(/&amp;/g, <span class="string">"&amp;amp;"</span>).replace(/&lt;/g, <span class="string">"&amp;lt;"</span>).replace(/&gt;/g, <span class="string">"&amp;gt;"</span>);
+    <span class="comment">// Don't escape special characters in the template.</span>
+    s += templateData[i];
+  }
+  <span class="keyword">return</span> s;
+}
+</code></pre><p>   模板处理函数的第一个参数（模板字符串数组），还有一个raw属性。该数组的成员与strings数组完全一致。两者唯一的区别，就是字符串里面的斜杠都被转义了。比如，strings.raw数组会将\n视为\和n两个字符，而不是换行符。这是为了方便取得转义之前的原始模板而设计的。</p>
+<h2 id="String-raw()">String.raw()</h2><p>   String.raw方法，往往用来充当模板字符串的处理函数，返回一个斜杠都被转义（即斜杠前面再加一个斜杠）的字符串，对应于替换变量后的模板字符串。</p>
+<pre><code>String.raw<span class="escape">`H</span>i\n${<span class="number">2</span>+<span class="number">3</span>}!<span class="escape">`;</span> // <span class="string">"Hi\\n5!"</span>
+</code></pre><p>   String.raw方法也可以作为正常的函数使用。这时，它的第一个参数，应该是一个具有raw属性的对象，且raw属性的值应该是一个数组。</p>
+<pre><code><span class="filename">String.raw({ raw</span>: <span class="string">'test'</span> }, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>); // <span class="string">'t0e1s2t'</span>, 等同于 <span class="filename">String.raw({ raw</span>: [<span class="string">'t'</span>,<span class="string">'e'</span>,<span class="string">'s'</span>,<span class="string">'t'</span>] }, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>);
+</code></pre><p><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>读阮一峰老师《ECMAScript6入门》一书的笔记</p>
+<h2 id="字符的Unicode表示法">字符的Unicode表示法</h2><p>   之前不识别在“\u”后面跟上超过0xFFFF的数值（比如\u20BB7），现在用只要将码点放入大括号中就能识别了（比如]]>
+    </summary>
+    
+      <category term="ECMAScript6入门" scheme="http://www.liuhaiming.me/tags/ECMAScript6%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="笔记" scheme="http://www.liuhaiming.me/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[iTerm2的使用]]></title>
+    <link href="http://www.liuhaiming.me/2015/07/23/iterm2/"/>
+    <id>http://www.liuhaiming.me/2015/07/23/iterm2/</id>
+    <published>2015-07-22T16:00:00.000Z</published>
+    <updated>2015-08-05T05:14:08.000Z</updated>
+    <content type="html"><![CDATA[<p>自从换了mac后连接远程linux服务器一直用电脑自带的终端，每次都要输密码，烦死了。看同事用iTerm挺方便的，就自己也弄了一个。</p>
+<h2 id="下载地址">下载地址</h2><p><a href="http://www.iterm2.com/" target="_blank" rel="external">http://www.iterm2.com/</a></p>
+<h3 id="记住远程服务器密码">记住远程服务器密码</h3><p>打开设置<br><img src="/img/iterm/iterm1.jpg" alt="图片"><br>相关配置<br><img src="/img/iterm/iterm2.jpg" alt="图片"><br>脚本<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">timeout</span> <span class="number">30</span></span><br><span class="line">spawn ssh liuhaiming@<span class="number">122.92</span><span class="number">.222</span><span class="number">.122</span> -p51618</span><br><span class="line">expect <span class="string">"*password*"</span></span><br><span class="line">send “**********\n<span class="string">"</span><br><span class="line">interact</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="替换图标">替换图标</h2><p>原图标看着不好看,替换一个喜欢的图标<br><img src="/img/iterm/iterm3.jpg" alt="图片">  <img src="/img/iterm/iterm4.jpg" alt="图片"><br>找好自己要替换的图标<br><a href="https://dribbble.com/shots/656627-Terminal-Macintosh-Icon" target="_blank" rel="external">https://dribbble.com/shots/656627-Terminal-Macintosh-Icon</a><br>找到自己要替换图标的app<br><img src="/img/iterm/iterm5.jpg" alt="图片"><br>右键显示简介，复制下载好的图标，并选中要替换的图标 command + v 就替换好了<br><img src="/img/iterm/iterm6.jpg" alt="图片">    </p>
+<h2 id="换个自己喜欢的主题">换个自己喜欢的主题</h2><p><a href="http://iterm2colorschemes.com/" target="_blank" rel="external">http://iterm2colorschemes.com/</a></p>
+<h2 id="相关命令">相关命令</h2><p>command + O: 打开配置方便选择<br><img src="/img/iterm/iterm7.jpg" alt="图片">    </p>
+<p><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>自从换了mac后连接远程linux服务器一直用电脑自带的终端，每次都要输密码，烦死了。看同事用iTerm挺方便的，就自己也弄了一个。</p>
+<h2 id="下载地址">下载地址</h2><p><a href="http://www.iterm2.com/" target=]]>
+    </summary>
+    
+      <category term="软件" scheme="http://www.liuhaiming.me/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+      <category term="软件" scheme="http://www.liuhaiming.me/categories/%E8%BD%AF%E4%BB%B6/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[setImmediate,setTimeout,nextTick的区别是什么]]></title>

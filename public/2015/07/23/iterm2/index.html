@@ -7,12 +7,14 @@
   <meta name="360-site-verification" content="67fbcc5a67f4c65c057315b28fa0b2c8" />
 <meta name="google-site-verification" content="2GzxQ0VtXwTSUdmGm6DzcmhTzM_I9QmzCb_pzpMzD88" />
   
-    <title>项目总结 | 寻梦的尕柳</title>
+    <title>iTerm2的使用 | 寻梦的尕柳</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="刘海铭">
     
-    <meta name="description" content="来现在这个公司已经大半年了，做了许多工作，也学习到许多新的知识，一直处在忙忙碌碌工作中，前端后端都做了一些，要学习的东西感觉太多。最近几天工作相对轻松些，准备花点时间整理一下自己的知识，在这篇文章中先大概整理一下工作中所用到的知识及技术，然后再抽空进行细化的整理，希望通过这次反省找到自己得薄弱和不足">
+    <meta name="description" content="自从换了mac后连接远程linux服务器一直用电脑自带的终端，每次都要输密码，烦死了。看同事用iTerm挺方便的，就自己也弄了一个。
+下载地址http://www.iterm2.com/
+记住远程服务器密码打开设置相关配置脚本12345set timeout 30spawn ssh liuhaimi">
     
     
     
@@ -65,15 +67,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/03/26/summary/" title="项目总结" itemprop="url">项目总结</a>
+      <a href="/2015/07/23/iterm2/" title="iTerm2的使用" itemprop="url">iTerm2的使用</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://www.liuhaiming.me" title="刘海铭">刘海铭</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-03-25T16:00:00.000Z" itemprop="datePublished">2015-03-26</time>
-    更新日期:<time datetime="2015-07-21T18:00:00.000Z" itemprop="dateModified">2015-07-22</time>
+    <time datetime="2015-07-22T16:00:00.000Z" itemprop="datePublished">2015-07-23</time>
+    更新日期:<time datetime="2015-08-05T05:14:08.000Z" itemprop="dateModified">2015-08-05</time>
     
   </p>
 </header>
@@ -82,53 +84,36 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#后端"><span class="toc-number">1.</span> <span class="toc-text">后端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#项目：ycombo"><span class="toc-number">1.1.</span> <span class="toc-text">项目：ycombo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前端"><span class="toc-number">2.</span> <span class="toc-text">前端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#项目名：node-wechat"><span class="toc-number">2.1.</span> <span class="toc-text">项目名：node-wechat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目名：node-admin"><span class="toc-number">2.2.</span> <span class="toc-text">项目名：node-admin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目名：node-web"><span class="toc-number">2.3.</span> <span class="toc-text">项目名：node-web</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目名：node-app"><span class="toc-number">2.4.</span> <span class="toc-text">项目名：node-app</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目名：app"><span class="toc-number">2.5.</span> <span class="toc-text">项目名：app</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载地址"><span class="toc-number">1.</span> <span class="toc-text">下载地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#记住远程服务器密码"><span class="toc-number">1.1.</span> <span class="toc-text">记住远程服务器密码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#替换图标"><span class="toc-number">2.</span> <span class="toc-text">替换图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#换个自己喜欢的主题"><span class="toc-number">3.</span> <span class="toc-text">换个自己喜欢的主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关命令"><span class="toc-number">4.</span> <span class="toc-text">相关命令</span></a></li></ol>
 		</div>
 		
-		<p>来现在这个公司已经大半年了，做了许多工作，也学习到许多新的知识，一直处在忙忙碌碌工作中，前端后端都做了一些，要学习的东西感觉太多。最近几天工作相对轻松些，准备花点时间整理一下自己的知识，在这篇文章中先大概整理一下工作中所用到的知识及技术，然后再抽空进行细化的整理，希望通过这次反省找到自己得薄弱和不足，并进行针对性的补充和学习。</p>
-<p>整体项目结构是进行前后端分离的，这样既能让前后端人员各司其职提高工作效率，也能使后端同时给多个前端提供数据支持（微信，WEB，APP共用一个后端）</p>
-<h2 id="后端">后端</h2><h3 id="项目：ycombo">项目：ycombo</h3><pre><code>作用：通过RESTFUL的方式对外提供接口
-使用技术：JAVA、Spring、SpringMvc、Mybatis、Maven、Nginx
-工具：IntelliJ IDEA、<span class="keyword">Mac</span>终端、Sequel <span class="keyword">Pro</span>、FileZilla
-第三方接口：支付宝支付、微信支付、SendCloud、极光推送、亿美短信、七牛
-</code></pre><h2 id="前端">前端</h2><h3 id="项目名：node-wechat">项目名：node-wechat</h3><pre><code>作用：微信公众账号系统
-使用技术：CSS、JS、NodeJS、Express、jade、<span class="keyword">forever</span>、SuperAgent、Mongodb
-工具：Sublime、Robomongo、PS
-第三方接口：GA、微信接口、七牛
-</code></pre><h3 id="项目名：node-admin">项目名：node-admin</h3><pre><code>作用：后台管理系统
-使用技术：CSS、JS、NodeJS、Express、jade、<span class="keyword">forever</span>、SuperAgent、Mongodb、Jquery、bootstrap
-工具：Sublime、Robomongo
-第三方接口：七牛
-</code></pre><h3 id="项目名：node-web">项目名：node-web</h3><pre><code>作用：web网站的实现
-使用技术：CSS、JS、NodeJS、Express、jade、<span class="keyword">forever</span>、SuperAgent
-工具：Sublime
-第三方接口：七牛
-</code></pre><h3 id="项目名：node-app">项目名：node-app</h3><pre><code>作用：因为后台接口服务器对访问端口进行限制，此项目用来作为app和后台接口的数据中转
-使用技术：NodeJS、Express、<span class="keyword">forever</span>、SuperAgent
-工具：Sublime
-</code></pre><h3 id="项目名：app">项目名：app</h3><pre><code>作用：iOSAPP
-使用技术：未知
-</code></pre><p><br></p>
+		<p>自从换了mac后连接远程linux服务器一直用电脑自带的终端，每次都要输密码，烦死了。看同事用iTerm挺方便的，就自己也弄了一个。</p>
+<h2 id="下载地址">下载地址</h2><p><a href="http://www.iterm2.com/" target="_blank" rel="external">http://www.iterm2.com/</a></p>
+<h3 id="记住远程服务器密码">记住远程服务器密码</h3><p>打开设置<br><img src="/img/iterm/iterm1.jpg" alt="图片"><br>相关配置<br><img src="/img/iterm/iterm2.jpg" alt="图片"><br>脚本<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">timeout</span> <span class="number">30</span></span><br><span class="line">spawn ssh liuhaiming@<span class="number">122.92</span><span class="number">.222</span><span class="number">.122</span> -p51618</span><br><span class="line">expect <span class="string">"*password*"</span></span><br><span class="line">send “**********\n<span class="string">"</span><br><span class="line">interact</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="替换图标">替换图标</h2><p>原图标看着不好看,替换一个喜欢的图标<br><img src="/img/iterm/iterm3.jpg" alt="图片">  <img src="/img/iterm/iterm4.jpg" alt="图片"><br>找好自己要替换的图标<br><a href="https://dribbble.com/shots/656627-Terminal-Macintosh-Icon" target="_blank" rel="external">https://dribbble.com/shots/656627-Terminal-Macintosh-Icon</a><br>找到自己要替换图标的app<br><img src="/img/iterm/iterm5.jpg" alt="图片"><br>右键显示简介，复制下载好的图标，并选中要替换的图标 command + v 就替换好了<br><img src="/img/iterm/iterm6.jpg" alt="图片">    </p>
+<h2 id="换个自己喜欢的主题">换个自己喜欢的主题</h2><p><a href="http://iterm2colorschemes.com/" target="_blank" rel="external">http://iterm2colorschemes.com/</a></p>
+<h2 id="相关命令">相关命令</h2><p>command + O: 打开配置方便选择<br><img src="/img/iterm/iterm7.jpg" alt="图片">    </p>
+<p><br></p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/总结/">总结</a>
+  <span></span> <a href="/tags/软件/">软件</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/总结/">总结</a>
+  <a class="article-category-link" href="/categories/软件/">软件</a>
 </div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://www.liuhaiming.me/2015/03/26/summary/" data-title="项目总结 | 寻梦的尕柳" data-tsina="null" class="share clearfix">
+  <div data-url="http://www.liuhaiming.me/2015/07/23/iterm2/" data-title="iTerm2的使用 | 寻梦的尕柳" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -138,18 +123,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/07/22/nexttick_immediate/" title="setImmediate,setTimeout,nextTick的区别是什么">
+ <a href="/2015/10/26/es6-string/" title="ES6-字符串的扩展">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  setImmediate,setTimeout,nextTick的区别是什么</span>
+  ES6-字符串的扩展</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/03/10/web-sit/"  title="常用网站记录">
+<a href="/2015/07/22/nexttick_immediate/"  title="setImmediate,setTimeout,nextTick的区别是什么">
  <strong>NEXT:</strong><br/> 
- <span>常用网站记录
+ <span>setImmediate,setTimeout,nextTick的区别是什么
 </span>
 </a>
 </div>
@@ -159,7 +144,7 @@
 	
 <section class="comment">
 	
-	<div class="ds-thread" data-title="项目总结" data-thread-key="summary" data-author-key="刘海铭" data-url="http://www.liuhaiming.me/post/summary"></div>
+	<div class="ds-thread" data-title="iTerm2的使用" data-thread-key="iterm2" data-author-key="刘海铭" data-url="http://www.liuhaiming.me/post/iterm2"></div>
 	
 </section>
 
@@ -169,7 +154,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#后端"><span class="toc-number">1.</span> <span class="toc-text">后端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#项目：ycombo"><span class="toc-number">1.1.</span> <span class="toc-text">项目：ycombo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前端"><span class="toc-number">2.</span> <span class="toc-text">前端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#项目名：node-wechat"><span class="toc-number">2.1.</span> <span class="toc-text">项目名：node-wechat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目名：node-admin"><span class="toc-number">2.2.</span> <span class="toc-text">项目名：node-admin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目名：node-web"><span class="toc-number">2.3.</span> <span class="toc-text">项目名：node-web</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目名：node-app"><span class="toc-number">2.4.</span> <span class="toc-text">项目名：node-app</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目名：app"><span class="toc-number">2.5.</span> <span class="toc-text">项目名：app</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载地址"><span class="toc-number">1.</span> <span class="toc-text">下载地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#记住远程服务器密码"><span class="toc-number">1.1.</span> <span class="toc-text">记住远程服务器密码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#替换图标"><span class="toc-number">2.</span> <span class="toc-text">替换图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#换个自己喜欢的主题"><span class="toc-number">3.</span> <span class="toc-text">换个自己喜欢的主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关命令"><span class="toc-number">4.</span> <span class="toc-text">相关命令</span></a></li></ol>
   </div>
 
 <div id="asidepart">
