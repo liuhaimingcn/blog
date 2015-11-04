@@ -3,16 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 寻梦的尕柳
+title: 点滴
 subtitle: 幽幽一缕香，飘在深深旧梦中，宛如挥手袖底风，淡淡回首，也无风雨也无晴。
 description: 
-author: 刘海铭
+author: 寻梦的尕柳
 language:
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://www.liuhaiming.me
+url: http://www.haiyue.me/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:

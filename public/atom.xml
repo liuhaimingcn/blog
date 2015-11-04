@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title><![CDATA[寻梦的尕柳]]></title>
+  <title><![CDATA[点滴]]></title>
   <subtitle><![CDATA[幽幽一缕香，飘在深深旧梦中，宛如挥手袖底风，淡淡回首，也无风雨也无晴。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
-  <link href="http://www.liuhaiming.me/"/>
+  <link href="http://www.haiyue.me/"/>
   <updated>2015-10-28T11:54:18.000Z</updated>
-  <id>http://www.liuhaiming.me/</id>
+  <id>http://www.haiyue.me/</id>
   
   <author>
-    <name><![CDATA[刘海铭]]></name>
+    <name><![CDATA[寻梦的尕柳]]></name>
     
   </author>
   
@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[ES6-Generator函数]]></title>
-    <link href="http://www.liuhaiming.me/2015/10/28/es6-generator/"/>
-    <id>http://www.liuhaiming.me/2015/10/28/es6-generator/</id>
+    <link href="http://www.haiyue.me/2015/10/28/es6-generator/"/>
+    <id>http://www.haiyue.me/2015/10/28/es6-generator/</id>
     <published>2015-10-27T16:00:00.000Z</published>
     <updated>2015-10-28T11:54:18.000Z</updated>
     <content type="html"><![CDATA[<p>读阮一峰老师《ECMAScript6入门》一书的笔记</p>
@@ -97,16 +97,16 @@ it.next();
 <h2 id="基本概念">基本概念</h2><p>Generator函数是ES6提供的一种异步编程解决方案<br>Generator函数有两个特征。一是，function命令与函数名之间有一个星号；二是，函数体]]>
     </summary>
     
-      <category term="ECMAScript6入门" scheme="http://www.liuhaiming.me/tags/ECMAScript6%E5%85%A5%E9%97%A8/"/>
+      <category term="ECMAScript6入门" scheme="http://www.haiyue.me/tags/ECMAScript6%E5%85%A5%E9%97%A8/"/>
     
-      <category term="笔记" scheme="http://www.liuhaiming.me/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="http://www.haiyue.me/categories/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[香山红叶节]]></title>
-    <link href="http://www.liuhaiming.me/2015/10/28/photo/xiangshan/"/>
-    <id>http://www.liuhaiming.me/2015/10/28/photo/xiangshan/</id>
+    <link href="http://www.haiyue.me/2015/10/28/photo/xiangshan/"/>
+    <id>http://www.haiyue.me/2015/10/28/photo/xiangshan/</id>
     <published>2015-10-27T16:00:00.000Z</published>
     <updated>2015-10-28T11:28:22.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_6998.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7008.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7035.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7060.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7074.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7093.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7095.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7152.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7202.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7251.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7257.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7263.JPG" alt="图片"></p>
@@ -116,16 +116,16 @@ it.next();
     <![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_6998.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiang]]>
     </summary>
     
-      <category term="风景" scheme="http://www.liuhaiming.me/tags/%E9%A3%8E%E6%99%AF/"/>
+      <category term="风景" scheme="http://www.haiyue.me/tags/%E9%A3%8E%E6%99%AF/"/>
     
-      <category term="摄影" scheme="http://www.liuhaiming.me/categories/%E6%91%84%E5%BD%B1/"/>
+      <category term="摄影" scheme="http://www.haiyue.me/categories/%E6%91%84%E5%BD%B1/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[ES6-字符串的扩展]]></title>
-    <link href="http://www.liuhaiming.me/2015/10/26/es6-string/"/>
-    <id>http://www.liuhaiming.me/2015/10/26/es6-string/</id>
+    <link href="http://www.haiyue.me/2015/10/26/es6-string/"/>
+    <id>http://www.haiyue.me/2015/10/26/es6-string/</id>
     <published>2015-10-25T16:00:00.000Z</published>
     <updated>2015-10-26T15:20:40.000Z</updated>
     <content type="html"><![CDATA[<p>读阮一峰老师《ECMAScript6入门》一书的笔记</p>
@@ -201,16 +201,16 @@ tag`<span class="javascript">Hello ${ a + b } world ${ a * b}</span>`; <span cla
 <h2 id="字符的Unicode表示法">字符的Unicode表示法</h2><p>   之前不识别在“\u”后面跟上超过0xFFFF的数值（比如\u20BB7），现在用只要将码点放入大括号中就能识别了（比如]]>
     </summary>
     
-      <category term="ECMAScript6入门" scheme="http://www.liuhaiming.me/tags/ECMAScript6%E5%85%A5%E9%97%A8/"/>
+      <category term="ECMAScript6入门" scheme="http://www.haiyue.me/tags/ECMAScript6%E5%85%A5%E9%97%A8/"/>
     
-      <category term="笔记" scheme="http://www.liuhaiming.me/categories/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="http://www.haiyue.me/categories/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[iTerm2的使用]]></title>
-    <link href="http://www.liuhaiming.me/2015/07/23/iterm2/"/>
-    <id>http://www.liuhaiming.me/2015/07/23/iterm2/</id>
+    <link href="http://www.haiyue.me/2015/07/23/iterm2/"/>
+    <id>http://www.haiyue.me/2015/07/23/iterm2/</id>
     <published>2015-07-22T16:00:00.000Z</published>
     <updated>2015-08-05T05:14:08.000Z</updated>
     <content type="html"><![CDATA[<p>自从换了mac后连接远程linux服务器一直用电脑自带的终端，每次都要输密码，烦死了。看同事用iTerm挺方便的，就自己也弄了一个。</p>
@@ -226,16 +226,16 @@ tag`<span class="javascript">Hello ${ a + b } world ${ a * b}</span>`; <span cla
 <h2 id="下载地址">下载地址</h2><p><a href="http://www.iterm2.com/" target=]]>
     </summary>
     
-      <category term="软件" scheme="http://www.liuhaiming.me/tags/%E8%BD%AF%E4%BB%B6/"/>
+      <category term="软件" scheme="http://www.haiyue.me/tags/%E8%BD%AF%E4%BB%B6/"/>
     
-      <category term="软件" scheme="http://www.liuhaiming.me/categories/%E8%BD%AF%E4%BB%B6/"/>
+      <category term="软件" scheme="http://www.haiyue.me/categories/%E8%BD%AF%E4%BB%B6/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[setImmediate,setTimeout,nextTick的区别是什么]]></title>
-    <link href="http://www.liuhaiming.me/2015/07/22/nexttick_immediate/"/>
-    <id>http://www.liuhaiming.me/2015/07/22/nexttick_immediate/</id>
+    <link href="http://www.haiyue.me/2015/07/22/nexttick_immediate/"/>
+    <id>http://www.haiyue.me/2015/07/22/nexttick_immediate/</id>
     <published>2015-07-21T16:00:00.000Z</published>
     <updated>2015-07-21T18:01:14.000Z</updated>
     <content type="html"><![CDATA[<h2 id="区别">区别</h2><p>1、nextTick和setImmediate主要的区别在于任务插入的位置nextTick的插入位置是在当前帧的末尾、io回调之前，如果nextTick过多，会导致io回调不断延后setImmediate的插入位置是在下一帧，不会影响io回调。</p>
@@ -250,18 +250,18 @@ tag`<span class="javascript">Hello ${ a + b } world ${ a * b}</span>`; <span cla
     <![CDATA[<h2 id="区别">区别</h2><p>1、nextTick和setImmediate主要的区别在于任务插入的位置nextTick的插入位置是在当前帧的末尾、io回调之前，如果nextTick过多，会导致io回调不断延后setImmediate的插入位置是在下一帧，不会影响i]]>
     </summary>
     
-      <category term="js" scheme="http://www.liuhaiming.me/tags/js/"/>
+      <category term="js" scheme="http://www.haiyue.me/tags/js/"/>
     
-      <category term="node" scheme="http://www.liuhaiming.me/tags/node/"/>
+      <category term="node" scheme="http://www.haiyue.me/tags/node/"/>
     
-      <category term="node" scheme="http://www.liuhaiming.me/categories/node/"/>
+      <category term="node" scheme="http://www.haiyue.me/categories/node/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[项目总结]]></title>
-    <link href="http://www.liuhaiming.me/2015/03/26/summary/"/>
-    <id>http://www.liuhaiming.me/2015/03/26/summary/</id>
+    <link href="http://www.haiyue.me/2015/03/26/summary/"/>
+    <id>http://www.haiyue.me/2015/03/26/summary/</id>
     <published>2015-03-25T16:00:00.000Z</published>
     <updated>2015-07-21T18:00:00.000Z</updated>
     <content type="html"><![CDATA[<p>来现在这个公司已经大半年了，做了许多工作，也学习到许多新的知识，一直处在忙忙碌碌工作中，前端后端都做了一些，要学习的东西感觉太多。最近几天工作相对轻松些，准备花点时间整理一下自己的知识，在这篇文章中先大概整理一下工作中所用到的知识及技术，然后再抽空进行细化的整理，希望通过这次反省找到自己得薄弱和不足，并进行针对性的补充和学习。</p>
@@ -293,16 +293,16 @@ tag`<span class="javascript">Hello ${ a + b } world ${ a * b}</span>`; <span cla
     <![CDATA[<p>来现在这个公司已经大半年了，做了许多工作，也学习到许多新的知识，一直处在忙忙碌碌工作中，前端后端都做了一些，要学习的东西感觉太多。最近几天工作相对轻松些，准备花点时间整理一下自己的知识，在这篇文章中先大概整理一下工作中所用到的知识及技术，然后再抽空进行细化的整理，希望通过这]]>
     </summary>
     
-      <category term="总结" scheme="http://www.liuhaiming.me/tags/%E6%80%BB%E7%BB%93/"/>
+      <category term="总结" scheme="http://www.haiyue.me/tags/%E6%80%BB%E7%BB%93/"/>
     
-      <category term="总结" scheme="http://www.liuhaiming.me/categories/%E6%80%BB%E7%BB%93/"/>
+      <category term="总结" scheme="http://www.haiyue.me/categories/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[常用网站记录]]></title>
-    <link href="http://www.liuhaiming.me/2015/03/10/web-sit/"/>
-    <id>http://www.liuhaiming.me/2015/03/10/web-sit/</id>
+    <link href="http://www.haiyue.me/2015/03/10/web-sit/"/>
+    <id>http://www.haiyue.me/2015/03/10/web-sit/</id>
     <published>2015-03-09T16:00:00.000Z</published>
     <updated>2015-07-21T17:54:57.000Z</updated>
     <content type="html"><![CDATA[<p>记录自己收集的一些网站资源，便于查阅</p>
@@ -319,9 +319,9 @@ tag`<span class="javascript">Hello ${ a + b } world ${ a * b}</span>`; <span cla
 <h2 id="博客">博客</h2><h3 id="寻梦的尕柳"><a href="http://www.liuhaiming.me" target="_blank" rel="external">寻梦的尕柳</a></h3>]]>
     </summary>
     
-      <category term="资源" scheme="http://www.liuhaiming.me/tags/%E8%B5%84%E6%BA%90/"/>
+      <category term="资源" scheme="http://www.haiyue.me/tags/%E8%B5%84%E6%BA%90/"/>
     
-      <category term="资源" scheme="http://www.liuhaiming.me/categories/%E8%B5%84%E6%BA%90/"/>
+      <category term="资源" scheme="http://www.haiyue.me/categories/%E8%B5%84%E6%BA%90/"/>
     
   </entry>
   
