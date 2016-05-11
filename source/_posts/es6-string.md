@@ -9,7 +9,6 @@ categories:
     - 笔记
 
 ---
-读阮一峰老师《ECMAScript6入门》一书的笔记
 
 ##字符的Unicode表示法
 
@@ -21,7 +20,8 @@ categories:
         '\x7A' === 'z' // true  
         '\u007A' === 'z' // true  
         '\u{7A}' === 'z' // true        
-    
+  
+<!-- more -->      
 
 ##codePointAt() // ?
 
@@ -141,5 +141,6 @@ categories:
    String.raw方法也可以作为正常的函数使用。这时，它的第一个参数，应该是一个具有raw属性的对象，且raw属性的值应该是一个数组。
    
     String.raw({ raw: 'test' }, 0, 1, 2); // 't0e1s2t', 等同于 String.raw({ raw: ['t','e','s','t'] }, 0, 1, 2);
-    
+
+读阮一峰老师《ECMAScript6入门》一书的笔记    
 <br>

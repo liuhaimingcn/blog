@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title><![CDATA[点滴]]></title>
+  <title><![CDATA[寻梦的尕柳]]></title>
   <subtitle><![CDATA[幽幽一缕香，飘在深深旧梦中，宛如挥手袖底风，淡淡回首，也无风雨也无晴。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.haiyue.me/"/>
-  <updated>2015-10-28T11:54:18.000Z</updated>
+  <updated>2016-05-11T06:10:11.000Z</updated>
   <id>http://www.haiyue.me/</id>
   
   <author>
@@ -15,13 +15,685 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[缓存的相关概念和应用]]></title>
+    <link href="http://www.haiyue.me/2016/05/11/cache/"/>
+    <id>http://www.haiyue.me/2016/05/11/cache/</id>
+    <published>2016-05-10T16:00:00.000Z</published>
+    <updated>2016-05-11T06:10:11.000Z</updated>
+    <content type="html"><![CDATA[<p>一般都是用Redis或者Memcached来做数据的缓存，让程序的读取效率更高，以此缓解数据库的压力。</p>
+<h2 id="缓存穿透">缓存穿透</h2><p>原因：我们在项目中使用缓存通常都是先检查缓存中是否存在，如果存在直接返回缓存内容，如果不存在就直接查询数据库然后再缓存查询结果返回。这个时候如果我们查询的某一个数据在缓存中一直不存在，就会造成每一次请求都查询DB，这样缓存就失去了意义，在流量大时，可能DB就挂掉了。有人利用不存在的key频繁攻击我们的应用，这就是漏洞。</p>
+<a id="more"></a>
+<p>解决办法：可以在查询时将不存在的key预先设定一个值。比如，”key” , “&amp;&amp;”。在返回这个&amp;&amp;值的时候，我们的应用就可以认为这是不存在的key，再次请求这个key，如果取到的值不再是&amp;&amp;，则可以认为这时候key有值了，从而避免了透传到数据库，从而把大量的类似请求挡在了缓存之中。</p>
+<h2 id="缓存并发">缓存并发</h2><p>原因：有时候如果网站并发访问高，一个缓存如果失效，可能出现多个进程同时查询DB，同时设置缓存的情况，如果并发确实很大，这也可能造成DB压力过大，还有缓存频繁更新的问题。</p>
+<p>解决办法：对缓存查询加锁，如果KEY不存在，就加锁，然后查DB入缓存，然后解锁；其他进程如果发现有锁就等待，然后等解锁后返回数据或者进入DB查询。</p>
+<h2 id="缓存失效">缓存失效</h2><p>原因：高并发的时候，平时我们设定一个缓存的过期时间时，可能有一些会设置1分钟啊，5分钟这些，并发很高时可能会出在某一个时间同时生成了很多的缓存，并且过期时间都一样，这个时候就可能引发一当过期时间到后，这些缓存同时失效，请求全部转发到DB，DB可能会压力过重。</p>
+<p>解决办法：将缓存失效时间分散开，比如我们可以在原有的失效时间基础上增加一个随机值，比如1-5分钟随机，这样每一个缓存的过期时间的重复率就会降低，就很难引发集体失效的事件。</p>
+<h3 id="总结">总结</h3><p>缓存并发和缓存失效都是在高并发的时候对压力的优化，缓存穿透很有必要在做缓存的时候加上解决的措施。</p>
+<p>原文链接：<a href="http://www.jianshu.com/p/d96906140199" target="_blank" rel="external">缓存穿透、缓存并发、缓存失效之思路变迁 - 小程故事多</a>   </p>
+<p><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>一般都是用Redis或者Memcached来做数据的缓存，让程序的读取效率更高，以此缓解数据库的压力。</p>
+<h2 id="缓存穿透">缓存穿透</h2><p>原因：我们在项目中使用缓存通常都是先检查缓存中是否存在，如果存在直接返回缓存内容，如果不存在就直接查询数据库然后再缓存查询结果返回。这个时候如果我们查询的某一个数据在缓存中一直不存在，就会造成每一次请求都查询DB，这样缓存就失去了意义，在流量大时，可能DB就挂掉了。有人利用不存在的key频繁攻击我们的应用，这就是漏洞。</p>]]>
+    
+    </summary>
+    
+      <category term="java" scheme="http://www.haiyue.me/tags/java/"/>
+    
+      <category term="笔记" scheme="http://www.haiyue.me/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[We have a problem with promises]]></title>
+    <link href="http://www.haiyue.me/2016/02/23/promises/"/>
+    <id>http://www.haiyue.me/2016/02/23/promises/</id>
+    <published>2016-02-22T16:00:00.000Z</published>
+    <updated>2016-02-23T04:28:23.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="下面的四种_promises_的区别是什么">下面的四种 promises 的区别是什么</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> doSomethingElse();  </span><br><span class="line">&#125;);  </span><br><span class="line">  </span><br><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;  </span><br><span class="line">    doSomethingElse();  </span><br><span class="line">&#125;);  </span><br><span class="line">  </span><br><span class="line">doSomething().then(doSomethingElse());  </span><br><span class="line"></span><br><span class="line">doSomething().then(doSomethingElse);</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="原文地址链接：http://fex-baidu-com/blog/2015/07/we-have-a-problem-with-promises/">原文地址链接：<a href="http://fex.baidu.com/blog/2015/07/we-have-a-problem-with-promises/" target="_blank" rel="external">http://fex.baidu.com/blog/2015/07/we-have-a-problem-with-promises/</a></h3><p>Puzzle #1</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">doSomething</span><br><span class="line">|-----------------|</span><br><span class="line">                  doSomethingElse(<span class="literal">undefined</span>)</span><br><span class="line">                  |------------------|</span><br><span class="line">                                     finalHandler(resultOfDoSomethingElse)</span><br><span class="line">                                     |------------------|</span><br></pre></td></tr></table></figure>
+<p>Puzzle #2</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">doSomething</span><br><span class="line">|-----------------|</span><br><span class="line">                  doSomethingElse(<span class="literal">undefined</span>)</span><br><span class="line">                  |------------------|</span><br><span class="line">                  finalHandler(<span class="literal">undefined</span>)</span><br><span class="line">                  |------------------|</span><br></pre></td></tr></table></figure>
+<p>Puzzle #3</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">doSomething</span><br><span class="line">|-----------------|</span><br><span class="line">doSomethingElse(<span class="literal">undefined</span>)</span><br><span class="line">|---------------------------------|</span><br><span class="line">                  finalHandler(resultOfDoSomething)</span><br><span class="line">                  |------------------|</span><br></pre></td></tr></table></figure>
+<p>Puzzle #4</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">doSomething</span><br><span class="line">|-----------------|</span><br><span class="line">                  doSomethingElse(resultOfDoSomething)</span><br><span class="line">                  |------------------|</span><br><span class="line">                                     finalHandler(resultOfDoSomethingElse)</span><br><span class="line">                                     |------------------|</span><br></pre></td></tr></table></figure>
+<p>Promises 解决了 Callback Hell 问题，并且不仅仅是缩进问题。就像在 《Callback Hell 的救赎》 中描述的一样，回调函数真正的问题在于他剥夺了我们使用 return 和 throw 这些关键字的能力。</p>
+<h2 id="Promises的正确的风格">Promises的正确的风格</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">remotedb.allDocs(...).then(<span class="function"><span class="keyword">function</span> <span class="params">(resultOfAllDocs)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> localdb.put(...);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span> <span class="params">(resultOfPut)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> localdb.get(...);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span> <span class="params">(resultOfGet)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> localdb.put(...);</span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span> <span class="params">(err)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这种写法被称为 composing promises ，是 promises 的强大能力之一。每一个函数只会在前一个 promise 被调用并且完成回调后调用，并且这个函数会被前一个 promise 的输出调用</p>
+<h2 id="用了_promises_后怎么用_forEach?">用了 promises 后怎么用 forEach?</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误写法</span></span><br><span class="line"><span class="comment">// I want to remove() all docs</span></span><br><span class="line">db.allDocs(&#123;include_docs: <span class="literal">true</span>&#125;).then(<span class="function"><span class="keyword">function</span> <span class="params">(result)</span> </span>&#123;</span><br><span class="line">  result.rows.forEach(<span class="function"><span class="keyword">function</span> <span class="params">(row)</span> </span>&#123;</span><br><span class="line">    db.remove(row.doc);  </span><br><span class="line">  &#125;);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// I naively believe all docs have been removed() now!</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 正确写法</span></span><br><span class="line">db.allDocs(&#123;include_docs: <span class="literal">true</span>&#125;).then(<span class="function"><span class="keyword">function</span> <span class="params">(result)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Promise.all(result.rows.map(<span class="function"><span class="keyword">function</span> <span class="params">(row)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> db.remove(row.doc);</span><br><span class="line">  &#125;));</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span> <span class="params">(arrayOfResults)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// All docs have really been removed() now!</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>一定不要忘记使用 .catch()</p>
+<h2 id="catch()_与_then(null,_…)_并非完全等价">catch() 与 then(null, …) 并非完全等价</h2><p>catch() 仅仅是一个语法糖。因此下面两段代码是等价的:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">somePromise().catch(<span class="function"><span class="keyword">function</span> <span class="params">(err)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// handle error</span></span><br><span class="line">&#125;);</span><br><span class="line">somePromise().then(<span class="literal">null</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// handle error</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>但是并非完全等价</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">somePromise().then(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'oh noes'</span>);</span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span> <span class="params">(err)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// I caught your error! :)</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">somePromise().then(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'oh noes'</span>);</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> <span class="params">(err)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// I didn't catch your error! :(</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="下面的四种_promises_的区别是什么">下面的四种 promises 的区别是什么</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> doSomethingElse();  </span><br><span class="line">&#125;);  </span><br><span class="line">  </span><br><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;  </span><br><span class="line">    doSomethingElse();  </span><br><span class="line">&#125;);  </span><br><span class="line">  </span><br><span class="line">doSomething().then(doSomethingElse());  </span><br><span class="line"></span><br><span class="line">doSomething().then(doSomethingElse);</span><br></pre></td></tr></table></figure>]]>
+    
+    </summary>
+    
+      <category term="js" scheme="http://www.haiyue.me/tags/js/"/>
+    
+      <category term="笔记" scheme="http://www.haiyue.me/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[深入浅出ES6笔记]]></title>
+    <link href="http://www.haiyue.me/2016/02/18/ES6-in-depth/"/>
+    <id>http://www.haiyue.me/2016/02/18/ES6-in-depth/</id>
+    <published>2016-02-17T16:00:00.000Z</published>
+    <updated>2016-02-18T07:10:27.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="ES6_是什么">ES6 是什么</h1><ul>
+<li>编程语言 JavaScript 是 ECMAScript 的实现和扩展,由 ECMA(一个类似 W3C 的标准组织)参与进行标准化。   </li>
+<li>ES4 饱受争议,当标准委员会最终停止开发 ES4 时,其成员同意发布一个相对谦和的 ES5 版本,随后继续制定一些更具实质性的新特性。这一明确的协商协议最终命 名为“Harmony”(ES6)。  </li>
+<li>2009 年发布的改进版本 ES5,引入了 Object.create()、Object.defineProperty()、getters 和 setters、严格模式以及 JSON 对象。  </li>
+<li>如果你想在 web 环境中使用这种新语法,同时需要支持 IE 和 Safari, 你可以使用 Babel 或 Google 的 Traceur 这些编译器来将你的 ES6 代码翻译为 Web 友好 的 ES5 代码。  </li>
+</ul>
+<a id="more"></a>
+<h1 id="迭代器和_for-of_循环">迭代器和 for-of 循环</h1><h2 id="遍历数组中的元素">遍历数组中的元素</h2><ul>
+<li><p>20 年前 JavaScript 刚萌生时     </p>
+<pre><code><span class="keyword">for</span> (var <span class="keyword">index</span> = <span class="number">0</span>; <span class="keyword">index</span> &lt; myArray.<span class="keyword">length</span>; <span class="keyword">index</span>++) { 
+    console.<span class="keyword">log</span>(myArray[<span class="keyword">index</span>]);
+}
+</code></pre></li>
+<li><p>ES5 正式发布后  </p>
+<pre><code>myArray.forEach(<span class="function"><span class="keyword">function</span> <span class="params">(value)</span> </span>{ 
+    <span class="built_in">console</span>.log(value);
+});  
+</code></pre><p>  这段代码看起来更加简洁,但这种方法也有一个小缺陷:你不能使用 break 语句中 断循环,也不能使用 return 语句返回到外层函数。  </p>
+</li>
+<li><p>for-in 循环(千万别这样做, 是为普通对象设计的) </p>
+<pre><code><span class="keyword">for</span> (<span class="reserved">var</span> index <span class="keyword">in</span> myArray) {
+    <span class="built_in">console</span>.log(myArray[index]);
+}
+</code></pre><p>  在这段代码中,赋给index的值不是实际的数字,而是字符串“0”、“1”、“2”, 此时很可能在无意之间进行字符串算数计算,例如:“2” + 1 == “21”,这给 编码过程带来极大的不便。<br>  作用于数组的 for-in 循环体除了遍历数组元素外,还会遍历自定义属性。举个例子,如果你的数组中有一个可枚举属性 myArray.name,循环将额外执行 一次,遍历到名为“name”的索引。就连数组原型链上的属性都能被访问到。<br>  最让人震惊的是,在某些情况下,这段代码可能按照随机顺序遍历数组元素。<br>  简而言之,for-in 是为普通对象设计的,你可以遍历得到字符串类型的键,因此不适用于数组遍历。</p>
+</li>
+<li><p>ES6</p>
+<pre><code><span class="keyword">for</span> (<span class="reserved">var</span> value <span class="keyword">of</span> myArray) {
+    <span class="built_in">console</span>.log(value);
+}
+</code></pre><p>  for-in 循环用来遍历对象属性。<br>  for-of 循环用来遍历数据—例如数组中的值。</p>
+</li>
+</ul>
+<h2 id="for-of_循环">for-of 循环</h2><pre><code><span class="keyword">for</span> (<span class="reserved">var</span> value <span class="keyword">of</span> myArray) {
+  <span class="built_in">console</span>.log(value);
+}
+</code></pre><p>这是最简洁、最直接的遍历数组元素的语法<br>这个方法避开了 for-in 循环的所有缺陷<br>与 forEach()不同的是,它可以正确响应 break、continue 和 return 语句<br>for-of 循环不仅支持数组,还支持大多数类数组对象,例如 DOM NodeList 对象。<br>for-of 循环也支持字符串遍历,它将字符串视为一系列的 Unicode 字符来进行遍历  </p>
+<pre><code><span class="reserved">var</span> str = <span class="string">'liuhaiming'</span>;
+<span class="keyword">for</span>(<span class="reserved">var</span> chr <span class="keyword">of</span> str) {
+  <span class="built_in">console</span>.log(chr);
+}
+</code></pre><p>for-of 循环也支持Set 对象  </p>
+<pre><code>var uniqueWords = new Set(<span class="property">words</span>);
+<span class="keyword">for</span> (var <span class="property">word</span> <span class="keyword">of</span> uniqueWords) {
+  console.<span class="command">log</span>(<span class="property">word</span>);
+}
+</code></pre><p>for-of 循环也支持Map对象  </p>
+<pre><code>for (<span class="built_in">var</span> [<span class="built_in">key</span>, <span class="built_in">value</span>] of phoneBookMap) {
+  console.log(<span class="built_in">key</span> + <span class="string">"'s phone number is: "</span> + <span class="built_in">value</span>);
+}
+</code></pre><p>for-of 循环不支持普通对象,但如果你想迭代一个对象的属性,你可以用 for-in 循 环(这也是它的本职工作)或内建的 Object.keys()方法:</p>
+<pre><code><span class="comment">// 向控制台输出对象的可枚举属性</span>
+<span class="keyword">for</span> (var <span class="variable">key</span> of <span class="keyword">Object</span>.keys(someObject)) {
+  console.<span class="built_in">log</span>(<span class="variable">key</span> + <span class="string">": "</span> + someObject[<span class="variable">key</span>]);
+}
+</code></pre><p><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="ES6_是什么">ES6 是什么</h1><ul>
+<li>编程语言 JavaScript 是 ECMAScript 的实现和扩展,由 ECMA(一个类似 W3C 的标准组织)参与进行标准化。   </li>
+<li>ES4 饱受争议,当标准委员会最终停止开发 ES4 时,其成员同意发布一个相对谦和的 ES5 版本,随后继续制定一些更具实质性的新特性。这一明确的协商协议最终命 名为“Harmony”(ES6)。  </li>
+<li>2009 年发布的改进版本 ES5,引入了 Object.create()、Object.defineProperty()、getters 和 setters、严格模式以及 JSON 对象。  </li>
+<li>如果你想在 web 环境中使用这种新语法,同时需要支持 IE 和 Safari, 你可以使用 Babel 或 Google 的 Traceur 这些编译器来将你的 ES6 代码翻译为 Web 友好 的 ES5 代码。  </li>
+</ul>]]>
+    
+    </summary>
+    
+      <category term="js" scheme="http://www.haiyue.me/tags/js/"/>
+    
+      <category term="笔记" scheme="http://www.haiyue.me/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[三亚春节]]></title>
+    <link href="http://www.haiyue.me/2016/02/16/photo/sanyacunjie/"/>
+    <id>http://www.haiyue.me/2016/02/16/photo/sanyacunjie/</id>
+    <published>2016-02-15T16:00:00.000Z</published>
+    <updated>2016-02-16T07:34:11.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/sanyaIMG_8180.jpg" alt=""><br>    在三亚过的春节，也没怎么出去玩……<br><a id="more"></a><br><img src="http://7xia33.com1.z0.glb.clouddn.com/sanyaIMG_8062.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/sanyaIMG_8151.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/sanyaIMG_8077.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/sanyaIMG_8206.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/sanyaIMG_8194.JPG" alt="">    </p>
+<p><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/sanyaIMG_8180.jpg" alt=""><br>    在三亚过的春节，也没怎么出去玩……<br>]]>
+    
+    </summary>
+    
+      <category term="摄影" scheme="http://www.haiyue.me/categories/%E6%91%84%E5%BD%B1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ES6-Class基本语法]]></title>
+    <link href="http://www.haiyue.me/2016/02/02/es6-class/"/>
+    <id>http://www.haiyue.me/2016/02/02/es6-class/</id>
+    <published>2016-02-01T16:00:00.000Z</published>
+    <updated>2016-02-02T10:37:02.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="Class基本语法">Class基本语法</h2><p>ES6的class可以看作只是一个语法糖，它的绝大部分功能，ES5都可以做到，新的class写法只是让对象原型的写法更加清晰、更像面向对象编程的语法而已。</p>
+<pre><code><span class="comment">// old</span>
+  <span class="function"><span class="keyword">function</span> <span class="title">Point</span><span class="params">(x,y)</span></span>{
+  <span class="keyword">this</span>.x = x;
+  <span class="keyword">this</span>.y = y;
+}
+Point.prototype.toString = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
+  <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
+}
+<span class="comment">// new</span>
+<span class="keyword">class</span> Point {
+  <span class="constructor"><span class="keyword">constructor</span>(x, y) </span>{
+    <span class="keyword">this</span>.x = x;
+    <span class="keyword">this</span>.y = y;
+  }
+  toString() {
+    <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
+  }   
+}
+</code></pre><a id="more"></a> 
+<p>Point类除了构造方法，还定义了一个toString方法。注意，定义“类”的方法的时候，前面不需要加上function这个保留字，直接把函数定义放进去了就可以了。另外，方法之间不需要逗号分隔，加了会报错。<br>构造函数的prototype属性，在ES6的“类”上面继续存在。事实上，类的所有方法都定义在类的prototype属性上面。<br>类的内部所有定义的方法，都是不可枚举的（enumerable）。这一点与ES5的行为不一致。</p>
+<pre><code><span class="keyword">class</span> Point {
+  <span class="constructor"><span class="keyword">constructor</span>(x, y) </span>{}
+  toString() {}
+}
+<span class="built_in">Object</span>.keys(Point.prototype) <span class="comment">// []</span>
+<span class="built_in">Object</span>.getOwnPropertyNames(Point.prototype) <span class="comment">// ["constructor","toString"]</span>
+</code></pre><p>constructor方法是类的默认方法，通过new命令生成对象实例时，自动调用该方法。一个类必须有constructor方法，如果没有显式定义，一个空的constructor方法会被默认添加。<br>constructor方法默认返回实例对象（即this），完全可以指定返回另外一个对象。</p>
+<pre><code><span class="keyword">class</span> Foo {
+  <span class="constructor"><span class="keyword">constructor</span>() </span>{
+    <span class="keyword">return</span> <span class="built_in">Object</span>.create(<span class="literal">null</span>);
+  }
+}
+<span class="keyword">new</span> Foo() <span class="keyword">instanceof</span> Foo; <span class="comment">// false </span>
+</code></pre><p>生成实例对象的写法，与ES5完全一样，也是使用new命令。如果忘记加上new，像函数那样调用Class，将会报错。<br>与ES5一样，实例的属性除非显式定义在其本身（即定义在this对象上），否则都是定义在原型上（即定义在class上）<br>与ES5一样，类的所有实例共享一个原型对象。所以<strong>proto</strong>属性是相等的。<br>name属性总是返回紧跟在class关键字后面的类名。</p>
+<pre><code>class <span class="keyword">Point</span> <span class="list">{}</span>
+<span class="keyword">Point</span>.name // <span class="string">"Point"</span>
+</code></pre><p>下面代码使用表达式定义了一个类。需要注意的是，这个类的名字是MyClass而不是Me，Me只在Class的内部代码可用，指代当前类。</p>
+<pre><code><span class="keyword">const</span> MyClass = <span class="class"><span class="keyword">class</span> <span class="title">Me</span> </span>{
+  getClassName() {
+    <span class="keyword">return</span> Me.name;
+  }
+};
+</code></pre><p>如果Class内部没用到的话，可以省略Me。<br>采用Class表达式，可以写出立即执行的Class。<br>Class不存在变量提升（hoist），这一点与ES5完全不同。</p>
+<pre><code><span class="keyword">new</span> Foo(); <span class="comment">// ReferenceError</span>
+<span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>{}
+</code></pre><p>类和模块的内部，默认就是严格模式，所以不需要使用use strict指定运行模式。<br>考虑到未来所有的代码，其实都是运行在模块之中，所以ES6实际上把整个语言升级到了严格模式。</p>
+<h2 id="Class的继承">Class的继承</h2><p>Class之间可以通过extends关键字实现继承，这比ES5的通过修改原型链实现继承，要清晰和方便很多。</p>
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">ColorPoint</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Point</span> {</span>}
+</code></pre><p>下面代码中，constructor方法和toString方法之中，都出现了super关键字，它指代父类的实例（即父类的this对象）。</p>
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">ColorPoint</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Point</span> {</span>
+  constructor(x, y, color) {
+    <span class="keyword">super</span>(x, y); <span class="comment">// 调用父类的constructor(x, y)</span>
+    <span class="keyword">this</span>.color = color;
+  }
+  toString() {
+    <span class="keyword">return</span> <span class="keyword">this</span>.color + ' ' + <span class="keyword">super</span>.toString(); <span class="comment">// 调用父类的toString()</span>
+  }
+}
+</code></pre><p>子类必须在constructor方法中调用super方法，否则新建实例时会报错。这是因为子类没有自己的this对象，而是继承父类的this对象，然后对其进行加工。如果不调用super方法，子类就得不到this对象。<br>子类实例的<strong>proto</strong>属性的<strong>proto</strong>属性，指向父类实例的<strong>proto</strong>属性。也就是说，子类的原型的原型，是父类的原型。</p>
+<h2 id="原生构造函数的继承">原生构造函数的继承</h2><p>原生构造函数是指语言内置的构造函数，通常用来生成数据结构。<br>ES6允许继承原生构造函数定义子类，因为ES6是先新建父类的实例对象this，然后再用子类的构造函数修饰this，使得父类的所有行为都可以继承。</p>
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">MyArray</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Array</span> {</span>
+  constructor(...args) {
+    <span class="keyword">super</span>(...args);
+  }
+}
+<span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="type">MyArray</span>();
+arr[<span class="number">0</span>] = <span class="number">12</span>;
+arr.length <span class="comment">// 1</span>
+arr.length = <span class="number">0</span>;
+arr[<span class="number">0</span>] <span class="comment">// undefined</span>
+</code></pre><h2 id="Class的取值函数（getter）和存值函数（setter）">Class的取值函数（getter）和存值函数（setter）</h2><p>与ES5一样，在Class内部可以使用get和set关键字，对某个属性设置存值函数和取值函数，拦截该属性的存取行为。</p>
+<pre><code><span class="keyword">class</span> MyClass {
+  <span class="constructor"><span class="keyword">constructor</span>() </span>{
+    <span class="comment">// ...</span>
+  }
+  <span class="keyword">get</span> prop() {
+    <span class="keyword">return</span> <span class="string">'getter'</span>;
+  }
+  <span class="keyword">set</span> prop(value) {
+    <span class="built_in">console</span>.log(<span class="string">'setter: '</span>+value);
+  }
+}
+<span class="keyword">let</span> inst = <span class="keyword">new</span> MyClass();
+inst.prop = <span class="number">123</span>; <span class="comment">// setter: 123</span>
+inst.prop <span class="comment">// 'getter'</span>
+</code></pre><h2 id="Class的静态方法">Class的静态方法</h2><p>类相当于实例的原型，所有在类中定义的方法，都会被实例继承。如果在一个方法前，加上static关键字，就表示该方法不会被实例继承，而是直接通过类来调用，这就称为“静态方法”。</p>
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> {</span>
+  static classMethod() {
+    <span class="keyword">return</span> <span class="string">'hello'</span>;
+  }
+}
+Foo.classMethod() <span class="regexp">//</span> <span class="string">'hello'</span>
+<span class="reserved">var</span> foo = <span class="keyword">new</span> Foo();
+foo.classMethod() <span class="regexp">//</span> <span class="attribute">TypeError</span>: <span class="literal">undefined</span> <span class="keyword">is</span> <span class="keyword">not</span> a <span class="reserved">function</span>
+</code></pre><p>父类的静态方法，可以被子类继承。<br>静态方法也是可以从super对象上调用的。</p>
+<h2 id="Class的静态属性">Class的静态属性</h2><p>静态属性指的是Class本身的属性，即Class.propname，而不是定义在实例对象（this）上的属性。</p>
+<pre><code><span class="keyword">class</span> Foo {
+}
+Foo.<span class="keyword">prop</span> = 1;
+Foo.<span class="keyword">prop</span> <span class="comment">// 1</span>
+</code></pre><p>目前，只有这种写法可行，因为ES6明确规定，Class内部只有静态方法，没有静态属性。</p>
+<h2 id="new-target属性">new.target属性</h2><p>new是从构造函数生成实例的命令。ES6为new命令引入了一个new.target属性，（在构造函数中）返回new命令作用于的那个构造函数。如果构造函数不是通过new命令调用的，new.target会返回undefined，因此这个属性可以用来确定构造函数是怎么调用的。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">(name)</span> </span>{
+  <span class="keyword">if</span> (<span class="keyword">new</span>.target !== <span class="literal">undefined</span>) {
+    <span class="keyword">this</span>.name = name;
+  } <span class="keyword">else</span> {
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'必须使用new生成实例'</span>);
+  }
+}
+<span class="comment">// 另一种写法</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">(name)</span> </span>{
+  <span class="keyword">if</span> (<span class="keyword">new</span>.target === Person) {
+    <span class="keyword">this</span>.name = name;
+  } <span class="keyword">else</span> {
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'必须使用new生成实例'</span>);
+  }
+}
+<span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">'张三'</span>); <span class="comment">// 正确</span>
+<span class="keyword">var</span> notAPerson = Person.call(person, <span class="string">'张三'</span>); <span class="comment">// 报错</span>
+</code></pre><p>Class内部调用new.target，返回当前Class。<br>子类继承父类时，new.target会返回子类。</p>
+<pre><code><span class="keyword">class</span> Rectangle {
+  <span class="constructor"><span class="keyword">constructor</span>(length, width) </span>{
+    <span class="built_in">console</span>.log(<span class="keyword">new</span>.target === Rectangle);
+    <span class="comment">// ...</span>
+  }
+}
+<span class="keyword">class</span> Square extends Rectangle {
+  <span class="constructor"><span class="keyword">constructor</span>(length) </span>{
+    <span class="keyword">super</span>(length, length);
+  }
+}
+<span class="keyword">var</span> obj = <span class="keyword">new</span> Square(<span class="number">3</span>); <span class="comment">// 输出 false</span>
+</code></pre><p>利用这个特点，可以写出不能独立使用、必须继承后才能使用的类。</p>
+<h2 id="类的修饰">类的修饰</h2><p>修饰器（Decorator）是一个表达式，用来修改类的行为。这是ES7的一个提案，目前Babel转码器已经支持。<br>修饰器对类的行为的改变，是代码编译时发生的，而不是在运行时。这意味着，修饰器能在编译阶段运行代码。  </p>
+<p>读阮一峰老师《ECMAScript6入门》一书的笔记<br><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="Class基本语法">Class基本语法</h2><p>ES6的class可以看作只是一个语法糖，它的绝大部分功能，ES5都可以做到，新的class写法只是让对象原型的写法更加清晰、更像面向对象编程的语法而已。</p>
+<pre><code><span class="comment">// old</span>
+  <span class="function"><span class="keyword">function</span> <span class="title">Point</span><span class="params">(x,y)</span></span>{
+  <span class="keyword">this</span>.x = x;
+  <span class="keyword">this</span>.y = y;
+}
+Point.prototype.toString = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
+  <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
+}
+<span class="comment">// new</span>
+<span class="keyword">class</span> Point {
+  <span class="constructor"><span class="keyword">constructor</span>(x, y) </span>{
+    <span class="keyword">this</span>.x = x;
+    <span class="keyword">this</span>.y = y;
+  }
+  toString() {
+    <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
+  }   
+}
+</code></pre>]]>
+    
+    </summary>
+    
+      <category term="ECMAScript6入门" scheme="http://www.haiyue.me/tags/ECMAScript6%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="笔记" scheme="http://www.haiyue.me/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ES6-Module]]></title>
+    <link href="http://www.haiyue.me/2016/02/02/es6-style/"/>
+    <id>http://www.haiyue.me/2016/02/02/es6-style/</id>
+    <published>2016-02-01T16:00:00.000Z</published>
+    <updated>2016-02-02T10:41:12.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="规格文件">规格文件</h1><p>规格文件是计算机语言的官方标准，详细描述语法规则和实现方法。<br>ECMAScript 6的规格，可以在ECMA国际标准组织的官方网站（www.ecma-international.org/ecma-262/6.0/）免费下载和在线阅读。</p>
+<a id="more"></a> 
+<h1 id="编程风格">编程风格</h1><h2 id="块级作用域">块级作用域</h2><p>let取代var<br>全局常量和线程安全<br>在let和const之间，建议优先使用const，尤其是在全局环境，不应该设置变量，只应设置常量。这符合函数式编程思想，有利于将来的分布式运算。</p>
+<pre><code><span class="comment">// bad</span>
+<span class="keyword">var</span> a = <span class="number">1</span>, b = <span class="number">2</span>, c = <span class="number">3</span>;
+<span class="comment">// good</span>
+<span class="keyword">const</span> a = <span class="number">1</span>;
+<span class="keyword">const</span> b = <span class="number">2</span>;
+<span class="keyword">const</span> c = <span class="number">3</span>;
+</code></pre><p>const声明常量还有两个好处，一是阅读代码的人立刻会意识到不应该修改这个值，二是防止了无意间修改变量值所导致的错误。<br>所有的函数都应该设置为常量。</p>
+<h2 id="严格模式">严格模式</h2><p>V8引擎只在严格模式之下，支持let。  </p>
+<h2 id="字符串">字符串</h2><p>静态字符串一律使用单引号或反引号，不使用双引号。动态字符串使用反引号。</p>
+<pre><code><span class="comment">// bad</span>
+<span class="keyword">const</span> a = <span class="string">"foobar"</span>;
+<span class="keyword">const</span> b = <span class="string">'foo'</span> + a + <span class="string">'bar'</span>;
+<span class="comment">// good</span>
+<span class="keyword">const</span> a = <span class="string">'foobar'</span>;
+<span class="keyword">const</span> b = <span class="string">`foo${a}bar`</span>;
+</code></pre><h2 id="解构赋值">解构赋值</h2><p>使用数组成员对变量赋值时，优先使用解构赋值。</p>
+<pre><code><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];
+<span class="comment">// bad</span>
+<span class="keyword">const</span> first = arr[<span class="number">0</span>];
+<span class="keyword">const</span> <span class="built_in">second</span> = arr[<span class="number">1</span>];
+<span class="comment">// good</span>
+<span class="keyword">const</span> [first, <span class="built_in">second</span>] = arr;
+</code></pre><p>函数的参数如果是对象的成员，优先使用解构赋值。</p>
+<pre><code><span class="comment">// bad</span>
+<span class="function"><span class="keyword">function</span> <span class="title">getFullName</span><span class="params">(user)</span> </span>{
+  <span class="keyword">const</span> firstName = user.firstName;
+  <span class="keyword">const</span> lastName = user.lastName;
+}
+<span class="comment">// best</span>
+<span class="function"><span class="keyword">function</span> <span class="title">getFullName</span><span class="params">({ firstName, lastName })</span> </span>{
+}
+</code></pre><p>如果函数返回多个值，优先使用对象的解构赋值，而不是数组的解构赋值。这样便于以后添加返回值，以及更改返回值的顺序。</p>
+<pre><code><span class="comment">// bad</span>
+<span class="function"><span class="keyword">function</span> <span class="title">processInput</span><span class="params">(input)</span> </span>{
+  <span class="keyword">return</span> [left, right, top, bottom];
+}
+<span class="comment">// good</span>
+<span class="function"><span class="keyword">function</span> <span class="title">processInput</span><span class="params">(input)</span> </span>{
+  <span class="keyword">return</span> { left, right, top, bottom };
+}
+<span class="keyword">const</span> { left, right } = processInput(input);
+</code></pre><h2 id="数组">数组</h2><p>使用扩展运算符（…）拷贝数组。</p>
+<pre><code><span class="comment">// bad</span>
+<span class="keyword">const</span> <span class="built_in">len</span> = items.length;
+<span class="keyword">const</span> itemsCopy = [];
+<span class="keyword">for</span> (let i = <span class="number">0</span>; i &lt; <span class="built_in">len</span>; i++) {
+  itemsCopy[i] = items[i];
+}
+<span class="comment">// good</span>
+<span class="keyword">const</span> itemsCopy = [...items];
+</code></pre><p>使用Array.from方法，将类似数组的对象转为数组。</p>
+<pre><code><span class="keyword">const</span> foo = <span class="built_in">document</span>.<span class="built_in">querySelectorAll</span>(<span class="string">'.foo'</span>);
+<span class="keyword">const</span> nodes = Array.from(foo);
+</code></pre><p>立即执行函数可以写成箭头函数的形式。</p>
+<pre><code><span class="list">(<span class="list">()</span> =&gt; <span class="collection">{
+  console.log<span class="list">(<span class="keyword">'Welcome</span> to the Internet.')</span><span class="comment">;</span>
+}</span>)</span><span class="list">()</span><span class="comment">;</span>
+</code></pre><p>那些需要使用函数表达式的场合，尽量用箭头函数代替。因为这样更简洁，而且绑定了this。</p>
+<pre><code><span class="comment">// bad</span>
+[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].map(<span class="function"><span class="keyword">function</span> <span class="params">(x)</span> </span>{
+  <span class="keyword">return</span> x * x;
+});
+<span class="comment">// best</span>
+[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].map(x =&gt; x * x);
+</code></pre><p>简单的、单行的、不会复用的函数，建议采用箭头函数。如果函数体较为复杂，行数较多，还是应该采用传统的函数写法。  </p>
+<p>不要在函数体内使用arguments变量，使用rest运算符（…）代替。因为rest运算符显式表明你想要获取参数，而且arguments是一个类似数组的对象，而rest运算符可以提供一个真正的数组。</p>
+<pre><code><span class="comment">// bad</span>
+<span class="function"><span class="keyword">function</span> <span class="title">concatenateAll</span><span class="params">()</span> </span>{
+  <span class="keyword">const</span> args = Array.prototype.slice.call(arguments);
+  <span class="keyword">return</span> args.join(<span class="string">''</span>);
+}
+<span class="comment">// good</span>
+<span class="function"><span class="keyword">function</span> <span class="title">concatenateAll</span><span class="params">(<span class="rest_arg">...args</span>)</span> </span>{
+  <span class="keyword">return</span> args.join(<span class="string">''</span>);
+}
+</code></pre><p>使用默认值语法设置函数参数的默认值。</p>
+<pre><code>// bad
+<span class="keyword">function</span> handleThings(opts) {
+  opts = opts || {};
+}
+// good
+<span class="keyword">function</span> handleThings(opts = {}) {
+  // <span class="keyword">...</span>
+}
+</code></pre><p>所有配置项都应该集中在一个对象，放在最后一个参数，布尔值不可以直接作为参数。</p>
+<pre><code><span class="comment">// bad</span>
+<span class="function"><span class="keyword">function</span> <span class="title">divide</span><span class="params">(a, b, option = false )</span> </span>{
+}
+<span class="comment">// good</span>
+<span class="function"><span class="keyword">function</span> <span class="title">divide</span><span class="params">(a, b, { option = false } = {})</span> </span>{
+}
+</code></pre><h2 id="Map结构">Map结构</h2><p>注意区分Object和Map，只有模拟实体对象时，才使用Object。如果只是需要key: value的数据结构，使用Map结构。因为Map有内建的遍历机制。</p>
+<pre><code><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="type">Map</span>(arr);
+<span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> map.keys<span class="literal">()</span>) {
+  console.log(key);
+}
+<span class="keyword">for</span> (<span class="keyword">let</span> <span class="keyword">value</span> <span class="keyword">of</span> map.values<span class="literal">()</span>) {
+  console.log(<span class="keyword">value</span>);
+}
+<span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> map.entries<span class="literal">()</span>) {
+  console.log(item[<span class="number">0</span>], item[<span class="number">1</span>]);
+}
+</code></pre><h2 id="Class">Class</h2><p>总是用Class，取代需要prototype的操作。因为Class的写法更简洁，更易于理解。</p>
+<pre><code><span class="comment">// bad</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Queue</span><span class="params">(contents = [])</span> </span>{
+  <span class="keyword">this</span>._queue = [...contents];
+}
+Queue.prototype.pop = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+  <span class="keyword">const</span> value = <span class="keyword">this</span>._queue[<span class="number">0</span>];
+  <span class="keyword">this</span>._queue.splice(<span class="number">0</span>, <span class="number">1</span>);
+  <span class="keyword">return</span> value;
+}
+<span class="comment">// good</span>
+<span class="keyword">class</span> Queue {
+  <span class="constructor"><span class="keyword">constructor</span>(contents = []) </span>{
+    <span class="keyword">this</span>._queue = [...contents];
+  }
+  pop() {
+    <span class="keyword">const</span> value = <span class="keyword">this</span>._queue[<span class="number">0</span>];
+    <span class="keyword">this</span>._queue.splice(<span class="number">0</span>, <span class="number">1</span>);
+    <span class="keyword">return</span> value;
+  }
+}
+</code></pre><p>使用extends实现继承，因为这样更简单，不会有破坏instanceof运算的危险。</p>
+<pre><code><span class="comment">// bad</span>
+const inherits = require(<span class="symbol">'inherit</span>s');
+function <span class="type">PeekableQueue</span>(contents) {
+  <span class="type">Queue</span>.apply(<span class="keyword">this</span>, contents);
+}
+inherits(<span class="type">PeekableQueue</span>, <span class="type">Queue</span>);
+<span class="type">PeekableQueue</span>.prototype.peek = function() {
+  <span class="keyword">return</span> <span class="keyword">this</span>._queue[<span class="number">0</span>];
+}
+<span class="comment">// good</span>
+<span class="class"><span class="keyword">class</span> <span class="title">PeekableQueue</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Queue</span> {</span>
+  peek() {
+    <span class="keyword">return</span> <span class="keyword">this</span>._queue[<span class="number">0</span>];
+  }
+}
+</code></pre><h2 id="模块">模块</h2><p>Module语法是JavaScript模块的标准写法，坚持使用这种写法。使用import取代require。</p>
+<pre><code><span class="comment">// bad</span>
+<span class="keyword">const</span> moduleA = <span class="keyword">require</span>(<span class="string">'moduleA'</span>);
+<span class="keyword">const</span> func1 = moduleA.func1;
+<span class="keyword">const</span> func2 = moduleA.func2;
+<span class="comment">// good</span>
+import <span class="comment">{ func1, func2 }</span> <span class="keyword">from</span> <span class="string">'moduleA'</span>;
+</code></pre><p>使用export取代module.exports。<br>如果模块只有一个输出值，就使用export default，如果模块有多个输出值，就不使用export default，不要export default与普通的export同时使用。</p>
+<pre><code><span class="regexp">//</span> commonJS的写法
+<span class="reserved">var</span> React = <span class="built_in">require</span>(<span class="string">'react'</span>);
+<span class="reserved">var</span> Breadcrumbs = React.createClass({
+  render() {
+    <span class="keyword">return</span> &lt;nav /&gt;;
+  }
+});
+<span class="built_in">module</span>.exports = Breadcrumbs;
+<span class="regexp">//</span> ES6的写法
+<span class="reserved">import</span> React from <span class="string">'react'</span>;
+<span class="reserved">const</span> Breadcrumbs = React.createClass({
+  render() {
+    <span class="keyword">return</span> &lt;nav /&gt;;
+  }
+});
+<span class="reserved">export</span> <span class="reserved">default</span> Breadcrumbs
+</code></pre><p>如果模块默认输出一个函数，函数名的首字母应该小写。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">makeStyleGuide</span><span class="params">()</span> </span>{
+}
+export <span class="keyword">default</span> makeStyleGuide;
+</code></pre><p>如果模块默认输出一个对象，对象名的首字母应该大写。</p>
+<pre><code><span class="reserved">const</span> StyleGuide = {
+  <span class="attribute">es6</span>: {
+  }
+};
+<span class="reserved">export</span> <span class="reserved">default</span> StyleGuide;
+</code></pre><p>读阮一峰老师《ECMAScript6入门》一书的笔记<br><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="规格文件">规格文件</h1><p>规格文件是计算机语言的官方标准，详细描述语法规则和实现方法。<br>ECMAScript 6的规格，可以在ECMA国际标准组织的官方网站（www.ecma-international.org/ecma-262/6.0/）免费下载和在线阅读。</p>]]>
+    
+    </summary>
+    
+      <category term="ECMAScript6入门" scheme="http://www.haiyue.me/tags/ECMAScript6%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="笔记" scheme="http://www.haiyue.me/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ES6-Module]]></title>
+    <link href="http://www.haiyue.me/2016/02/02/es6-module/"/>
+    <id>http://www.haiyue.me/2016/02/02/es6-module/</id>
+    <published>2016-02-01T16:00:00.000Z</published>
+    <updated>2016-02-02T10:39:40.000Z</updated>
+    <content type="html"><![CDATA[<p>ES6的Class只是面向对象编程的语法糖，升级了ES5的构造函数的原型链继承的写法，并没有解决模块化问题。Module功能就是为了解决这个问题而提出的。<br>在ES6之前，社区制定了一些模块加载方案，最主要的有CommonJS和AMD两种。前者用于服务器，后者用于浏览器。ES6在语言规格的层面上，实现了模块功能，而且实现得相当简单，完全可以取代现有的CommonJS和AMD规范，成为浏览器和服务器通用的模块解决方案。</p>
+<pre><code>// CommonJS模块
+<span class="built_in">let</span> { <span class="built_in">stat</span>, exists, <span class="built_in">read</span>File } = require(<span class="string">'fs'</span>);
+</code></pre><p>上面代码的实质是整体加载fs模块（即加载fs的所有方法），生成一个对象（_fs），然后再从这个对象上面读取3个方法。这种加载称为“运行时加载”，因为只有运行时才能得到这个对象，导致完全没办法在编译时做“静态优化”。</p>
+<a id="more"></a> 
+<pre><code><span class="comment">// ES6模块</span>
+<span class="keyword">import</span> { stat, exists, readFile } <span class="keyword">from</span> <span class="string">'fs'</span>;
+</code></pre><p>上面代码的实质是从fs模块加载3个方法，其他方法不加载。这种加载称为“编译时加载”，即ES6可以在编译时就完成模块加载，效率要比CommonJS模块的加载方式高。当然，这也导致了没法引用ES6模块本身，因为它不是对象。</p>
+<h2 id="严格模式(ES5引入)">严格模式(ES5引入)</h2><p>ES6的模块自动采用严格模式，不管你有没有在模块头部加上”use strict”。</p>
+<h2 id="export命令">export命令</h2><p>模块功能主要由两个命令构成：export和import。export命令用于规定模块的对外接口，import命令用于输入其他模块提供的功能。<br>一个模块就是一个独立的文件。该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用export关键字输出该变量。</p>
+<pre><code><span class="comment">// good</span>
+<span class="literal">export</span> <span class="keyword">var</span> firstName = <span class="string">'Michael'</span>;
+<span class="literal">export</span> <span class="keyword">var</span> lastName = <span class="string">'Jackson'</span>;
+<span class="comment">// best</span>
+<span class="keyword">var</span> firstName = <span class="string">'Michael'</span>;
+<span class="keyword">var</span> lastName = <span class="string">'Jackson'</span>;
+<span class="literal">export</span> {firstName, lastName};
+</code></pre><p>export命令除了输出变量，还可以输出函数或类（class）。</p>
+<pre><code><span class="keyword">function</span> v1() { <span class="keyword">...</span> }
+<span class="keyword">function</span> v2() { <span class="keyword">...</span> }
+export {
+  v1 as streamV1,
+  v2 as streamV2,
+  v2 as streamLatestVersion
+};
+</code></pre><p>export命令可以出现在模块的任何位置，只要处于模块顶层就可以。如果处于块级作用域内，就会报错，下面的import命令也是如此。这是因为处于条件代码块之中，就没法做静态优化了，违背了ES6模块的设计初衷。<br>export语句输出的值是动态绑定，绑定其所在的模块。</p>
+<pre><code><span class="reserved">export</span> <span class="reserved">var</span> foo = <span class="string">'bar'</span>;
+setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> foo = <span class="string">'baz'</span>, <span class="number">500</span>);
+</code></pre><p>上面代码输出变量foo，值为bar，500毫秒之后变成baz。</p>
+<h2 id="import命令">import命令</h2><p>使用export命令定义了模块的对外接口以后，其他JS文件就可以通过import命令加载这个模块（文件）。</p>
+<pre><code><span class="keyword">import</span> {firstName, lastName, year} <span class="keyword">from</span> <span class="string">'./profile'</span>;
+</code></pre><p>import命令接受一个对象（用大括号表示），里面指定要从其他模块导入的变量名。大括号里面的变量名，必须与被导入模块（profile.js）对外接口的名称相同。<br>如果想为输入的变量重新取一个名字，import命令要使用as关键字，将输入的变量重命名。</p>
+<pre><code><span class="keyword">import</span> { lastName <span class="keyword">as</span> surname } <span class="keyword">from</span> <span class="string">'./profile'</span>;
+</code></pre><p>import命令具有提升效果，会提升到整个模块的头部，首先执行。</p>
+<pre><code>foo();
+<span class="keyword">import</span> { foo } <span class="keyword">from</span> <span class="string">'my_module'</span>;
+</code></pre><p>如果在一个模块之中，先输入后输出同一个模块，import语句可以与export语句写在一起。</p>
+<pre><code><span class="literal">export</span> { es6 <span class="literal">as</span> <span class="keyword">default</span> } from <span class="string">'./someModule'</span>;
+<span class="comment">// 等同于 (best)</span>
+<span class="literal">import</span> { es6 } from <span class="string">'./someModule'</span>;
+<span class="literal">export</span> <span class="keyword">default</span> es6;
+</code></pre><h2 id="模块的整体加载">模块的整体加载</h2><p>除了指定加载某个输出值，还可以使用整体加载，即用星号（*）指定一个对象，所有输出值都加载在这个对象上面。</p>
+<pre><code><span class="keyword">import</span> * as circle <span class="keyword">from</span> <span class="string">'./circle'</span>;
+<span class="built_in">console</span>.log(<span class="string">"圆面积："</span> <span class="string">\+</span> circle.area(<span class="number">4</span>));
+<span class="built_in">console</span>.log(<span class="string">"圆周长："</span> <span class="string">\+</span> circle.circumference(<span class="number">14</span>));
+</code></pre><h3 id="export_default命令">export default命令</h3><p>export default命令，为模块指定默认输出。一个模块只能有一个默认输出，因此export deault命令只能使用一次。</p>
+<pre><code>export <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
+  <span class="built_in">console</span>.log(<span class="string">'foo'</span>);
+}
+</code></pre><p>其他模块加载该模块时，import命令可以为该匿名函数指定任意名字。这时import命令后面，不使用大括号。</p>
+<pre><code><span class="keyword">import</span> customName <span class="keyword">from</span> <span class="string">'./export-default'</span>;
+customName(); <span class="comment">// 'foo'</span>
+</code></pre><p>export default命令用在非匿名函数前，也是可以的。加载的时候，视同匿名函数加载。<br>如果想在一条import语句中，同时输入默认方法和其他变量，可以写成下面这样。  </p>
+<pre><code><span class="keyword">import</span> customName, { otherMethod } <span class="keyword">from</span> <span class="string">'./export-default'</span>;
+</code></pre><h2 id="模块的继承">模块的继承</h2><pre><code><span class="keyword">export</span> * from <span class="string">'circle'</span>;
+<span class="keyword">export</span> <span class="keyword">var</span> e = <span class="number">2.71828182846</span>;
+<span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span><span class="params">(x)</span> </span>{
+  <span class="keyword">return</span> <span class="built_in">Math</span>.exp(x);
+}
+</code></pre><p>上面代码中的export <em>，表示再输出circle模块的所有属性和方法。注意，export </em>命令会忽略circle模块的default方法。然后，上面代码又输出了自定义的e变量和默认方法。</p>
+<h2 id="ES6模块加载的实质">ES6模块加载的实质</h2><p>ES6模块加载的机制，与CommonJS模块完全不同。CommonJS模块输出的是一个值的拷贝，一旦输出一个值，模块内部的变化就影响不到这个值。而ES6模块输出的是值的引,用此，ES6模块是动态引用，并且不会缓存值，模块里面的变量绑定其所在的模块。。<br>由于ES6输入的模块变量，只是一个”符号连接“，所以这个变量是只读的，对它进行重新赋值会报错。</p>
+<h2 id="ES6模块的循环加载">ES6模块的循环加载</h2><p>ES6处理“循环加载”与CommonJS有本质的不同。ES6模块是动态引用，遇到模块加载命令import时，不会去执行模块，只是生成一个指向被加载模块的引用，需要开发者自己保证，真正取值的时候能够取到值。</p>
+<h2 id="ES6模块的转码">ES6模块的转码</h2><p>浏览器目前还不支持ES6模块，为了现在就能使用，可以将转为ES5的写法。除了Babel可以用来转码之外，还有以下两个方法，也可以用来转码。</p>
+<pre><code><span class="constant">ES6</span> <span class="class"><span class="keyword">module</span> <span class="title">transpiler</span></span>
+<span class="constant">SystemJS</span>
+</code></pre><p>读阮一峰老师《ECMAScript6入门》一书的笔记<br><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>ES6的Class只是面向对象编程的语法糖，升级了ES5的构造函数的原型链继承的写法，并没有解决模块化问题。Module功能就是为了解决这个问题而提出的。<br>在ES6之前，社区制定了一些模块加载方案，最主要的有CommonJS和AMD两种。前者用于服务器，后者用于浏览器。ES6在语言规格的层面上，实现了模块功能，而且实现得相当简单，完全可以取代现有的CommonJS和AMD规范，成为浏览器和服务器通用的模块解决方案。</p>
+<pre><code>// CommonJS模块
+<span class="built_in">let</span> { <span class="built_in">stat</span>, exists, <span class="built_in">read</span>File } = require(<span class="string">'fs'</span>);
+</code></pre><p>上面代码的实质是整体加载fs模块（即加载fs的所有方法），生成一个对象（_fs），然后再从这个对象上面读取3个方法。这种加载称为“运行时加载”，因为只有运行时才能得到这个对象，导致完全没办法在编译时做“静态优化”。</p>]]>
+    
+    </summary>
+    
+      <category term="ECMAScript6入门" scheme="http://www.haiyue.me/tags/ECMAScript6%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="笔记" scheme="http://www.haiyue.me/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[蓝色港湾跨年夜]]></title>
+    <link href="http://www.haiyue.me/2016/01/06/photo/lansegangwan/"/>
+    <id>http://www.haiyue.me/2016/01/06/photo/lansegangwan/</id>
+    <published>2016-01-05T16:00:00.000Z</published>
+    <updated>2016-02-01T10:18:33.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_75423232.jpg" alt=""><br>    跨年夜无聊去蓝色港湾看灯展，还是挺好看的。<br><a id="more"></a><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7560.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7515.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7461.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7466.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7610.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7616.JPG" alt="">  </p>
+<p><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_75423232.jpg" alt=""><br>    跨年夜无聊去蓝色港湾看灯展，还是挺好看的。<br>]]>
+    
+    </summary>
+    
+      <category term="摄影" scheme="http://www.haiyue.me/categories/%E6%91%84%E5%BD%B1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[北京大雪]]></title>
+    <link href="http://www.haiyue.me/2016/01/06/photo/beijingdaxue/"/>
+    <id>http://www.haiyue.me/2016/01/06/photo/beijingdaxue/</id>
+    <published>2016-01-05T16:00:00.000Z</published>
+    <updated>2016-02-01T10:25:01.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/bjdaxIMG_733823232.jpg" alt=""><br>    北京难得一见的大雪，冰天雪地的很好看。<br><a id="more"></a><br><img src="http://7xia33.com1.z0.glb.clouddn.com/bjdaxIMG_7408.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/bjdaxIMG_7307.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/bjdaxIMG_7326.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/bjdaxIMG_7331.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/bjdaxIMG_7351.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/bjdaxIMG_7392.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/bjdaxIMG_7395.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/bjdaxIMG_7415.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/bjdaxIMG_7424.JPG" alt="">  </p>
+<p><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/bjdaxIMG_733823232.jpg" alt=""><br>    北京难得一见的大雪，冰天雪地的很好看。<br>]]>
+    
+    </summary>
+    
+      <category term="摄影" scheme="http://www.haiyue.me/categories/%E6%91%84%E5%BD%B1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[香山红叶节]]></title>
+    <link href="http://www.haiyue.me/2015/10/28/photo/xiangshan/"/>
+    <id>http://www.haiyue.me/2015/10/28/photo/xiangshan/</id>
+    <published>2015-10-27T16:00:00.000Z</published>
+    <updated>2016-02-01T10:22:39.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/IMG_70742324.jpg" alt=""><br>老早爬起来去香山看红叶，没有想象中的那么好，红叶不多，可能去的还不是时候。<br><a id="more"></a><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_6998.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7008.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7035.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7060.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7093.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7095.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7152.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7202.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7251.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7257.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7263.JPG" alt=""></p>
+<p><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/IMG_70742324.jpg" alt=""><br>老早爬起来去香山看红叶，没有想象中的那么好，红叶不多，可能去的还不是时候。<br>]]>
+    
+    </summary>
+    
+      <category term="摄影" scheme="http://www.haiyue.me/categories/%E6%91%84%E5%BD%B1/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[ES6-Generator函数]]></title>
     <link href="http://www.haiyue.me/2015/10/28/es6-generator/"/>
     <id>http://www.haiyue.me/2015/10/28/es6-generator/</id>
     <published>2015-10-27T16:00:00.000Z</published>
-    <updated>2015-10-28T11:54:18.000Z</updated>
-    <content type="html"><![CDATA[<p>读阮一峰老师《ECMAScript6入门》一书的笔记</p>
-<h2 id="基本概念">基本概念</h2><p>Generator函数是ES6提供的一种异步编程解决方案<br>Generator函数有两个特征。一是，function命令与函数名之间有一个星号；二是，函数体内部使用yield语句，定义不同的内部状态。<br>调用Generator函数后，该函数并不执行，返回的是一个指向内部状态的指针对象（遍历器对象）。下一步，必须调用遍历器对象的next方法，使得指针移向下一个状态。也就是说，每次调用next方法，内部指针就从函数头部或上一次停下来的地方开始执行，直到遇到下一个yield语句（或return语句）为止。  </p>
+    <updated>2016-02-02T04:12:17.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="基本概念">基本概念</h2><p>Generator函数是ES6提供的一种异步编程解决方案<br>Generator函数有两个特征。一是，function命令与函数名之间有一个星号；二是，函数体内部使用yield语句，定义不同的内部状态。<br>调用Generator函数后，该函数并不执行，返回的是一个指向内部状态的指针对象（遍历器对象）。下一步，必须调用遍历器对象的next方法，使得指针移向下一个状态。也就是说，每次调用next方法，内部指针就从函数头部或上一次停下来的地方开始执行，直到遇到下一个yield语句（或return语句）为止。  </p>
 <pre><code><span class="function"><span class="keyword">function</span>* <span class="title">helloWorldGenerator</span><span class="params">()</span></span> {
   yield <span class="string">'hello'</span>;
   yield <span class="string">'world'</span>;
@@ -33,6 +705,7 @@ hw.<span class="built_in">next</span>() // { value: <span class="string">'world'
 hw.<span class="built_in">next</span>() // { value: <span class="string">'ending'</span>, done: <span class="keyword">true</span> }
 hw.<span class="built_in">next</span>() // { value: undefined, done: <span class="keyword">true</span> }
 </code></pre><p>每次调用遍历器对象的next方法，就会返回一个有着value和done两个属性的对象。value属性表示当前的内部状态的值，是yield语句后面那个表达式的值；done属性是一个布尔值，表示是否遍历结束。</p>
+<a id="more"></a> 
 <h2 id="yield语句">yield语句</h2><p>遍历器对象的next方法的运行逻辑如下。</p>
 <pre><code>遇到<span class="keyword">yield</span>语句，就暂停执行后面的操作，并将紧跟在<span class="keyword">yield</span>后面的那个表达式的值，作为返回的对象的<span class="keyword">value</span>属性值。
 下一次调用next方法时，再继续往下执行，直到遇到下一个<span class="keyword">yield</span>语句。
@@ -90,11 +763,22 @@ function request(url) {
 }
 <span class="keyword">var</span> it = main();
 it.next();
-</code></pre><h2 id="控制流管理_//_???">控制流管理 // ???</h2><h2 id="部署iterator接口_//_?">部署iterator接口 // ?</h2><h2 id="作为数据结构_//_?">作为数据结构 // ?</h2><p><br></p>
+</code></pre><h2 id="控制流管理_//_???">控制流管理 // ???</h2><h2 id="部署iterator接口_//_?">部署iterator接口 // ?</h2><h2 id="作为数据结构_//_?">作为数据结构 // ?</h2><p>读阮一峰老师《ECMAScript6入门》一书的笔记<br><br></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>读阮一峰老师《ECMAScript6入门》一书的笔记</p>
-<h2 id="基本概念">基本概念</h2><p>Generator函数是ES6提供的一种异步编程解决方案<br>Generator函数有两个特征。一是，function命令与函数名之间有一个星号；二是，函数体]]>
+    <![CDATA[<h2 id="基本概念">基本概念</h2><p>Generator函数是ES6提供的一种异步编程解决方案<br>Generator函数有两个特征。一是，function命令与函数名之间有一个星号；二是，函数体内部使用yield语句，定义不同的内部状态。<br>调用Generator函数后，该函数并不执行，返回的是一个指向内部状态的指针对象（遍历器对象）。下一步，必须调用遍历器对象的next方法，使得指针移向下一个状态。也就是说，每次调用next方法，内部指针就从函数头部或上一次停下来的地方开始执行，直到遇到下一个yield语句（或return语句）为止。  </p>
+<pre><code><span class="function"><span class="keyword">function</span>* <span class="title">helloWorldGenerator</span><span class="params">()</span></span> {
+  yield <span class="string">'hello'</span>;
+  yield <span class="string">'world'</span>;
+  <span class="keyword">return</span> <span class="string">'ending'</span>;
+}
+var hw = helloWorldGenerator();
+hw.<span class="built_in">next</span>() // { value: <span class="string">'hello'</span>, done: <span class="keyword">false</span> }
+hw.<span class="built_in">next</span>() // { value: <span class="string">'world'</span>, done: <span class="keyword">false</span> }
+hw.<span class="built_in">next</span>() // { value: <span class="string">'ending'</span>, done: <span class="keyword">true</span> }
+hw.<span class="built_in">next</span>() // { value: undefined, done: <span class="keyword">true</span> }
+</code></pre><p>每次调用遍历器对象的next方法，就会返回一个有着value和done两个属性的对象。value属性表示当前的内部状态的值，是yield语句后面那个表达式的值；done属性是一个布尔值，表示是否遍历结束。</p>]]>
+    
     </summary>
     
       <category term="ECMAScript6入门" scheme="http://www.haiyue.me/tags/ECMAScript6%E5%85%A5%E9%97%A8/"/>
@@ -104,38 +788,19 @@ it.next();
   </entry>
   
   <entry>
-    <title><![CDATA[香山红叶节]]></title>
-    <link href="http://www.haiyue.me/2015/10/28/photo/xiangshan/"/>
-    <id>http://www.haiyue.me/2015/10/28/photo/xiangshan/</id>
-    <published>2015-10-27T16:00:00.000Z</published>
-    <updated>2015-10-28T11:28:22.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_6998.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7008.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7035.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7060.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7074.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7093.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7095.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7152.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7202.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7251.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7257.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7263.JPG" alt="图片"></p>
-<p><br></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_6998.JPG" alt="图片"><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiang]]>
-    </summary>
-    
-      <category term="风景" scheme="http://www.haiyue.me/tags/%E9%A3%8E%E6%99%AF/"/>
-    
-      <category term="摄影" scheme="http://www.haiyue.me/categories/%E6%91%84%E5%BD%B1/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[ES6-字符串的扩展]]></title>
     <link href="http://www.haiyue.me/2015/10/26/es6-string/"/>
     <id>http://www.haiyue.me/2015/10/26/es6-string/</id>
     <published>2015-10-25T16:00:00.000Z</published>
-    <updated>2015-10-26T15:20:40.000Z</updated>
-    <content type="html"><![CDATA[<p>读阮一峰老师《ECMAScript6入门》一书的笔记</p>
-<h2 id="字符的Unicode表示法">字符的Unicode表示法</h2><p>   之前不识别在“\u”后面跟上超过0xFFFF的数值（比如\u20BB7），现在用只要将码点放入大括号中就能识别了（比如\u{20BB7}）<br>   所以现在JavaScript共有6种方法可以表示一个字符</p>
+    <updated>2016-02-01T09:22:12.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="字符的Unicode表示法">字符的Unicode表示法</h2><p>   之前不识别在“\u”后面跟上超过0xFFFF的数值（比如\u20BB7），现在用只要将码点放入大括号中就能识别了（比如\u{20BB7}）<br>   所以现在JavaScript共有6种方法可以表示一个字符</p>
 <pre><code><span class="string">'\z'</span> === <span class="string">'z'</span>  <span class="comment">// true  </span>
 <span class="string">'\172'</span> === <span class="string">'z'</span> <span class="comment">// true  </span>
 <span class="string">'\x7A'</span> === <span class="string">'z'</span> <span class="comment">// true  </span>
 <span class="string">'\u007A'</span> === <span class="string">'z'</span> <span class="comment">// true  </span>
 <span class="string">'\u{7A}'</span> === <span class="string">'z'</span> <span class="comment">// true        </span>
-</code></pre><h2 id="codePointAt()_//_?">codePointAt() // ?</h2><p>   JavaScript内部，字符以UTF-16的格式储存，每个字符固定为2个字节。对于那些需要4个字节储存的字符（Unicode码点大于0xFFFF的字符），JavaScript会认为它们是两个字符。</p>
+</code></pre><a id="more"></a>      
+<h2 id="codePointAt()_//_?">codePointAt() // ?</h2><p>   JavaScript内部，字符以UTF-16的格式储存，每个字符固定为2个字节。对于那些需要4个字节储存的字符（Unicode码点大于0xFFFF的字符），JavaScript会认为它们是两个字符。</p>
 <pre><code><span class="keyword">var</span> s = <span class="string">"𠮷"</span>;
 s.length <span class="comment">// 2</span>
 s.charAt(<span class="number">0</span>) <span class="comment">// ''</span>
@@ -194,11 +859,17 @@ tag`<span class="javascript">Hello ${ a + b } world ${ a * b}</span>`; <span cla
 <pre><code>String.raw<span class="escape">`H</span>i\n${<span class="number">2</span>+<span class="number">3</span>}!<span class="escape">`;</span> // <span class="string">"Hi\\n5!"</span>
 </code></pre><p>   String.raw方法也可以作为正常的函数使用。这时，它的第一个参数，应该是一个具有raw属性的对象，且raw属性的值应该是一个数组。</p>
 <pre><code><span class="filename">String.raw({ raw</span>: <span class="string">'test'</span> }, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>); // <span class="string">'t0e1s2t'</span>, 等同于 <span class="filename">String.raw({ raw</span>: [<span class="string">'t'</span>,<span class="string">'e'</span>,<span class="string">'s'</span>,<span class="string">'t'</span>] }, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>);
-</code></pre><p><br></p>
+</code></pre><p>读阮一峰老师《ECMAScript6入门》一书的笔记<br><br></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>读阮一峰老师《ECMAScript6入门》一书的笔记</p>
-<h2 id="字符的Unicode表示法">字符的Unicode表示法</h2><p>   之前不识别在“\u”后面跟上超过0xFFFF的数值（比如\u20BB7），现在用只要将码点放入大括号中就能识别了（比如]]>
+    <![CDATA[<h2 id="字符的Unicode表示法">字符的Unicode表示法</h2><p>   之前不识别在“\u”后面跟上超过0xFFFF的数值（比如\u20BB7），现在用只要将码点放入大括号中就能识别了（比如\u{20BB7}）<br>   所以现在JavaScript共有6种方法可以表示一个字符</p>
+<pre><code><span class="string">'\z'</span> === <span class="string">'z'</span>  <span class="comment">// true  </span>
+<span class="string">'\172'</span> === <span class="string">'z'</span> <span class="comment">// true  </span>
+<span class="string">'\x7A'</span> === <span class="string">'z'</span> <span class="comment">// true  </span>
+<span class="string">'\u007A'</span> === <span class="string">'z'</span> <span class="comment">// true  </span>
+<span class="string">'\u{7A}'</span> === <span class="string">'z'</span> <span class="comment">// true        </span>
+</code></pre>]]>
+    
     </summary>
     
       <category term="ECMAScript6入门" scheme="http://www.haiyue.me/tags/ECMAScript6%E5%85%A5%E9%97%A8/"/>
@@ -212,23 +883,26 @@ tag`<span class="javascript">Hello ${ a + b } world ${ a * b}</span>`; <span cla
     <link href="http://www.haiyue.me/2015/07/23/iterm2/"/>
     <id>http://www.haiyue.me/2015/07/23/iterm2/</id>
     <published>2015-07-22T16:00:00.000Z</published>
-    <updated>2015-08-05T05:14:08.000Z</updated>
+    <updated>2016-02-02T04:13:10.000Z</updated>
     <content type="html"><![CDATA[<p>自从换了mac后连接远程linux服务器一直用电脑自带的终端，每次都要输密码，烦死了。看同事用iTerm挺方便的，就自己也弄了一个。</p>
-<h2 id="下载地址">下载地址</h2><p><a href="http://www.iterm2.com/" target="_blank" rel="external">http://www.iterm2.com/</a></p>
-<h3 id="记住远程服务器密码">记住远程服务器密码</h3><p>打开设置<br><img src="/img/iterm/iterm1.jpg" alt="图片"><br>相关配置<br><img src="/img/iterm/iterm2.jpg" alt="图片"><br>脚本<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">timeout</span> <span class="number">30</span></span><br><span class="line">spawn ssh liuhaiming@<span class="number">122.92</span><span class="number">.222</span><span class="number">.122</span> -p51618</span><br><span class="line">expect <span class="string">"*password*"</span></span><br><span class="line">send “**********\n<span class="string">"</span><br><span class="line">interact</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="替换图标">替换图标</h2><p>原图标看着不好看,替换一个喜欢的图标<br><img src="/img/iterm/iterm3.jpg" alt="图片">  <img src="/img/iterm/iterm4.jpg" alt="图片"><br>找好自己要替换的图标<br><a href="https://dribbble.com/shots/656627-Terminal-Macintosh-Icon" target="_blank" rel="external">https://dribbble.com/shots/656627-Terminal-Macintosh-Icon</a><br>找到自己要替换图标的app<br><img src="/img/iterm/iterm5.jpg" alt="图片"><br>右键显示简介，复制下载好的图标，并选中要替换的图标 command + v 就替换好了<br><img src="/img/iterm/iterm6.jpg" alt="图片">    </p>
-<h2 id="换个自己喜欢的主题">换个自己喜欢的主题</h2><p><a href="http://iterm2colorschemes.com/" target="_blank" rel="external">http://iterm2colorschemes.com/</a></p>
-<h2 id="相关命令">相关命令</h2><p>command + O: 打开配置方便选择<br><img src="/img/iterm/iterm7.jpg" alt="图片">    </p>
+<h3 id="下载地址">下载地址</h3><p><a href="http://www.iterm2.com/" target="_blank" rel="external">http://www.iterm2.com/</a></p>
+<h3 id="记住远程服务器密码">记住远程服务器密码</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">timeout</span> <span class="number">30</span></span><br><span class="line">spawn ssh liuhaiming@<span class="number">122.92</span><span class="number">.222</span><span class="number">.122</span> -p51618</span><br><span class="line">expect <span class="string">"*password*"</span></span><br><span class="line">send “**********\n<span class="string">"</span><br><span class="line">interact</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>  
+<h3 id="替换图标">替换图标</h3><p>原图标看着不好看,替换一个喜欢的图标<br>找好自己要替换的图标<br><a href="https://dribbble.com/shots/656627-Terminal-Macintosh-Icon" target="_blank" rel="external">https://dribbble.com/shots/656627-Terminal-Macintosh-Icon</a><br>找到自己要替换图标的app<br>右键显示简介，复制下载好的图标，并选中要替换的图标 command + v 就替换好了    </p>
+<h3 id="换个自己喜欢的主题">换个自己喜欢的主题</h3><p><a href="http://iterm2colorschemes.com/" target="_blank" rel="external">http://iterm2colorschemes.com/</a></p>
+<h3 id="相关命令">相关命令</h3><p>command + O: 打开配置方便选择    </p>
 <p><br></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>自从换了mac后连接远程linux服务器一直用电脑自带的终端，每次都要输密码，烦死了。看同事用iTerm挺方便的，就自己也弄了一个。</p>
-<h2 id="下载地址">下载地址</h2><p><a href="http://www.iterm2.com/" target=]]>
+<h3 id="下载地址">下载地址</h3><p><a href="http://www.iterm2.com/">http://www.iterm2.com/</a></p>
+<h3 id="记住远程服务器密码">记住远程服务器密码</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">timeout</span> <span class="number">30</span></span><br><span class="line">spawn ssh liuhaiming@<span class="number">122.92</span><span class="number">.222</span><span class="number">.122</span> -p51618</span><br><span class="line">expect <span class="string">"*password*"</span></span><br><span class="line">send “**********\n<span class="string">"</span><br><span class="line">interact</span></span><br></pre></td></tr></table></figure>]]>
+    
     </summary>
     
       <category term="软件" scheme="http://www.haiyue.me/tags/%E8%BD%AF%E4%BB%B6/"/>
     
-      <category term="软件" scheme="http://www.haiyue.me/categories/%E8%BD%AF%E4%BB%B6/"/>
+      <category term="编程" scheme="http://www.haiyue.me/categories/%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
@@ -237,9 +911,10 @@ tag`<span class="javascript">Hello ${ a + b } world ${ a * b}</span>`; <span cla
     <link href="http://www.haiyue.me/2015/07/22/nexttick_immediate/"/>
     <id>http://www.haiyue.me/2015/07/22/nexttick_immediate/</id>
     <published>2015-07-21T16:00:00.000Z</published>
-    <updated>2015-07-21T18:01:14.000Z</updated>
+    <updated>2016-02-02T04:13:35.000Z</updated>
     <content type="html"><![CDATA[<h2 id="区别">区别</h2><p>1、nextTick和setImmediate主要的区别在于任务插入的位置nextTick的插入位置是在当前帧的末尾、io回调之前，如果nextTick过多，会导致io回调不断延后setImmediate的插入位置是在下一帧，不会影响io回调。</p>
 <p>2、Nodejs的特点是事件驱动，异步I/O产生的高并发，产生此特点的引擎是事件循环，事件被分门别类地归到对应的事件观察者上，比如idle观察者，定时器观察者，I/O观察者等等，事件循环每次循环称为Tick，每次Tick按照先后顺序从事件观察者中取出事件进行处理。<br>调用setTimeout()时创建的计时器会被放入定时器观察者内部的红黑树中，每次Tick时，会从该红黑树中检查定时器是否超过定时时间，超过的话，就立即执行对应的回调函数。由于定时器是超时触发，这会导致触发精确度降低。</p>
+<a id="more"></a>  
 <h2 id="代码例子">代码例子</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nextTick</span><span class="params">(msg, cb)</span> </span>&#123;</span><br><span class="line">  process.nextTick(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'tick: '</span> + msg);</span><br><span class="line">    <span class="keyword">if</span> (cb) &#123;</span><br><span class="line">      cb();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">immediate</span><span class="params">(msg, cb)</span> </span>&#123;</span><br><span class="line">  setImmediate(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'immediate : '</span> + msg);</span><br><span class="line">    <span class="keyword">if</span> (cb) &#123;</span><br><span class="line">      cb();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">nextTick(<span class="string">'1'</span>);</span><br><span class="line">nextTick(<span class="string">'2'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  nextTick(<span class="string">'10'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">immediate(<span class="string">'3'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  nextTick(<span class="string">'5'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">nextTick(<span class="string">'7'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  immediate(<span class="string">'9'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">immediate(<span class="string">'4'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  nextTick(<span class="string">'8'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> n = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> timer = setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  n++;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'interval:'</span>, n);</span><br><span class="line">  nextTick(<span class="string">'tick from interval: '</span> +  n);</span><br><span class="line">  nextTick(<span class="string">'another tick from interval: '</span> +  n);</span><br><span class="line">  immediate(<span class="string">'immediate from interval: '</span> + n);</span><br><span class="line">  immediate(<span class="string">'another immediate from interval: '</span> + n);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( n === <span class="number">3</span> ) &#123;</span><br><span class="line">    clearInterval(timer);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'the last line of the program.'</span>);</span><br></pre></td></tr></table></figure>
 <h2 id="结果">结果</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">the last line of the program.</span><br><span class="line"><span class="string">tick:</span> <span class="number">1</span></span><br><span class="line"><span class="string">tick:</span> <span class="number">2</span></span><br><span class="line"><span class="string">tick:</span> <span class="number">7</span></span><br><span class="line"><span class="string">tick:</span> <span class="number">10</span></span><br><span class="line"><span class="string">interval:</span> <span class="number">1</span></span><br><span class="line"><span class="string">tick:</span> tick from <span class="string">interval:</span> <span class="number">1</span></span><br><span class="line"><span class="string">tick:</span> another tick from <span class="string">interval:</span> <span class="number">1</span></span><br><span class="line"><span class="string">immediate :</span> <span class="number">3</span></span><br><span class="line"><span class="string">immediate :</span> <span class="number">4</span></span><br><span class="line"><span class="string">immediate :</span> <span class="number">9</span></span><br><span class="line"><span class="string">immediate :</span> immediate from <span class="string">interval:</span> <span class="number">1</span></span><br><span class="line"><span class="string">immediate :</span> another immediate from <span class="string">interval:</span> <span class="number">1</span></span><br><span class="line"><span class="string">tick:</span> <span class="number">5</span></span><br><span class="line"><span class="string">tick:</span> <span class="number">8</span></span><br><span class="line"><span class="string">interval:</span> <span class="number">2</span></span><br><span class="line"><span class="string">tick:</span> tick from <span class="string">interval:</span> <span class="number">2</span></span><br><span class="line"><span class="string">tick:</span> another tick from <span class="string">interval:</span> <span class="number">2</span></span><br><span class="line"><span class="string">immediate :</span> immediate from <span class="string">interval:</span> <span class="number">2</span></span><br><span class="line"><span class="string">immediate :</span> another immediate from <span class="string">interval:</span> <span class="number">2</span></span><br><span class="line"><span class="string">interval:</span> <span class="number">3</span></span><br><span class="line"><span class="string">tick:</span> tick from <span class="string">interval:</span> <span class="number">3</span></span><br><span class="line"><span class="string">tick:</span> another tick from <span class="string">interval:</span> <span class="number">3</span></span><br><span class="line"><span class="string">immediate :</span> immediate from <span class="string">interval:</span> <span class="number">3</span></span><br><span class="line"><span class="string">immediate :</span> another immediate from <span class="string">interval:</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
 <h2 id="Maximum_call_stack_size_exceeded错误的原因">Maximum call stack size exceeded错误的原因</h2><p>之所以会发生Maximum call stack size exceeded,因为process.maxTickDepth的缺省值是1000，如果递归调用nextTick只能调用1000次，超过1000就会报这个错，但并不是真正栈溢出，只是想给你一个提示不希望你递归调用nextTick太多次，如果nextTick递归调用，那么其他的回调事件就会等待，会造成event loop饥饿，所以官方推荐用setImmediate作为递归调用</p>
@@ -247,14 +922,14 @@ tag`<span class="javascript">Hello ${ a + b } world ${ a * b}</span>`; <span cla
 <p><br></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h2 id="区别">区别</h2><p>1、nextTick和setImmediate主要的区别在于任务插入的位置nextTick的插入位置是在当前帧的末尾、io回调之前，如果nextTick过多，会导致io回调不断延后setImmediate的插入位置是在下一帧，不会影响i]]>
+    <![CDATA[<h2 id="区别">区别</h2><p>1、nextTick和setImmediate主要的区别在于任务插入的位置nextTick的插入位置是在当前帧的末尾、io回调之前，如果nextTick过多，会导致io回调不断延后setImmediate的插入位置是在下一帧，不会影响io回调。</p>
+<p>2、Nodejs的特点是事件驱动，异步I/O产生的高并发，产生此特点的引擎是事件循环，事件被分门别类地归到对应的事件观察者上，比如idle观察者，定时器观察者，I/O观察者等等，事件循环每次循环称为Tick，每次Tick按照先后顺序从事件观察者中取出事件进行处理。<br>调用setTimeout()时创建的计时器会被放入定时器观察者内部的红黑树中，每次Tick时，会从该红黑树中检查定时器是否超过定时时间，超过的话，就立即执行对应的回调函数。由于定时器是超时触发，这会导致触发精确度降低。</p>]]>
+    
     </summary>
     
       <category term="js" scheme="http://www.haiyue.me/tags/js/"/>
     
-      <category term="node" scheme="http://www.haiyue.me/tags/node/"/>
-    
-      <category term="node" scheme="http://www.haiyue.me/categories/node/"/>
+      <category term="编程" scheme="http://www.haiyue.me/categories/%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
@@ -263,9 +938,10 @@ tag`<span class="javascript">Hello ${ a + b } world ${ a * b}</span>`; <span cla
     <link href="http://www.haiyue.me/2015/03/26/summary/"/>
     <id>http://www.haiyue.me/2015/03/26/summary/</id>
     <published>2015-03-25T16:00:00.000Z</published>
-    <updated>2015-07-21T18:00:00.000Z</updated>
+    <updated>2016-02-02T04:13:55.000Z</updated>
     <content type="html"><![CDATA[<p>来现在这个公司已经大半年了，做了许多工作，也学习到许多新的知识，一直处在忙忙碌碌工作中，前端后端都做了一些，要学习的东西感觉太多。最近几天工作相对轻松些，准备花点时间整理一下自己的知识，在这篇文章中先大概整理一下工作中所用到的知识及技术，然后再抽空进行细化的整理，希望通过这次反省找到自己得薄弱和不足，并进行针对性的补充和学习。</p>
 <p>整体项目结构是进行前后端分离的，这样既能让前后端人员各司其职提高工作效率，也能使后端同时给多个前端提供数据支持（微信，WEB，APP共用一个后端）</p>
+<a id="more"></a>  
 <h2 id="后端">后端</h2><h3 id="项目：ycombo">项目：ycombo</h3><pre><code>作用：通过RESTFUL的方式对外提供接口
 使用技术：JAVA、Spring、SpringMvc、Mybatis、Maven、Nginx
 工具：IntelliJ IDEA、<span class="keyword">Mac</span>终端、Sequel <span class="keyword">Pro</span>、FileZilla
@@ -290,12 +966,14 @@ tag`<span class="javascript">Hello ${ a + b } world ${ a * b}</span>`; <span cla
 </code></pre><p><br></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>来现在这个公司已经大半年了，做了许多工作，也学习到许多新的知识，一直处在忙忙碌碌工作中，前端后端都做了一些，要学习的东西感觉太多。最近几天工作相对轻松些，准备花点时间整理一下自己的知识，在这篇文章中先大概整理一下工作中所用到的知识及技术，然后再抽空进行细化的整理，希望通过这]]>
+    <![CDATA[<p>来现在这个公司已经大半年了，做了许多工作，也学习到许多新的知识，一直处在忙忙碌碌工作中，前端后端都做了一些，要学习的东西感觉太多。最近几天工作相对轻松些，准备花点时间整理一下自己的知识，在这篇文章中先大概整理一下工作中所用到的知识及技术，然后再抽空进行细化的整理，希望通过这次反省找到自己得薄弱和不足，并进行针对性的补充和学习。</p>
+<p>整体项目结构是进行前后端分离的，这样既能让前后端人员各司其职提高工作效率，也能使后端同时给多个前端提供数据支持（微信，WEB，APP共用一个后端）</p>]]>
+    
     </summary>
     
       <category term="总结" scheme="http://www.haiyue.me/tags/%E6%80%BB%E7%BB%93/"/>
     
-      <category term="总结" scheme="http://www.haiyue.me/categories/%E6%80%BB%E7%BB%93/"/>
+      <category term="编程" scheme="http://www.haiyue.me/categories/%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
@@ -304,9 +982,10 @@ tag`<span class="javascript">Hello ${ a + b } world ${ a * b}</span>`; <span cla
     <link href="http://www.haiyue.me/2015/03/10/web-sit/"/>
     <id>http://www.haiyue.me/2015/03/10/web-sit/</id>
     <published>2015-03-09T16:00:00.000Z</published>
-    <updated>2015-07-21T17:54:57.000Z</updated>
+    <updated>2016-02-02T04:14:17.000Z</updated>
     <content type="html"><![CDATA[<p>记录自己收集的一些网站资源，便于查阅</p>
-<h2 id="博客">博客</h2><h3 id="寻梦的尕柳"><a href="http://www.liuhaiming.me" target="_blank" rel="external">寻梦的尕柳</a></h3><p>地址：<a href="http://www.liuhaiming.me" target="_blank" rel="external">http://www.liuhaiming.me</a><br>备注：我自己得个人博客，记录学习以及生活</p>
+<h2 id="博客">博客</h2><h3 id="寻梦的尕柳"><a href="http://haiyue.me" target="_blank" rel="external">寻梦的尕柳</a></h3><p>地址：<a href="http://haiyue.me" target="_blank" rel="external">http://haiyue.me</a><br>备注：我自己得个人博客，记录学习以及生活</p>
+<a id="more"></a>  
 <hr>
 <h3 id="粉丝日志"><a href="http://blog.fens.me" target="_blank" rel="external">粉丝日志</a></h3><p>地址：<a href="http://blog.fens.me" target="_blank" rel="external">http://blog.fens.me</a><br>备注：跨界的IT博客|Hadoop家族, R, RHadoop, Nodejs, AngularJS, KVM, NoSQL, IT金融</p>
 <hr>
@@ -316,12 +995,13 @@ tag`<span class="javascript">Hello ${ a + b } world ${ a * b}</span>`; <span cla
 ]]></content>
     <summary type="html">
     <![CDATA[<p>记录自己收集的一些网站资源，便于查阅</p>
-<h2 id="博客">博客</h2><h3 id="寻梦的尕柳"><a href="http://www.liuhaiming.me" target="_blank" rel="external">寻梦的尕柳</a></h3>]]>
+<h2 id="博客">博客</h2><h3 id="寻梦的尕柳"><a href="http://haiyue.me">寻梦的尕柳</a></h3><p>地址：<a href="http://haiyue.me">http://haiyue.me</a><br>备注：我自己得个人博客，记录学习以及生活</p>]]>
+    
     </summary>
     
-      <category term="资源" scheme="http://www.haiyue.me/tags/%E8%B5%84%E6%BA%90/"/>
+      <category term="总结" scheme="http://www.haiyue.me/tags/%E6%80%BB%E7%BB%93/"/>
     
-      <category term="资源" scheme="http://www.haiyue.me/categories/%E8%B5%84%E6%BA%90/"/>
+      <category term="编程" scheme="http://www.haiyue.me/categories/%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   

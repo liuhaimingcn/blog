@@ -3,10 +3,10 @@ title: 常用网站记录
 date: 2015-3-10
 
 tags:
-    - 资源
+    - 总结
 
 categories:
-    - 资源
+    - 编程
 
 ---
 记录自己收集的一些网站资源，便于查阅
@@ -14,9 +14,11 @@ categories:
 ## 博客
 
 
-### [寻梦的尕柳](http://www.liuhaiming.me)  
-地址：http://www.liuhaiming.me	
+### [寻梦的尕柳](http://haiyue.me)  
+地址：http://haiyue.me	
 备注：我自己得个人博客，记录学习以及生活
+
+<!-- more -->  
 
 ---
 

@@ -2,38 +2,98 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://www.haiyue.me/2015/10/28/es6-generator/</loc>
-    <lastmod>2015-10-28T11:54:18.000Z</lastmod>
+    <loc>http://www.haiyue.me/2016/05/11/cache/</loc>
+    <lastmod>2016-05-11T06:10:11.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://www.haiyue.me/2015/10/28/photo/xiangshan/</loc>
-    <lastmod>2015-10-28T11:28:22.000Z</lastmod>
+    <loc>http://www.haiyue.me/2016/02/23/promises/</loc>
+    <lastmod>2016-02-23T04:28:23.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://www.haiyue.me/2015/10/26/es6-string/</loc>
-    <lastmod>2015-10-26T15:20:40.000Z</lastmod>
+    <loc>http://www.haiyue.me/2016/02/18/ES6-in-depth/</loc>
+    <lastmod>2016-02-18T07:10:27.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://www.haiyue.me/2015/07/23/iterm2/</loc>
-    <lastmod>2015-08-05T05:14:08.000Z</lastmod>
+    <loc>http://www.haiyue.me/2016/02/16/photo/sanyacunjie/</loc>
+    <lastmod>2016-02-16T07:34:11.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://www.haiyue.me/2015/07/22/nexttick_immediate/</loc>
-    <lastmod>2015-07-21T18:01:14.000Z</lastmod>
+    <loc>http://www.haiyue.me/2016/02/02/es6-style/</loc>
+    <lastmod>2016-02-02T10:41:12.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://www.haiyue.me/2015/03/26/summary/</loc>
-    <lastmod>2015-07-21T18:00:00.000Z</lastmod>
+    <loc>http://www.haiyue.me/2016/02/02/es6-module/</loc>
+    <lastmod>2016-02-02T10:39:40.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/2016/02/02/es6-class/</loc>
+    <lastmod>2016-02-02T10:37:02.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/about/index.html</loc>
+    <lastmod>2016-02-02T07:45:01.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://www.haiyue.me/2015/03/10/web-sit/</loc>
-    <lastmod>2015-07-21T17:54:57.000Z</lastmod>
+    <lastmod>2016-02-02T04:14:17.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/2015/03/26/summary/</loc>
+    <lastmod>2016-02-02T04:13:55.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/2015/07/22/nexttick_immediate/</loc>
+    <lastmod>2016-02-02T04:13:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/2015/07/23/iterm2/</loc>
+    <lastmod>2016-02-02T04:13:10.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/2015/10/28/es6-generator/</loc>
+    <lastmod>2016-02-02T04:12:17.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/tags/index.html</loc>
+    <lastmod>2016-02-02T03:55:50.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/categories/index.html</loc>
+    <lastmod>2016-02-02T03:55:41.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/2016/01/06/photo/beijingdaxue/</loc>
+    <lastmod>2016-02-01T10:25:01.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/2015/10/28/photo/xiangshan/</loc>
+    <lastmod>2016-02-01T10:22:39.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/2016/01/06/photo/lansegangwan/</loc>
+    <lastmod>2016-02-01T10:18:33.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/2015/10/26/es6-string/</loc>
+    <lastmod>2016-02-01T09:22:12.000Z</lastmod>
   </url>
   
 </urlset>

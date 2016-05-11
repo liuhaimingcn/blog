@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 点滴
+title: 寻梦的尕柳
 subtitle: 幽幽一缕香，飘在深深旧梦中，宛如挥手袖底风，淡淡回首，也无风雨也无晴。
 description: 
 author: 寻梦的尕柳
@@ -62,7 +62,9 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: coney
+theme: minos
+
+duoshuo_shortname: liuhaiming
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html

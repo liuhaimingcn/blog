@@ -6,22 +6,17 @@ tags:
     - 软件
 
 categories:
-    - 软件
+    - 编程
 
 ---
 自从换了mac后连接远程linux服务器一直用电脑自带的终端，每次都要输密码，烦死了。看同事用iTerm挺方便的，就自己也弄了一个。
 
-## 下载地址
+### 下载地址
 
 http://www.iterm2.com/
 
 ### 记住远程服务器密码
 
-打开设置
-![图片](/img/iterm/iterm1.jpg)
-相关配置
-![图片](/img/iterm/iterm2.jpg)
-脚本
 ```
 set timeout 30
 spawn ssh liuhaiming@122.92.222.122 -p51618
@@ -30,24 +25,22 @@ send “**********\n"
 interact
 ```
 
-## 替换图标
+<!-- more -->  
+
+### 替换图标
 
 原图标看着不好看,替换一个喜欢的图标
-![图片](/img/iterm/iterm3.jpg)  ![图片](/img/iterm/iterm4.jpg)  
 找好自己要替换的图标	
 https://dribbble.com/shots/656627-Terminal-Macintosh-Icon	
 找到自己要替换图标的app
-![图片](/img/iterm/iterm5.jpg)	
 右键显示简介，复制下载好的图标，并选中要替换的图标 command + v 就替换好了	
-![图片](/img/iterm/iterm6.jpg)	
 
-## 换个自己喜欢的主题
+### 换个自己喜欢的主题
 
 http://iterm2colorschemes.com/
 
-## 相关命令
+### 相关命令
 
 command + O: 打开配置方便选择	
-![图片](/img/iterm/iterm7.jpg)	
 
 <br>

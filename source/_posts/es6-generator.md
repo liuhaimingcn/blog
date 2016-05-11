@@ -9,7 +9,6 @@ categories:
     - 笔记
 
 ---
-读阮一峰老师《ECMAScript6入门》一书的笔记
 
 ## 基本概念
 Generator函数是ES6提供的一种异步编程解决方案  
@@ -28,6 +27,8 @@ Generator函数有两个特征。一是，function命令与函数名之间有一
     hw.next() // { value: undefined, done: true }
     
 每次调用遍历器对象的next方法，就会返回一个有着value和done两个属性的对象。value属性表示当前的内部状态的值，是yield语句后面那个表达式的值；done属性是一个布尔值，表示是否遍历结束。
+
+<!-- more --> 
 
 ##yield语句
 遍历器对象的next方法的运行逻辑如下。
@@ -150,4 +151,5 @@ Generator函数的暂停执行的效果，意味着可以把异步操作写在yi
 
 ##作为数据结构 // ?
     
+读阮一峰老师《ECMAScript6入门》一书的笔记    
 <br>
