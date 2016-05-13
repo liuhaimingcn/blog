@@ -58,6 +58,56 @@
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-UnsupportedOperationException" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/13/UnsupportedOperationException/">List 进行 remove 操作时抛出 java.lang.UnsupportedOperationException 异常分析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/13/UnsupportedOperationException/" class="article-date">
+  <time datetime="2016-05-12T16:00:00.000Z" itemprop="datePublished">2016-05-13</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编程/">编程</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天将一个数组转换成 List 然后进行 remove 操作时却抛出 java.lang.UnsupportedOperationException 异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">String pattern = <span class="string">" ^, v, m, n-music-name, $ "</span>;</span><br><span class="line">String[] patternSplit = Utils.getStringTrimSplit(pattern, <span class="string">","</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 去除模式中的^和$标识</span></span><br><span class="line">List&lt;String&gt; natureList = Arrays.asList(patternSplit);</span><br><span class="line"><span class="keyword">if</span> (<span class="string">"^"</span>.equals(natureList.get(<span class="number">0</span>))) &#123;</span><br><span class="line">    natureList.remove(<span class="number">0</span>); <span class="comment">// throw java.lang.UnsupportedOperationException</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="string">"$"</span>.equals(natureList.get(natureList.size() - <span class="number">1</span>))) &#123;</span><br><span class="line">    natureList.remove(natureList.size() - <span class="number">1</span>); <span class="comment">// throw java.lang.UnsupportedOperationException</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">String[] natureArray = natureList.toArray(<span class="keyword">new</span> String[natureList.size()]);</span><br><span class="line">System.out.println(natureArray.length);</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2016/05/13/UnsupportedOperationException/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+    
       <article id="post-cache" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -254,6 +304,55 @@
 
 
     
+      <article id="post-es6-style" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/02/es6-style/">ES6-Module</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/02/02/es6-style/" class="article-date">
+  <time datetime="2016-02-01T16:00:00.000Z" itemprop="datePublished">2016-02-02</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="规格文件">规格文件</h1><p>规格文件是计算机语言的官方标准，详细描述语法规则和实现方法。<br>ECMAScript 6的规格，可以在ECMA国际标准组织的官方网站（www.ecma-international.org/ecma-262/6.0/）免费下载和在线阅读。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/02/02/es6-style/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript6入门/">ECMAScript6入门</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+    
       <article id="post-es6-class" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -304,55 +403,6 @@ Point.prototype.toString = <span class="function"><span class="keyword">function
         
           <p class="article-more-link">
             <a href="/2016/02/02/es6-class/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript6入门/">ECMAScript6入门</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-es6-style" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/02/es6-style/">ES6-Module</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/02/02/es6-style/" class="article-date">
-  <time datetime="2016-02-01T16:00:00.000Z" itemprop="datePublished">2016-02-02</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/笔记/">笔记</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="规格文件">规格文件</h1><p>规格文件是计算机语言的官方标准，详细描述语法规则和实现方法。<br>ECMAScript 6的规格，可以在ECMA国际标准组织的官方网站（www.ecma-international.org/ecma-262/6.0/）免费下载和在线阅读。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/02/es6-style/#more">Read More</a>
           </p>
         
       
@@ -497,49 +547,6 @@ Point.prototype.toString = <span class="function"><span class="keyword">function
         
           <p class="article-more-link">
             <a href="/2016/01/06/photo/beijingdaxue/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-photo/xiangshan" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/28/photo/xiangshan/">香山红叶节</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2015/10/28/photo/xiangshan/" class="article-date">
-  <time datetime="2015-10-27T16:00:00.000Z" itemprop="datePublished">2015-10-28</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/摄影/">摄影</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://7xia33.com1.z0.glb.clouddn.com/IMG_70742324.jpg" alt=""><br>老早爬起来去香山看红叶，没有想象中的那么好，红叶不多，可能去的还不是时候。<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/10/28/photo/xiangshan/#more">Read More</a>
           </p>
         
       
