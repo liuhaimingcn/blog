@@ -58,6 +58,144 @@
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-es6-module" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/02/es6-module/">ES6-Module</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/02/02/es6-module/" class="article-date">
+  <time datetime="2016-02-01T16:00:00.000Z" itemprop="datePublished">2016-02-02</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ES6的Class只是面向对象编程的语法糖，升级了ES5的构造函数的原型链继承的写法，并没有解决模块化问题。Module功能就是为了解决这个问题而提出的。<br>在ES6之前，社区制定了一些模块加载方案，最主要的有CommonJS和AMD两种。前者用于服务器，后者用于浏览器。ES6在语言规格的层面上，实现了模块功能，而且实现得相当简单，完全可以取代现有的CommonJS和AMD规范，成为浏览器和服务器通用的模块解决方案。</p>
+<pre><code>// CommonJS模块
+<span class="built_in">let</span> { <span class="built_in">stat</span>, exists, <span class="built_in">read</span>File } = require(<span class="string">'fs'</span>);
+</code></pre><p>上面代码的实质是整体加载fs模块（即加载fs的所有方法），生成一个对象（_fs），然后再从这个对象上面读取3个方法。这种加载称为“运行时加载”，因为只有运行时才能得到这个对象，导致完全没办法在编译时做“静态优化”。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/02/02/es6-module/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript6入门/">ECMAScript6入门</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-photo/lansegangwan" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/06/photo/lansegangwan/">蓝色港湾跨年夜</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/01/06/photo/lansegangwan/" class="article-date">
+  <time datetime="2016-01-05T16:00:00.000Z" itemprop="datePublished">2016-01-06</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/摄影/">摄影</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_75423232.jpg" alt=""><br>    跨年夜无聊去蓝色港湾看灯展，还是挺好看的。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/01/06/photo/lansegangwan/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-photo/beijingdaxue" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/06/photo/beijingdaxue/">北京大雪</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/01/06/photo/beijingdaxue/" class="article-date">
+  <time datetime="2016-01-05T16:00:00.000Z" itemprop="datePublished">2016-01-06</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/摄影/">摄影</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://7xia33.com1.z0.glb.clouddn.com/bjdaxIMG_733823232.jpg" alt=""><br>    北京难得一见的大雪，冰天雪地的很好看。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/01/06/photo/beijingdaxue/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+  </div>
+  
+</article>
+
+
+    
       <article id="post-photo/xiangshan" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     

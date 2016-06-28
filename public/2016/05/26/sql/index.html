@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>sql 操作 - 寻梦的尕柳</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="删除重复的数据
+1234567delete a from tb_dict awhere (a.keyword,a.nature) in (	select * from (select keyword,nature from tb_dict group by keyword, nature having count(*) &amp;gt; 1) b) and a.id not in (	select * f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql 操作">
+<meta property="og:url" content="http://www.haiyue.me/2016/05/26/sql/index.html">
+<meta property="og:site_name" content="寻梦的尕柳">
+<meta property="og:description" content="删除重复的数据
+1234567delete a from tb_dict awhere (a.keyword,a.nature) in (	select * from (select keyword,nature from tb_dict group by keyword, nature having count(*) &amp;gt; 1) b) and a.id not in (	select * f">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sql 操作">
+<meta name="twitter:description" content="删除重复的数据
+1234567delete a from tb_dict awhere (a.keyword,a.nature) in (	select * from (select keyword,nature from tb_dict group by keyword, nature having count(*) &amp;gt; 1) b) and a.id not in (	select * f">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">寻梦的尕柳</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/categories/编程">编程</a>
+        
+          <a class="main-nav-link" href="/categories/笔记">笔记</a>
+        
+          <a class="main-nav-link" href="/categories/摄影">摄影</a>
+        
+          <a class="main-nav-link" href="/tags">标签</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于我</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="q" value="site:http://www.haiyue.me"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-sql" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      sql 操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/26/sql/" class="article-date">
+  <time datetime="2016-05-25T16:00:00.000Z" itemprop="datePublished">2016-05-26</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编程/">编程</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>删除重复的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">delete</span> a <span class="keyword">from</span> tb_dict a</span><br><span class="line"><span class="keyword">where</span> (a.keyword,a.nature) <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> keyword,nature <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature <span class="keyword">having</span> <span class="keyword">count</span>(*) &gt; <span class="number">1</span>) b</span><br><span class="line">) </span><br><span class="line"><span class="keyword">and</span> a.id <span class="keyword">not</span> <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> <span class="keyword">min</span>(id) <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature <span class="keyword">having</span> <span class="keyword">count</span>(*)&gt;<span class="number">1</span>) c</span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>      
+<p>查询重复的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> tb_dict a </span><br><span class="line"><span class="keyword">where</span> (a.keyword,a.nature, a.freq) <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> keyword,nature, freq <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature, freq <span class="keyword">having</span> <span class="keyword">count</span>(*) &gt; <span class="number">1</span></span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/">sql</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/26/mysql-batch-delete/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          mysql 批量删除错误分析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/13/UnsupportedOperationException/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">List 进行 remove 操作时抛出 java.lang.UnsupportedOperationException 异常分析&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-sql" data-title="sql 操作" data-url="http://www.haiyue.me/2016/05/26/sql/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'liuhaiming'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  </section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 寻梦的尕柳&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>

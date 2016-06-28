@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.haiyue.me/2016/05/28/android-base/</loc>
+    <lastmod>2016-06-28T06:56:19.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/2016/05/26/sql/</loc>
+    <lastmod>2016-05-26T09:49:12.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/2016/05/26/mysql-batch-delete/</loc>
+    <lastmod>2016-05-26T08:08:12.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.haiyue.me/2016/05/13/UnsupportedOperationException/</loc>
     <lastmod>2016-05-13T07:47:18.000Z</lastmod>
   </url>

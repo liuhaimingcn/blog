@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android 基础 - 寻梦的尕柳</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android 开发的基本环境
+JDK (Java Development Kit)  
+IDE (Android Studio)  
+Android SDK (Android Software Development Kit)  
+ADT (Android Development Tools)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 基础">
+<meta property="og:url" content="http://www.haiyue.me/2016/05/28/android-base/index.html">
+<meta property="og:site_name" content="寻梦的尕柳">
+<meta property="og:description" content="Android 开发的基本环境
+JDK (Java Development Kit)  
+IDE (Android Studio)  
+Android SDK (Android Software Development Kit)  
+ADT (Android Development Tools)">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 基础">
+<meta name="twitter:description" content="Android 开发的基本环境
+JDK (Java Development Kit)  
+IDE (Android Studio)  
+Android SDK (Android Software Development Kit)  
+ADT (Android Development Tools)">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">寻梦的尕柳</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/categories/编程">编程</a>
+        
+          <a class="main-nav-link" href="/categories/笔记">笔记</a>
+        
+          <a class="main-nav-link" href="/categories/摄影">摄影</a>
+        
+          <a class="main-nav-link" href="/tags">标签</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于我</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="q" value="site:http://www.haiyue.me"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-android-base" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android 基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/28/android-base/" class="article-date">
+  <time datetime="2016-05-27T16:00:00.000Z" itemprop="datePublished">2016-05-28</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Android_开发的基本环境">Android 开发的基本环境</h3><ul>
+<li>JDK (Java Development Kit)  </li>
+<li>IDE (Android Studio)  </li>
+<li>Android SDK (Android Software Development Kit)  </li>
+<li>ADT (Android Development Tools)  </li>
+</ul>
+<a id="more"></a>
+<h3 id="ADT_和_Android_SDK的区别">ADT 和 Android SDK的区别</h3><ul>
+<li>ADT(Android Development Tools)： 目前Android开发所用的开发工具是Eclipse，在Eclipse编译IDE环境中，安装ADT，为Android开发提供开发工具的升级或者变更，简单理解为在Eclipse下开发工具的升级下载工具。ADT只是一个Eclipse的插件，里面可以设置sdk路径。     </li>
+<li>SDK(Software Development Kit)： 一般是一些被软件工程师用于为特定的软件包、软件框架、硬件平台、操作系统等建立应用软件的开发工具的集合。在Android中，他为开发者提供了库文件以及其他开发所用到的工具。简单理解为开发工具包集合，是整体开发中所用到的工具包，如果你不用Eclipse作为你的开发工具，你就不需要下载ADT，只下载SDK即可开发。  </li>
+</ul>
+<h3 id="JDK_和_JRE的区别">JDK 和 JRE的区别</h3><ul>
+<li>JRE(Java Runtime Environment): 顾名思义是java运行时环境，包含了java虚拟机，java基础类库。是使用java语言编写的程序运行所需要的软件环境，是提供给想运行java程序的用户使用的。  </li>
+<li>JDK(Java Development Kit): 顾名思义是java开发工具包，是程序员使用java语言编写java程序所需的开发工具包，是提供给程序员使用的。</li>
+<li>JDK包含了JRE，同时还包含了编译java源码的编译器javac，还包含了很多java程序调试和分析的工具：jconsole，jvisualvm等工具软件，还包含了java程序编写所需的文档和demo例子程序。如果你需要运行java程序，只需安装JRE就可以了。如果你需要编写java程序，需要安装JDK。</li>
+</ul>
+<h3 id="Android项目目录结构">Android项目目录结构</h3><ul>
+<li>src    放java代码的目录</li>
+<li>gen    目录下的文件是编译器生成</li>
+<li>assets 资源目录，例如音频、图片、xml（不一定要打入apk包中）</li>
+<li>bin    存放编译后的.class .dex  .apk文件的目录，编译器生成</li>
+<li>libs    放第三方jar包</li>
+<li><p>res    资源目录 （都要打入apk包中）</p>
+<ul>
+<li><p>drawable（根据名字存放不同分辨率的图片，Android系统为了适配移动设备会根据设备的DPI去对应的目录选择图片）</p>
+<ul>
+<li>Drawable-hdpi 存放高分辨率图片；</li>
+<li>Drawable-ldpi 存放低分辨率图片；</li>
+<li>Drawable-mdpi 存放中分辨率图片；</li>
+<li>Drawable-xhdpi 存放中高分辨率图片；</li>
+<li>Drawable-xhdpi 存放特高分辨率图片。</li>
+</ul>
+</li>
+<li><p>layout 布局文件，Android系统为了使控制层和View层做分离，对一些静态的界面尽量写成xml文件的形式放在Layout文件夹下。</p>
+</li>
+<li>menu 存放菜单文件</li>
+<li>values 存放文字信息配置<ul>
+<li>dimens.xml文件存放一些尺寸信息，为了适配屏幕用；</li>
+<li>string.xml文件存放文本信息；</li>
+<li>styles.xml 文件中定义了一些属性集，方便复用和修改。</li>
+</ul>
+</li>
+<li>AndroidManifest.xml 清单文件，这个文件列出了应用程序所提供的功能，需要什么权限，用到那些服务，当前应用的版本，最低支持android版本，应用的名称、图标和包名，有那些组件，每个组件的配置信息</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/26/mysql-batch-delete/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mysql 批量删除错误分析&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-android-base" data-title="Android 基础" data-url="http://www.haiyue.me/2016/05/28/android-base/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'liuhaiming'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  </section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 寻梦的尕柳&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>
