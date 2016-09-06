@@ -58,6 +58,124 @@
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-nginx-install" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/06/nginx-install/">Nginx 安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/09/06/nginx-install/" class="article-date">
+  <time datetime="2016-09-05T16:00:00.000Z" itemprop="datePublished">2016-09-06</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="安装编译工具及库文件">安装编译工具及库文件</h2><ul>
+<li>切换到root用户下面</li>
+<li>yum -y install make zlib zlib-devel gcc-c++ libtool  openssl openssl-devel</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2016/09/06/nginx-install/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/">Nginx</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-escape" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/05/escape/">Node.js中用escape解决sql注入</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/07/05/escape/" class="article-date">
+  <time datetime="2016-07-04T16:00:00.000Z" itemprop="datePublished">2016-07-05</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编程/">编程</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="直接拼写sql进行数据库的操作时，很容易被人在动态参数中加入特殊字符产生sql注入，威胁数据库的安全。">直接拼写sql进行数据库的操作时，很容易被人在动态参数中加入特殊字符产生sql注入，威胁数据库的安全。</h3><pre><code class="js"><span class="pi">'use strict'</span>;
+
+<span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">'mysql'</span>);
+
+<span class="keyword">let</span> param = <span class="string">'ns'</span>;
+<span class="keyword">let</span> pool = mysql.createPool({
+  user: <span class="string">'root'</span>,
+  password: <span class="string">'root'</span>,
+  database: <span class="string">'nlp_dict'</span>
+});
+
+pool.getConnection(<span class="function"><span class="keyword">function</span> <span class="params">(err, conn)</span> </span>{
+  <span class="keyword">let</span> sql = <span class="string">'select * from tb_nature where nature = "'</span> + param + <span class="string">'" and del_status=1'</span>;
+  conn.query(sql, <span class="function"><span class="keyword">function</span> <span class="params">(err, result)</span> </span>{
+    <span class="built_in">console</span>.log(result);
+  })
+});
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2016/07/05/escape/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+    
       <article id="post-android-base" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -463,125 +581,8 @@
 
 
     
-      <article id="post-es6-style" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/02/es6-style/">ES6-Module</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/02/02/es6-style/" class="article-date">
-  <time datetime="2016-02-01T16:00:00.000Z" itemprop="datePublished">2016-02-02</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/笔记/">笔记</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="规格文件">规格文件</h1><p>规格文件是计算机语言的官方标准，详细描述语法规则和实现方法。<br>ECMAScript 6的规格，可以在ECMA国际标准组织的官方网站（www.ecma-international.org/ecma-262/6.0/）免费下载和在线阅读。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/02/es6-style/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript6入门/">ECMAScript6入门</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-es6-class" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/02/es6-class/">ES6-Class基本语法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/02/02/es6-class/" class="article-date">
-  <time datetime="2016-02-01T16:00:00.000Z" itemprop="datePublished">2016-02-02</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/笔记/">笔记</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Class基本语法">Class基本语法</h2><p>ES6的class可以看作只是一个语法糖，它的绝大部分功能，ES5都可以做到，新的class写法只是让对象原型的写法更加清晰、更像面向对象编程的语法而已。</p>
-<pre><code><span class="comment">// old</span>
-  <span class="function"><span class="keyword">function</span> <span class="title">Point</span><span class="params">(x,y)</span></span>{
-  <span class="keyword">this</span>.x = x;
-  <span class="keyword">this</span>.y = y;
-}
-Point.prototype.toString = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
-  <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
-}
-<span class="comment">// new</span>
-<span class="keyword">class</span> Point {
-  <span class="constructor"><span class="keyword">constructor</span>(x, y) </span>{
-    <span class="keyword">this</span>.x = x;
-    <span class="keyword">this</span>.y = y;
-  }
-  toString() {
-    <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
-  }   
-}
-</code></pre>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/02/es6-class/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript6入门/">ECMAScript6入门</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-    
       <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Далее &raquo;</a>
       </nav>
     </section>
     <footer id="footer">

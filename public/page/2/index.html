@@ -110,6 +110,123 @@
 
 
     
+      <article id="post-es6-style" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/02/es6-style/">ES6-Module</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/02/02/es6-style/" class="article-date">
+  <time datetime="2016-02-01T16:00:00.000Z" itemprop="datePublished">2016-02-02</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="规格文件">规格文件</h1><p>规格文件是计算机语言的官方标准，详细描述语法规则和实现方法。<br>ECMAScript 6的规格，可以在ECMA国际标准组织的官方网站（www.ecma-international.org/ecma-262/6.0/）免费下载和在线阅读。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/02/02/es6-style/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript6入门/">ECMAScript6入门</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-es6-class" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/02/es6-class/">ES6-Class基本语法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/02/02/es6-class/" class="article-date">
+  <time datetime="2016-02-01T16:00:00.000Z" itemprop="datePublished">2016-02-02</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/笔记/">笔记</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Class基本语法">Class基本语法</h2><p>ES6的class可以看作只是一个语法糖，它的绝大部分功能，ES5都可以做到，新的class写法只是让对象原型的写法更加清晰、更像面向对象编程的语法而已。</p>
+<pre><code><span class="comment">// old</span>
+  <span class="function"><span class="keyword">function</span> <span class="title">Point</span><span class="params">(x,y)</span></span>{
+  <span class="keyword">this</span>.x = x;
+  <span class="keyword">this</span>.y = y;
+}
+Point.prototype.toString = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
+  <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
+}
+<span class="comment">// new</span>
+<span class="keyword">class</span> Point {
+  <span class="constructor"><span class="keyword">constructor</span>(x, y) </span>{
+    <span class="keyword">this</span>.x = x;
+    <span class="keyword">this</span>.y = y;
+  }
+  toString() {
+    <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
+  }   
+}
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2016/02/02/es6-class/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript6入门/">ECMAScript6入门</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+    
       <article id="post-photo/lansegangwan" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -455,108 +572,8 @@ hw.<span class="built_in">next</span>() // { value: undefined, done: <span class
 
 
     
-      <article id="post-summary" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/26/summary/">项目总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2015/03/26/summary/" class="article-date">
-  <time datetime="2015-03-25T16:00:00.000Z" itemprop="datePublished">2015-03-26</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/编程/">编程</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>来现在这个公司已经大半年了，做了许多工作，也学习到许多新的知识，一直处在忙忙碌碌工作中，前端后端都做了一些，要学习的东西感觉太多。最近几天工作相对轻松些，准备花点时间整理一下自己的知识，在这篇文章中先大概整理一下工作中所用到的知识及技术，然后再抽空进行细化的整理，希望通过这次反省找到自己得薄弱和不足，并进行针对性的补充和学习。</p>
-<p>整体项目结构是进行前后端分离的，这样既能让前后端人员各司其职提高工作效率，也能使后端同时给多个前端提供数据支持（微信，WEB，APP共用一个后端）</p>
-        
-          <p class="article-more-link">
-            <a href="/2015/03/26/summary/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-web-sit" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/10/web-sit/">常用网站记录</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2015/03/10/web-sit/" class="article-date">
-  <time datetime="2015-03-09T16:00:00.000Z" itemprop="datePublished">2015-03-10</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/编程/">编程</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>记录自己收集的一些网站资源，便于查阅</p>
-<h2 id="博客">博客</h2><h3 id="寻梦的尕柳"><a href="http://haiyue.me">寻梦的尕柳</a></h3><p>地址：<a href="http://haiyue.me">http://haiyue.me</a><br>备注：我自己得个人博客，记录学习以及生活</p>
-        
-          <p class="article-more-link">
-            <a href="/2015/03/10/web-sit/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-    
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+        <a class="extend prev" rel="prev" href="/">&laquo; Назад</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Далее &raquo;</a>
       </nav>
     </section>
     <footer id="footer">
