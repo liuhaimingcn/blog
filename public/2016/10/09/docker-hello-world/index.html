@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Docker Hello World - 寻梦的尕柳</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="查看linux版本123456$ lsb_release -aLSB Version:    :core-4.1-amd64:core-4.1-noarchDistributor ID: CentOSDescription:    CentOS Linux release 7.2.1511 (Core)Release:    7.2.1511Codename:   Core">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker Hello World">
+<meta property="og:url" content="http://www.haiyue.me/2016/10/09/docker-hello-world/index.html">
+<meta property="og:site_name" content="寻梦的尕柳">
+<meta property="og:description" content="查看linux版本123456$ lsb_release -aLSB Version:    :core-4.1-amd64:core-4.1-noarchDistributor ID: CentOSDescription:    CentOS Linux release 7.2.1511 (Core)Release:    7.2.1511Codename:   Core">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker Hello World">
+<meta name="twitter:description" content="查看linux版本123456$ lsb_release -aLSB Version:    :core-4.1-amd64:core-4.1-noarchDistributor ID: CentOSDescription:    CentOS Linux release 7.2.1511 (Core)Release:    7.2.1511Codename:   Core">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">寻梦的尕柳</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/categories/编程">编程</a>
+        
+          <a class="main-nav-link" href="/categories/笔记">笔记</a>
+        
+          <a class="main-nav-link" href="/categories/摄影">摄影</a>
+        
+          <a class="main-nav-link" href="/tags">标签</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于我</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="q" value="site:http://www.haiyue.me"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-docker-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Docker Hello World
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/10/09/docker-hello-world/" class="article-date">
+  <time datetime="2016-10-08T16:00:00.000Z" itemprop="datePublished">2016-10-09</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编程/">编程</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="查看linux版本">查看linux版本</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ lsb_release <span class="operator">-a</span></span><br><span class="line">LSB Version:    :core-<span class="number">4.1</span>-amd64:core-<span class="number">4.1</span>-noarch</span><br><span class="line">Distributor ID: CentOS</span><br><span class="line">Description:    CentOS Linux release <span class="number">7.2</span>.<span class="number">1511</span> (Core)</span><br><span class="line">Release:    <span class="number">7.2</span>.<span class="number">1511</span></span><br><span class="line">Codename:   Core</span><br></pre></td></tr></table></figure>
+<a id="more"></a>   
+<h2 id="Docker_环境准备">Docker 环境准备</h2><ul>
+<li>CentOS7 系统 CentOS-Extras 库中已带 Docker，可以直接安装</li>
+</ul>
+<h3 id="安装">安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ su root</span><br><span class="line"><span class="comment"># yum install docker</span></span><br></pre></td></tr></table></figure>
+<h3 id="启动">启动</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># service docker start</span></span><br><span class="line">Redirecting to /bin/systemctl start  docker.service</span><br></pre></td></tr></table></figure>
+<h3 id="让它随系统启动自动加载">让它随系统启动自动加载</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># service docker start</span></span><br><span class="line">Redirecting to /bin/systemctl start  docker.service</span><br><span class="line"><span class="comment"># chkconfig docker on</span></span><br><span class="line">注意：正在将请求转发到“systemctl <span class="built_in">enable</span> docker.service”。</span><br><span class="line">Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.</span><br></pre></td></tr></table></figure>
+<h2 id="镜像">镜像</h2><h3 id="获取镜像">获取镜像</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker pull ubuntu:12.04</span></span><br><span class="line">Trying to pull repository docker.io/library/ubuntu ...</span><br><span class="line"><span class="number">12.04</span>: Pulling from docker.io/library/ubuntu</span><br><span class="line"><span class="number">36</span>cef014d5d4: Pull complete</span><br><span class="line"><span class="number">0</span>d99ad4de1d2: Pull complete</span><br><span class="line"><span class="number">3</span>e32dbf1ab94: Pull complete</span><br><span class="line"><span class="number">44710</span>c456ffc: Pull complete</span><br><span class="line"><span class="number">56</span>e70ac3b314: Pull complete</span><br><span class="line">Digest: sha256:<span class="number">0</span>c25aa67baaff2b895882ce1e7d25efeeb15d0f38df6c099e23f481641<span class="built_in">cd</span>6cab</span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> docker.io/ubuntu:<span class="number">12.04</span></span><br></pre></td></tr></table></figure>
+<h3 id="列出本地已有的镜像">列出本地已有的镜像</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">docker.io/ubuntu    <span class="number">12.04</span>               e216a057b1cb        <span class="number">12</span> days ago         <span class="number">103.6</span> MB</span><br></pre></td></tr></table></figure>
+<ul>
+<li>REPOSITORY: 来自于哪个仓库</li>
+<li>TAG: 镜像的标记（如果不指定具体的标记，则默认使用 latest 标记信息。）</li>
+<li>IMAGE ID: 它的 ID 号（唯一）</li>
+<li>CREATED: 创建时间</li>
+<li>SIZE: 镜像大小</li>
+</ul>
+<h3 id="创建镜像">创建镜像</h3><ul>
+<li>修改已有镜像</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker run -t -i docker.io/ubuntu:12.04 /bin/bash</span></span><br><span class="line">root@d7ac9b2f8<span class="built_in">cd</span>7:/<span class="comment"># apt-get update</span></span><br><span class="line">root@d7ac9b2f8<span class="built_in">cd</span>7:/<span class="comment"># apt-get install nodejs</span></span><br><span class="line">root@d7ac9b2f8<span class="built_in">cd</span>7:/<span class="comment"># node -v</span></span><br><span class="line">v0.<span class="number">6.12</span></span><br><span class="line">root@d7ac9b2f8<span class="built_in">cd</span>7:/<span class="comment"># exit</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line"><span class="comment"># docker commit -m "add node evn" -a "haiyue" d7ac9b2f8cd7 haiyue/nodejs:v1</span></span><br><span class="line">sha256:<span class="number">23</span>c1c51f86414ae2ab3bf31f192537e6635c248044b61802c9e553ef4e46fbf9</span><br><span class="line"><span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">haiyue/nodejs       v1                  <span class="number">23</span>c1c51f8641        <span class="number">10</span> seconds ago      <span class="number">162.4</span> MB</span><br><span class="line">docker.io/ubuntu    <span class="number">12.04</span>               e216a057b1cb        <span class="number">12</span> days ago         <span class="number">103.6</span> MB</span><br></pre></td></tr></table></figure>
+<p>-m 来指定提交的说明信息；-a 可以指定更新的用户信息；之后是用来创建镜像的容器的 ID；最后指定目标镜像的仓库名和 tag 信息。创建成功后会返回这个镜像的 ID 信息。</p>
+<ul>
+<li>利用 Dockerfile 来创建镜像<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mkdir haiyue</span></span><br><span class="line"><span class="comment"># cd haiyue/</span></span><br><span class="line"><span class="comment"># This is a comment</span></span><br><span class="line"><span class="comment"># vim Dockerfile</span></span><br><span class="line">FROM docker.io/ubuntu:<span class="number">12.04</span></span><br><span class="line">MAINTAINER haiyue</span><br><span class="line">RUN apt-get update</span><br><span class="line">RUN apt-get install nodejs</span><br><span class="line"><span class="comment"># docker build -t="haiyue/nodejs:v2" .</span></span><br><span class="line"><span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">haiyue/nodejs       v2                  <span class="number">5190</span>c35<span class="built_in">fc</span>391        <span class="number">4</span> seconds ago       <span class="number">103.6</span> MB</span><br><span class="line">haiyue/nodejs       v1                  <span class="number">23</span>c1c51f8641        <span class="number">2</span> hours ago         <span class="number">162.4</span> MB</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Dockerfile 基本的语法是</span><br><span class="line"><span class="preprocessor">#: 注释</span></span><br><span class="line"><span class="label">FROM:</span> 告诉 Docker 使用哪个镜像作为基础</span><br><span class="line"><span class="label">MAINTAINER:</span> 维护者的信息</span><br><span class="line"><span class="label">RUN:</span> 指令会在创建中运行</span><br><span class="line"></span><br><span class="line">build 指令后 -t 标记来添加 tag，指定新的镜像的用户信息。 “.” 是 Dockerfile 所在的路径（当前目录），也可以替换为一个具体的 Dockerfile 的路径。</span><br><span class="line"></span><br><span class="line">*注意一个镜像不能超过 <span class="number">127</span> 层</span><br></pre></td></tr></table></figure>
+<ul>
+<li>上传镜像(推送自己的镜像到仓库, Docker Hub)<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker push haiyue/nodejs</span></span><br><span class="line">The push refers to a repository [haiyue/nodejs] (len: <span class="number">1</span>)</span><br><span class="line">Sending image list</span><br><span class="line">Pushing repository haiyue/nodejs (<span class="number">2</span> tags)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="存出和载入镜像">存出和载入镜像</h3><ul>
+<li>存出镜像</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker save -o nodejs_v1.tar haiyue/nodejs:v1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>载入镜像</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker load &lt; nodejs_v1.tar</span></span><br></pre></td></tr></table></figure>
+<h3 id="移除">移除</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker rmi haiyue/nodejs:v2</span></span><br><span class="line">Untagged: haiyue/nodejs:v2</span><br><span class="line">Deleted: sha256:<span class="number">5190</span>c35<span class="built_in">fc</span>391b6e9b3ed228a60a8342887fb555efcbb8a7bc351badfbb306550</span><br><span class="line">Deleted: sha256:<span class="number">01</span>e2<span class="built_in">cd</span>409ed3b15a1c34a2<span class="built_in">cd</span>656772f51e472ec988b2011ec7d60de3a23e3111</span><br><span class="line">Deleted: sha256:daf78048142d52646c96e8ac025ea5d034270e15cab677838638767b00cb908e</span><br><span class="line"><span class="comment"># docker rmi 23c1c51f8641</span></span><br><span class="line">Failed to remove image (<span class="number">23</span>c1c51f8641): Error response from daemon: conflict: unable to delete <span class="number">23</span>c1c51f8641 (must be forced) - image is being used by stopped container <span class="number">1586</span>df1c5dc1</span><br><span class="line"><span class="comment"># docker rmi -f 23c1c51f8641</span></span><br><span class="line">Untagged: haiyue/nodejs:v1</span><br></pre></td></tr></table></figure>
+<h2 id="容器">容器</h2><h3 id="启动-1">启动</h3><ul>
+<li>新建并启动<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker run haiyue/nodejs:v1 /bin/echo 'Hello world'</span></span><br><span class="line">Hello world</span><br><span class="line"><span class="comment"># docker run -t -i haiyue/nodejs:v1 /bin/bash</span></span><br><span class="line">root@<span class="number">66230</span>fd659ff:/<span class="comment"># node -v</span></span><br><span class="line">v0.<span class="number">6.12</span></span><br><span class="line">root@<span class="number">66230</span>fd659ff:/<span class="comment"># ls</span></span><br><span class="line">bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  selinux  srv  sys  tmp  usr  var</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">t 让<span class="constant">Docker</span>分配一个伪终端（pseudo-tty）并绑定到容器的标准输入上 </span><br><span class="line"></span>-<span class="ruby">i 则让容器的标准输入保持打开。</span><br><span class="line"></span></span><br><span class="line">docker run 来创建容器时，Docker 在后台运行的标准操作包括：</span><br><span class="line">检查本地是否存在指定的镜像，不存在就从公有仓库下载</span><br><span class="line">利用镜像创建并启动一个容器</span><br><span class="line">分配一个文件系统，并在只读的镜像层外面挂载一层可读写层</span><br><span class="line">从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去</span><br><span class="line">从地址池配置一个 ip 地址给容器</span><br><span class="line">执行用户指定的应用程序</span><br><span class="line">执行完毕后容器被终止</span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动已终止容器<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">利用 docker <span class="literal">start</span> 命令，直接将一个已经终止的容器启动运行。</span><br><span class="line">docker <span class="literal">restart</span> 命令会将一个运行态的容器终止，然后再重新启动它。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="守护态运行">守护态运行</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker run -d haiyue/nodejs:v1 /bin/sh -c "while true; do echo hello world; sleep 1; done"</span></span><br><span class="line"><span class="number">90</span>a4f5809293e21f8eacf1945668b9076e68ed500ac3d3018<span class="built_in">fc</span>902d947f57248</span><br><span class="line"><span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES</span><br><span class="line"><span class="number">90</span>a4f5809293        haiyue/nodejs:v1    <span class="string">"/bin/sh -c 'while tr"</span>   <span class="number">9</span> seconds ago       Up <span class="number">8</span> seconds                            determined_sammet</span><br><span class="line"><span class="comment"># docker logs 90a4f5809293</span></span><br><span class="line">hello world</span><br><span class="line">hello world</span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
+<h3 id="终止容器">终止容器</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES</span><br><span class="line"><span class="number">90</span>a4f5809293        haiyue/nodejs:v1    <span class="string">"/bin/sh -c 'while tr"</span>   <span class="number">2</span> minutes ago       Up <span class="number">2</span> minutes                            determined_sammet</span><br><span class="line"><span class="comment"># docker stop 90a4f5809293</span></span><br><span class="line"><span class="number">90</span>a4f5809293</span><br><span class="line"><span class="comment"># docker ps -a</span></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                        PORTS               NAMES</span><br><span class="line"><span class="number">90</span>a4f5809293        haiyue/nodejs:v1    <span class="string">"/bin/sh -c 'while tr"</span>   <span class="number">3</span> minutes ago       Exited (<span class="number">137</span>) <span class="number">37</span> seconds ago                       determined_sammet</span><br></pre></td></tr></table></figure>
+<h3 id="进入容器">进入容器</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker attach 90a4f5809293</span></span><br><span class="line">hello world</span><br><span class="line">hello world</span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
+<h3 id="导出和导入容器">导出和导入容器</h3><ul>
+<li>导出容器</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker export 90a4f5809293 &gt; determined_sammet.tar</span></span><br><span class="line"><span class="comment"># ls</span></span><br><span class="line">determined_sammet.tar</span><br></pre></td></tr></table></figure>
+<ul>
+<li>导入容器快照(容器快照文件中再导入为镜像)</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">haiyue/nodejs       v1                  <span class="number">23</span>c1c51f8641        <span class="number">3</span> hours ago         <span class="number">162.4</span> MB</span><br><span class="line">docker.io/ubuntu    <span class="number">12.04</span>               e216a057b1cb        <span class="number">12</span> days ago         <span class="number">103.6</span> MB</span><br><span class="line"><span class="comment"># cat determined_sammet.tar | docker import - haiyue/nodejs:v2</span></span><br><span class="line">sha256:<span class="number">7</span>b78999d774ccb41d474fb2c851323191967593053a26982c11157c7621e9202</span><br><span class="line"><span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">haiyue/nodejs       v2                  <span class="number">7</span>b78999d774c        <span class="number">3</span> seconds ago       <span class="number">142.1</span> MB</span><br><span class="line">haiyue/nodejs       v1                  <span class="number">23</span>c1c51f8641        <span class="number">3</span> hours ago         <span class="number">162.4</span> MB</span><br><span class="line">docker.io/ubuntu    <span class="number">12.04</span>               e216a057b1cb        <span class="number">12</span> days ago         <span class="number">103.6</span> MB</span><br></pre></td></tr></table></figure>
+<figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户既可以使用 docker load 来导入镜像存储文件到本地镜像库，也可以使用 docker <span class="preprocessor"><span class="keyword">import</span> 来导入一个容器快照到本地镜像库。这两者的区别在于容器快照文件将丢弃所有的历史记录和元数据信息（即仅保存容器当时的快照状态），而镜像存储文件将保存完整记录，体积也要大。此外，从容器快照文件导入时可以重新指定标签等元数据信息。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">可以使用 docker rm 来删除一个处于终止状态的容器。</span><br><span class="line">如果要删除一个运行中的容器，可以添加 <span class="operator">-f</span> 参数。Docker 会发送 SIGKILL 信号给容器。</span><br></pre></td></tr></table></figure>
+<p><br></p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/24/spring-boot-single-main/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          Spring Boot 项目中只能有一个main方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/06/nginx-install/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Nginx 安装&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-docker-hello-world" data-title="Docker Hello World" data-url="http://www.haiyue.me/2016/10/09/docker-hello-world/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'liuhaiming'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  </section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 寻梦的尕柳&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>

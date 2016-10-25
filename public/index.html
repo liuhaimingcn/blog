@@ -58,6 +58,155 @@
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-yml-evn" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/25/yml-evn/">yml 文件中使用环境变量</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/10/25/yml-evn/" class="article-date">
+  <time datetime="2016-10-24T16:00:00.000Z" itemprop="datePublished">2016-10-25</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编程/">编程</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Spring Boot 中可以用 spring.profiles.active 参数来指定系统环境，让系统加载不同的配置文件。<br>可以在程序启动的时候加上参数来指定需要的配置  </p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Dspring<span class="class">.profiles</span><span class="class">.active</span>=<span class="string">"dev"</span> -jar user.jar</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/25/yml-evn/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-spring-boot-single-main" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/24/spring-boot-single-main/">Spring Boot 项目中只能有一个main方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/10/24/spring-boot-single-main/" class="article-date">
+  <time datetime="2016-10-23T16:00:00.000Z" itemprop="datePublished">2016-10-24</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编程/">编程</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对Spring Boot 项目用maven进行打包的时候报错以下错误  </p>
+<p>[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:1.4.1.RELEASE:repackage (default) on project nlp-user: Execution default of goal org.springframework.boot:spring-boot-maven-plugin:1.4.1.RELEASE:repackage failed: Unable to find a single main class from the following candidates [com.raventech.user.Application, com.raventech.user.util.Utils] -&gt; [Help 1]  </p>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/24/spring-boot-single-main/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-docker-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/09/docker-hello-world/">Docker Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/10/09/docker-hello-world/" class="article-date">
+  <time datetime="2016-10-08T16:00:00.000Z" itemprop="datePublished">2016-10-09</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编程/">编程</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="查看linux版本">查看linux版本</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ lsb_release <span class="operator">-a</span></span><br><span class="line">LSB Version:    :core-<span class="number">4.1</span>-amd64:core-<span class="number">4.1</span>-noarch</span><br><span class="line">Distributor ID: CentOS</span><br><span class="line">Description:    CentOS Linux release <span class="number">7.2</span>.<span class="number">1511</span> (Core)</span><br><span class="line">Release:    <span class="number">7.2</span>.<span class="number">1511</span></span><br><span class="line">Codename:   Core</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/09/docker-hello-world/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+    
       <article id="post-nginx-install" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -230,6 +379,56 @@ pool.getConnection(<span class="function"><span class="keyword">function</span> 
 
 
     
+      <article id="post-sql" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/26/sql/">sql 操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/26/sql/" class="article-date">
+  <time datetime="2016-05-25T16:00:00.000Z" itemprop="datePublished">2016-05-26</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编程/">编程</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>删除重复的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">delete</span> a <span class="keyword">from</span> tb_dict a</span><br><span class="line"><span class="keyword">where</span> (a.keyword,a.nature) <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> keyword,nature <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature <span class="keyword">having</span> <span class="keyword">count</span>(*) &gt; <span class="number">1</span>) b</span><br><span class="line">) </span><br><span class="line"><span class="keyword">and</span> a.id <span class="keyword">not</span> <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> <span class="keyword">min</span>(id) <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature <span class="keyword">having</span> <span class="keyword">count</span>(*)&gt;<span class="number">1</span>) c</span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2016/05/26/sql/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/">sql</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+    
       <article id="post-mysql-batch-delete" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -269,56 +468,6 @@ pool.getConnection(<span class="function"><span class="keyword">function</span> 
 <p>将子查询得到的数据封装成临时表，这时就能解决问题了。</p>
 <p><br></p>
 
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/">sql</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-sql" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/26/sql/">sql 操作</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/05/26/sql/" class="article-date">
-  <time datetime="2016-05-25T16:00:00.000Z" itemprop="datePublished">2016-05-26</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/编程/">编程</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>删除重复的数据</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">delete</span> a <span class="keyword">from</span> tb_dict a</span><br><span class="line"><span class="keyword">where</span> (a.keyword,a.nature) <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> keyword,nature <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature <span class="keyword">having</span> <span class="keyword">count</span>(*) &gt; <span class="number">1</span>) b</span><br><span class="line">) </span><br><span class="line"><span class="keyword">and</span> a.id <span class="keyword">not</span> <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> <span class="keyword">min</span>(id) <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature <span class="keyword">having</span> <span class="keyword">count</span>(*)&gt;<span class="number">1</span>) c</span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/26/sql/#more">Read More</a>
-          </p>
-        
       
     </div>
     
@@ -435,154 +584,8 @@ pool.getConnection(<span class="function"><span class="keyword">function</span> 
 
 
     
-      <article id="post-promises" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/23/promises/">We have a problem with promises</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/02/23/promises/" class="article-date">
-  <time datetime="2016-02-22T16:00:00.000Z" itemprop="datePublished">2016-02-23</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/笔记/">笔记</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="下面的四种_promises_的区别是什么">下面的四种 promises 的区别是什么</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> doSomethingElse();  </span><br><span class="line">&#125;);  </span><br><span class="line">  </span><br><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;  </span><br><span class="line">    doSomethingElse();  </span><br><span class="line">&#125;);  </span><br><span class="line">  </span><br><span class="line">doSomething().then(doSomethingElse());  </span><br><span class="line"></span><br><span class="line">doSomething().then(doSomethingElse);</span><br></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/23/promises/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-ES6-in-depth" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/18/ES6-in-depth/">深入浅出ES6笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/02/18/ES6-in-depth/" class="article-date">
-  <time datetime="2016-02-17T16:00:00.000Z" itemprop="datePublished">2016-02-18</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/笔记/">笔记</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="ES6_是什么">ES6 是什么</h1><ul>
-<li>编程语言 JavaScript 是 ECMAScript 的实现和扩展,由 ECMA(一个类似 W3C 的标准组织)参与进行标准化。   </li>
-<li>ES4 饱受争议,当标准委员会最终停止开发 ES4 时,其成员同意发布一个相对谦和的 ES5 版本,随后继续制定一些更具实质性的新特性。这一明确的协商协议最终命 名为“Harmony”(ES6)。  </li>
-<li>2009 年发布的改进版本 ES5,引入了 Object.create()、Object.defineProperty()、getters 和 setters、严格模式以及 JSON 对象。  </li>
-<li>如果你想在 web 环境中使用这种新语法,同时需要支持 IE 和 Safari, 你可以使用 Babel 或 Google 的 Traceur 这些编译器来将你的 ES6 代码翻译为 Web 友好 的 ES5 代码。  </li>
-</ul>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/18/ES6-in-depth/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-photo/sanyacunjie" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/16/photo/sanyacunjie/">三亚春节</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/02/16/photo/sanyacunjie/" class="article-date">
-  <time datetime="2016-02-15T16:00:00.000Z" itemprop="datePublished">2016-02-16</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/摄影/">摄影</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://7xia33.com1.z0.glb.clouddn.com/sanyaIMG_8180.jpg" alt=""><br>    在三亚过的春节，也没怎么出去玩……<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/02/16/photo/sanyacunjie/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    
-    
-  </div>
-  
-</article>
-
-
-    
       <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Далее &raquo;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
       </nav>
     </section>
     <footer id="footer">

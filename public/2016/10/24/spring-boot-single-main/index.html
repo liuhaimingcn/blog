@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>mysql 批量删除错误分析 - 寻梦的尕柳</title>
+  <title>Spring Boot 项目中只能有一个main方法 - 寻梦的尕柳</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1234delete t1 from tb_dict t1 where t1.id in (	select t2.id from tb_dict t2 where t2.nature = &apos;v-taxi&apos;);
-使用这条 sql 语句进行批量删除时报 “You can’t specify target table ‘t1’ for update in FROM clause” 错误，查询后得知原来">
+  <meta name="description" content="对Spring Boot 项目用maven进行打包的时候报错以下错误  
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:1.4.1.RELEASE:repackage (default) on project nlp-user: Execution default of goal o">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql 批量删除错误分析">
-<meta property="og:url" content="http://www.haiyue.me/2016/05/26/mysql-batch-delete/index.html">
+<meta property="og:title" content="Spring Boot 项目中只能有一个main方法">
+<meta property="og:url" content="http://www.haiyue.me/2016/10/24/spring-boot-single-main/index.html">
 <meta property="og:site_name" content="寻梦的尕柳">
-<meta property="og:description" content="1234delete t1 from tb_dict t1 where t1.id in (	select t2.id from tb_dict t2 where t2.nature = &apos;v-taxi&apos;);
-使用这条 sql 语句进行批量删除时报 “You can’t specify target table ‘t1’ for update in FROM clause” 错误，查询后得知原来">
+<meta property="og:description" content="对Spring Boot 项目用maven进行打包的时候报错以下错误  
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:1.4.1.RELEASE:repackage (default) on project nlp-user: Execution default of goal o">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql 批量删除错误分析">
-<meta name="twitter:description" content="1234delete t1 from tb_dict t1 where t1.id in (	select t2.id from tb_dict t2 where t2.nature = &apos;v-taxi&apos;);
-使用这条 sql 语句进行批量删除时报 “You can’t specify target table ‘t1’ for update in FROM clause” 错误，查询后得知原来">
+<meta name="twitter:title" content="Spring Boot 项目中只能有一个main方法">
+<meta name="twitter:description" content="对Spring Boot 项目用maven进行打包的时候报错以下错误  
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:1.4.1.RELEASE:repackage (default) on project nlp-user: Execution default of goal o">
   
   
     <link rel="icon" href="/favicon.png">
@@ -60,7 +60,7 @@
     </div>
   </div>
 </header>
-    <section id="main" class="outer"><article id="post-mysql-batch-delete" class="article article-type-post" itemscope itemprop="blogPost">
+    <section id="main" class="outer"><article id="post-spring-boot-single-main" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -68,15 +68,15 @@
         
   
     <h1 class="article-title" itemprop="name">
-      mysql 批量删除错误分析
+      Spring Boot 项目中只能有一个main方法
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-      <a href="/2016/05/26/mysql-batch-delete/" class="article-date">
-  <time datetime="2016-05-25T16:00:00.000Z" itemprop="datePublished">2016-05-26</time>
+      <a href="/2016/10/24/spring-boot-single-main/" class="article-date">
+  <time datetime="2016-10-23T16:00:00.000Z" itemprop="datePublished">2016-10-24</time>
 </a>
       
   <div class="article-category">
@@ -87,16 +87,11 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">delete</span> t1 <span class="keyword">from</span> tb_dict t1 </span><br><span class="line"><span class="keyword">where</span> t1.id <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> t2.id <span class="keyword">from</span> tb_dict t2 <span class="keyword">where</span> t2.nature = <span class="string">'v-taxi'</span></span><br><span class="line">);</span></span><br></pre></td></tr></table></figure>
-<p>使用这条 sql 语句进行批量删除时报 “You can’t specify target table ‘t1’ for update in FROM clause” 错误，查询后得知原来 msyql 不允许在子查询的同时删除原表中的数据。下面对应的解决办法。</p>
-<pre><code class="sql"><span class="operator"><span class="keyword">delete</span> t1 <span class="keyword">from</span> tb_dict t1 
-<span class="keyword">where</span> t1.id <span class="keyword">in</span> (
-    <span class="keyword">select</span> t3.id <span class="keyword">from</span> (
-        <span class="keyword">select</span> * <span class="keyword">from</span> tb_dict t2 <span class="keyword">where</span> t2.nature = <span class="string">'v-taxi'</span>
-    ) <span class="keyword">as</span> t3
-);</span>
-</code></pre>
-<p>将子查询得到的数据封装成临时表，这时就能解决问题了。</p>
+        <p>对Spring Boot 项目用maven进行打包的时候报错以下错误  </p>
+<p>[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:1.4.1.RELEASE:repackage (default) on project nlp-user: Execution default of goal org.springframework.boot:spring-boot-maven-plugin:1.4.1.RELEASE:repackage failed: Unable to find a single main class from the following candidates [com.raventech.user.Application, com.raventech.user.util.Utils] -&gt; [Help 1]  </p>
+<a id="more"></a>
+<p>原来是因为 Spring Boot 项目中只能有一个main方法，不然 spring-boot-maven-plugin 在打包的过程中会扫描到了多个 main 方法，然后就懵逼不知道用哪个作为启动方法了。  </p>
+<p>以前总喜欢在 Utils 中写个main方法来调试静态方法，看来以后用完就得随手把它给删除了。</p>
 <p><br></p>
 
       
@@ -105,7 +100,7 @@
     
       <footer class="article-footer">
         
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/">sql</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a></li></ul>
 
       </footer>
     
@@ -114,17 +109,17 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/05/26/sql/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/10/25/yml-evn/" id="article-nav-newer" class="article-nav-link-wrap">
       <div class="article-nav-title"><span>&lt;</span>&nbsp;
         
-          sql 操作
+          yml 文件中使用环境变量
         
       </div>
     </a>
   
   
-    <a href="/2016/05/13/UnsupportedOperationException/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">List 进行 remove 操作时抛出 java.lang.UnsupportedOperationException 异常分析&nbsp;<span>&gt;</span></div>
+    <a href="/2016/10/09/docker-hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Docker Hello World&nbsp;<span>&gt;</span></div>
     </a>
   
 </nav>
@@ -135,7 +130,7 @@
 
   <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-mysql-batch-delete" data-title="mysql 批量删除错误分析" data-url="http://www.haiyue.me/2016/05/26/mysql-batch-delete/"></div>
+    <div class="ds-thread" data-thread-key="post-spring-boot-single-main" data-title="Spring Boot 项目中只能有一个main方法" data-url="http://www.haiyue.me/2016/10/24/spring-boot-single-main/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">

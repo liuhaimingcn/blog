@@ -55,6 +55,15 @@
 		<array>
 			<string>web-sit.md</string>
 		</array>
+		<array>
+			<string>android-base.md</string>
+		</array>
+		<array>
+			<string>escape.md</string>
+		</array>
+		<array>
+			<string>nginx-install.md</string>
+		</array>
 	</array>
 </dict>
 </plist>

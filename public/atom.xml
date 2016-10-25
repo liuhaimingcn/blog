@@ -4,7 +4,7 @@
   <subtitle><![CDATA[幽幽一缕香，飘在深深旧梦中，宛如挥手袖底风，淡淡回首，也无风雨也无晴。]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.haiyue.me/"/>
-  <updated>2016-09-06T10:40:12.000Z</updated>
+  <updated>2016-10-25T06:52:51.000Z</updated>
   <id>http://www.haiyue.me/</id>
   
   <author>
@@ -15,11 +15,147 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[yml 文件中使用环境变量]]></title>
+    <link href="http://www.haiyue.me/2016/10/25/yml-evn/"/>
+    <id>http://www.haiyue.me/2016/10/25/yml-evn/</id>
+    <published>2016-10-24T16:00:00.000Z</published>
+    <updated>2016-10-25T06:52:51.000Z</updated>
+    <content type="html"><![CDATA[<p>Spring Boot 中可以用 spring.profiles.active 参数来指定系统环境，让系统加载不同的配置文件。<br>可以在程序启动的时候加上参数来指定需要的配置  </p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Dspring<span class="class">.profiles</span><span class="class">.active</span>=<span class="string">"dev"</span> -jar user.jar</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>当然我们也可以事先设置好系统的环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expoer SERVER_EVN=<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<p>然后在 yml 文件中用 active: ${SERVER_EVN} 来动态的获取系统已设置好的数据。这样这台 test 服务器中的再启动 Spring Boot 项目的时候就可以不用每次都去设置参数了。  </p>
+<p>同时 yml 也支持 ${SERVER_EVN:dev} 这样的方式来设置默认值，此时如果环境变量中没有 SERVER_EVN ， active就会默认设置为”dev”。  </p>
+<p><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Spring Boot 中可以用 spring.profiles.active 参数来指定系统环境，让系统加载不同的配置文件。<br>可以在程序启动的时候加上参数来指定需要的配置  </p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Dspring<span class="class">.profiles</span><span class="class">.active</span>=<span class="string">"dev"</span> -jar user.jar</span><br></pre></td></tr></table></figure>]]>
+    
+    </summary>
+    
+      <category term="Spring Boot" scheme="http://www.haiyue.me/tags/Spring-Boot/"/>
+    
+      <category term="编程" scheme="http://www.haiyue.me/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Spring Boot 项目中只能有一个main方法]]></title>
+    <link href="http://www.haiyue.me/2016/10/24/spring-boot-single-main/"/>
+    <id>http://www.haiyue.me/2016/10/24/spring-boot-single-main/</id>
+    <published>2016-10-23T16:00:00.000Z</published>
+    <updated>2016-10-24T09:11:29.000Z</updated>
+    <content type="html"><![CDATA[<p>对Spring Boot 项目用maven进行打包的时候报错以下错误  </p>
+<p>[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:1.4.1.RELEASE:repackage (default) on project nlp-user: Execution default of goal org.springframework.boot:spring-boot-maven-plugin:1.4.1.RELEASE:repackage failed: Unable to find a single main class from the following candidates [com.raventech.user.Application, com.raventech.user.util.Utils] -&gt; [Help 1]  </p>
+<a id="more"></a>
+<p>原来是因为 Spring Boot 项目中只能有一个main方法，不然 spring-boot-maven-plugin 在打包的过程中会扫描到了多个 main 方法，然后就懵逼不知道用哪个作为启动方法了。  </p>
+<p>以前总喜欢在 Utils 中写个main方法来调试静态方法，看来以后用完就得随手把它给删除了。</p>
+<p><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>对Spring Boot 项目用maven进行打包的时候报错以下错误  </p>
+<p>[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:1.4.1.RELEASE:repackage (default) on project nlp-user: Execution default of goal org.springframework.boot:spring-boot-maven-plugin:1.4.1.RELEASE:repackage failed: Unable to find a single main class from the following candidates [com.raventech.user.Application, com.raventech.user.util.Utils] -&gt; [Help 1]  </p>]]>
+    
+    </summary>
+    
+      <category term="Spring Boot" scheme="http://www.haiyue.me/tags/Spring-Boot/"/>
+    
+      <category term="编程" scheme="http://www.haiyue.me/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Docker Hello World]]></title>
+    <link href="http://www.haiyue.me/2016/10/09/docker-hello-world/"/>
+    <id>http://www.haiyue.me/2016/10/09/docker-hello-world/</id>
+    <published>2016-10-08T16:00:00.000Z</published>
+    <updated>2016-10-09T07:52:57.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="查看linux版本">查看linux版本</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ lsb_release <span class="operator">-a</span></span><br><span class="line">LSB Version:    :core-<span class="number">4.1</span>-amd64:core-<span class="number">4.1</span>-noarch</span><br><span class="line">Distributor ID: CentOS</span><br><span class="line">Description:    CentOS Linux release <span class="number">7.2</span>.<span class="number">1511</span> (Core)</span><br><span class="line">Release:    <span class="number">7.2</span>.<span class="number">1511</span></span><br><span class="line">Codename:   Core</span><br></pre></td></tr></table></figure>
+<a id="more"></a>   
+<h2 id="Docker_环境准备">Docker 环境准备</h2><ul>
+<li>CentOS7 系统 CentOS-Extras 库中已带 Docker，可以直接安装</li>
+</ul>
+<h3 id="安装">安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ su root</span><br><span class="line"><span class="comment"># yum install docker</span></span><br></pre></td></tr></table></figure>
+<h3 id="启动">启动</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># service docker start</span></span><br><span class="line">Redirecting to /bin/systemctl start  docker.service</span><br></pre></td></tr></table></figure>
+<h3 id="让它随系统启动自动加载">让它随系统启动自动加载</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># service docker start</span></span><br><span class="line">Redirecting to /bin/systemctl start  docker.service</span><br><span class="line"><span class="comment"># chkconfig docker on</span></span><br><span class="line">注意：正在将请求转发到“systemctl <span class="built_in">enable</span> docker.service”。</span><br><span class="line">Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.</span><br></pre></td></tr></table></figure>
+<h2 id="镜像">镜像</h2><h3 id="获取镜像">获取镜像</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker pull ubuntu:12.04</span></span><br><span class="line">Trying to pull repository docker.io/library/ubuntu ...</span><br><span class="line"><span class="number">12.04</span>: Pulling from docker.io/library/ubuntu</span><br><span class="line"><span class="number">36</span>cef014d5d4: Pull complete</span><br><span class="line"><span class="number">0</span>d99ad4de1d2: Pull complete</span><br><span class="line"><span class="number">3</span>e32dbf1ab94: Pull complete</span><br><span class="line"><span class="number">44710</span>c456ffc: Pull complete</span><br><span class="line"><span class="number">56</span>e70ac3b314: Pull complete</span><br><span class="line">Digest: sha256:<span class="number">0</span>c25aa67baaff2b895882ce1e7d25efeeb15d0f38df6c099e23f481641<span class="built_in">cd</span>6cab</span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> docker.io/ubuntu:<span class="number">12.04</span></span><br></pre></td></tr></table></figure>
+<h3 id="列出本地已有的镜像">列出本地已有的镜像</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">docker.io/ubuntu    <span class="number">12.04</span>               e216a057b1cb        <span class="number">12</span> days ago         <span class="number">103.6</span> MB</span><br></pre></td></tr></table></figure>
+<ul>
+<li>REPOSITORY: 来自于哪个仓库</li>
+<li>TAG: 镜像的标记（如果不指定具体的标记，则默认使用 latest 标记信息。）</li>
+<li>IMAGE ID: 它的 ID 号（唯一）</li>
+<li>CREATED: 创建时间</li>
+<li>SIZE: 镜像大小</li>
+</ul>
+<h3 id="创建镜像">创建镜像</h3><ul>
+<li>修改已有镜像</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker run -t -i docker.io/ubuntu:12.04 /bin/bash</span></span><br><span class="line">root@d7ac9b2f8<span class="built_in">cd</span>7:/<span class="comment"># apt-get update</span></span><br><span class="line">root@d7ac9b2f8<span class="built_in">cd</span>7:/<span class="comment"># apt-get install nodejs</span></span><br><span class="line">root@d7ac9b2f8<span class="built_in">cd</span>7:/<span class="comment"># node -v</span></span><br><span class="line">v0.<span class="number">6.12</span></span><br><span class="line">root@d7ac9b2f8<span class="built_in">cd</span>7:/<span class="comment"># exit</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line"><span class="comment"># docker commit -m "add node evn" -a "haiyue" d7ac9b2f8cd7 haiyue/nodejs:v1</span></span><br><span class="line">sha256:<span class="number">23</span>c1c51f86414ae2ab3bf31f192537e6635c248044b61802c9e553ef4e46fbf9</span><br><span class="line"><span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">haiyue/nodejs       v1                  <span class="number">23</span>c1c51f8641        <span class="number">10</span> seconds ago      <span class="number">162.4</span> MB</span><br><span class="line">docker.io/ubuntu    <span class="number">12.04</span>               e216a057b1cb        <span class="number">12</span> days ago         <span class="number">103.6</span> MB</span><br></pre></td></tr></table></figure>
+<p>-m 来指定提交的说明信息；-a 可以指定更新的用户信息；之后是用来创建镜像的容器的 ID；最后指定目标镜像的仓库名和 tag 信息。创建成功后会返回这个镜像的 ID 信息。</p>
+<ul>
+<li>利用 Dockerfile 来创建镜像<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mkdir haiyue</span></span><br><span class="line"><span class="comment"># cd haiyue/</span></span><br><span class="line"><span class="comment"># This is a comment</span></span><br><span class="line"><span class="comment"># vim Dockerfile</span></span><br><span class="line">FROM docker.io/ubuntu:<span class="number">12.04</span></span><br><span class="line">MAINTAINER haiyue</span><br><span class="line">RUN apt-get update</span><br><span class="line">RUN apt-get install nodejs</span><br><span class="line"><span class="comment"># docker build -t="haiyue/nodejs:v2" .</span></span><br><span class="line"><span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">haiyue/nodejs       v2                  <span class="number">5190</span>c35<span class="built_in">fc</span>391        <span class="number">4</span> seconds ago       <span class="number">103.6</span> MB</span><br><span class="line">haiyue/nodejs       v1                  <span class="number">23</span>c1c51f8641        <span class="number">2</span> hours ago         <span class="number">162.4</span> MB</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Dockerfile 基本的语法是</span><br><span class="line"><span class="preprocessor">#: 注释</span></span><br><span class="line"><span class="label">FROM:</span> 告诉 Docker 使用哪个镜像作为基础</span><br><span class="line"><span class="label">MAINTAINER:</span> 维护者的信息</span><br><span class="line"><span class="label">RUN:</span> 指令会在创建中运行</span><br><span class="line"></span><br><span class="line">build 指令后 -t 标记来添加 tag，指定新的镜像的用户信息。 “.” 是 Dockerfile 所在的路径（当前目录），也可以替换为一个具体的 Dockerfile 的路径。</span><br><span class="line"></span><br><span class="line">*注意一个镜像不能超过 <span class="number">127</span> 层</span><br></pre></td></tr></table></figure>
+<ul>
+<li>上传镜像(推送自己的镜像到仓库, Docker Hub)<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker push haiyue/nodejs</span></span><br><span class="line">The push refers to a repository [haiyue/nodejs] (len: <span class="number">1</span>)</span><br><span class="line">Sending image list</span><br><span class="line">Pushing repository haiyue/nodejs (<span class="number">2</span> tags)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="存出和载入镜像">存出和载入镜像</h3><ul>
+<li>存出镜像</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker save -o nodejs_v1.tar haiyue/nodejs:v1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>载入镜像</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker load &lt; nodejs_v1.tar</span></span><br></pre></td></tr></table></figure>
+<h3 id="移除">移除</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker rmi haiyue/nodejs:v2</span></span><br><span class="line">Untagged: haiyue/nodejs:v2</span><br><span class="line">Deleted: sha256:<span class="number">5190</span>c35<span class="built_in">fc</span>391b6e9b3ed228a60a8342887fb555efcbb8a7bc351badfbb306550</span><br><span class="line">Deleted: sha256:<span class="number">01</span>e2<span class="built_in">cd</span>409ed3b15a1c34a2<span class="built_in">cd</span>656772f51e472ec988b2011ec7d60de3a23e3111</span><br><span class="line">Deleted: sha256:daf78048142d52646c96e8ac025ea5d034270e15cab677838638767b00cb908e</span><br><span class="line"><span class="comment"># docker rmi 23c1c51f8641</span></span><br><span class="line">Failed to remove image (<span class="number">23</span>c1c51f8641): Error response from daemon: conflict: unable to delete <span class="number">23</span>c1c51f8641 (must be forced) - image is being used by stopped container <span class="number">1586</span>df1c5dc1</span><br><span class="line"><span class="comment"># docker rmi -f 23c1c51f8641</span></span><br><span class="line">Untagged: haiyue/nodejs:v1</span><br></pre></td></tr></table></figure>
+<h2 id="容器">容器</h2><h3 id="启动-1">启动</h3><ul>
+<li>新建并启动<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker run haiyue/nodejs:v1 /bin/echo 'Hello world'</span></span><br><span class="line">Hello world</span><br><span class="line"><span class="comment"># docker run -t -i haiyue/nodejs:v1 /bin/bash</span></span><br><span class="line">root@<span class="number">66230</span>fd659ff:/<span class="comment"># node -v</span></span><br><span class="line">v0.<span class="number">6.12</span></span><br><span class="line">root@<span class="number">66230</span>fd659ff:/<span class="comment"># ls</span></span><br><span class="line">bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  selinux  srv  sys  tmp  usr  var</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">t 让<span class="constant">Docker</span>分配一个伪终端（pseudo-tty）并绑定到容器的标准输入上 </span><br><span class="line"></span>-<span class="ruby">i 则让容器的标准输入保持打开。</span><br><span class="line"></span></span><br><span class="line">docker run 来创建容器时，Docker 在后台运行的标准操作包括：</span><br><span class="line">检查本地是否存在指定的镜像，不存在就从公有仓库下载</span><br><span class="line">利用镜像创建并启动一个容器</span><br><span class="line">分配一个文件系统，并在只读的镜像层外面挂载一层可读写层</span><br><span class="line">从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去</span><br><span class="line">从地址池配置一个 ip 地址给容器</span><br><span class="line">执行用户指定的应用程序</span><br><span class="line">执行完毕后容器被终止</span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动已终止容器<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">利用 docker <span class="literal">start</span> 命令，直接将一个已经终止的容器启动运行。</span><br><span class="line">docker <span class="literal">restart</span> 命令会将一个运行态的容器终止，然后再重新启动它。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="守护态运行">守护态运行</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker run -d haiyue/nodejs:v1 /bin/sh -c "while true; do echo hello world; sleep 1; done"</span></span><br><span class="line"><span class="number">90</span>a4f5809293e21f8eacf1945668b9076e68ed500ac3d3018<span class="built_in">fc</span>902d947f57248</span><br><span class="line"><span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES</span><br><span class="line"><span class="number">90</span>a4f5809293        haiyue/nodejs:v1    <span class="string">"/bin/sh -c 'while tr"</span>   <span class="number">9</span> seconds ago       Up <span class="number">8</span> seconds                            determined_sammet</span><br><span class="line"><span class="comment"># docker logs 90a4f5809293</span></span><br><span class="line">hello world</span><br><span class="line">hello world</span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
+<h3 id="终止容器">终止容器</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES</span><br><span class="line"><span class="number">90</span>a4f5809293        haiyue/nodejs:v1    <span class="string">"/bin/sh -c 'while tr"</span>   <span class="number">2</span> minutes ago       Up <span class="number">2</span> minutes                            determined_sammet</span><br><span class="line"><span class="comment"># docker stop 90a4f5809293</span></span><br><span class="line"><span class="number">90</span>a4f5809293</span><br><span class="line"><span class="comment"># docker ps -a</span></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                        PORTS               NAMES</span><br><span class="line"><span class="number">90</span>a4f5809293        haiyue/nodejs:v1    <span class="string">"/bin/sh -c 'while tr"</span>   <span class="number">3</span> minutes ago       Exited (<span class="number">137</span>) <span class="number">37</span> seconds ago                       determined_sammet</span><br></pre></td></tr></table></figure>
+<h3 id="进入容器">进入容器</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker attach 90a4f5809293</span></span><br><span class="line">hello world</span><br><span class="line">hello world</span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
+<h3 id="导出和导入容器">导出和导入容器</h3><ul>
+<li>导出容器</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker export 90a4f5809293 &gt; determined_sammet.tar</span></span><br><span class="line"><span class="comment"># ls</span></span><br><span class="line">determined_sammet.tar</span><br></pre></td></tr></table></figure>
+<ul>
+<li>导入容器快照(容器快照文件中再导入为镜像)</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">haiyue/nodejs       v1                  <span class="number">23</span>c1c51f8641        <span class="number">3</span> hours ago         <span class="number">162.4</span> MB</span><br><span class="line">docker.io/ubuntu    <span class="number">12.04</span>               e216a057b1cb        <span class="number">12</span> days ago         <span class="number">103.6</span> MB</span><br><span class="line"><span class="comment"># cat determined_sammet.tar | docker import - haiyue/nodejs:v2</span></span><br><span class="line">sha256:<span class="number">7</span>b78999d774ccb41d474fb2c851323191967593053a26982c11157c7621e9202</span><br><span class="line"><span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">haiyue/nodejs       v2                  <span class="number">7</span>b78999d774c        <span class="number">3</span> seconds ago       <span class="number">142.1</span> MB</span><br><span class="line">haiyue/nodejs       v1                  <span class="number">23</span>c1c51f8641        <span class="number">3</span> hours ago         <span class="number">162.4</span> MB</span><br><span class="line">docker.io/ubuntu    <span class="number">12.04</span>               e216a057b1cb        <span class="number">12</span> days ago         <span class="number">103.6</span> MB</span><br></pre></td></tr></table></figure>
+<figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户既可以使用 docker load 来导入镜像存储文件到本地镜像库，也可以使用 docker <span class="preprocessor"><span class="keyword">import</span> 来导入一个容器快照到本地镜像库。这两者的区别在于容器快照文件将丢弃所有的历史记录和元数据信息（即仅保存容器当时的快照状态），而镜像存储文件将保存完整记录，体积也要大。此外，从容器快照文件导入时可以重新指定标签等元数据信息。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">可以使用 docker rm 来删除一个处于终止状态的容器。</span><br><span class="line">如果要删除一个运行中的容器，可以添加 <span class="operator">-f</span> 参数。Docker 会发送 SIGKILL 信号给容器。</span><br></pre></td></tr></table></figure>
+<p><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="查看linux版本">查看linux版本</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ lsb_release <span class="operator">-a</span></span><br><span class="line">LSB Version:    :core-<span class="number">4.1</span>-amd64:core-<span class="number">4.1</span>-noarch</span><br><span class="line">Distributor ID: CentOS</span><br><span class="line">Description:    CentOS Linux release <span class="number">7.2</span>.<span class="number">1511</span> (Core)</span><br><span class="line">Release:    <span class="number">7.2</span>.<span class="number">1511</span></span><br><span class="line">Codename:   Core</span><br></pre></td></tr></table></figure>]]>
+    
+    </summary>
+    
+      <category term="Docker" scheme="http://www.haiyue.me/tags/Docker/"/>
+    
+      <category term="编程" scheme="http://www.haiyue.me/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Nginx 安装]]></title>
     <link href="http://www.haiyue.me/2016/09/06/nginx-install/"/>
     <id>http://www.haiyue.me/2016/09/06/nginx-install/</id>
     <published>2016-09-05T16:00:00.000Z</published>
-    <updated>2016-09-06T10:40:12.000Z</updated>
+    <updated>2016-09-06T10:41:21.000Z</updated>
     <content type="html"><![CDATA[<h2 id="安装编译工具及库文件">安装编译工具及库文件</h2><ul>
 <li>切换到root用户下面</li>
 <li>yum -y install make zlib zlib-devel gcc-c++ libtool  openssl openssl-devel</li>
@@ -256,6 +392,31 @@ pool.getConnection(<span class="function"><span class="keyword">function</span> 
   </entry>
   
   <entry>
+    <title><![CDATA[sql 操作]]></title>
+    <link href="http://www.haiyue.me/2016/05/26/sql/"/>
+    <id>http://www.haiyue.me/2016/05/26/sql/</id>
+    <published>2016-05-25T16:00:00.000Z</published>
+    <updated>2016-05-26T09:49:12.000Z</updated>
+    <content type="html"><![CDATA[<p>删除重复的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">delete</span> a <span class="keyword">from</span> tb_dict a</span><br><span class="line"><span class="keyword">where</span> (a.keyword,a.nature) <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> keyword,nature <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature <span class="keyword">having</span> <span class="keyword">count</span>(*) &gt; <span class="number">1</span>) b</span><br><span class="line">) </span><br><span class="line"><span class="keyword">and</span> a.id <span class="keyword">not</span> <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> <span class="keyword">min</span>(id) <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature <span class="keyword">having</span> <span class="keyword">count</span>(*)&gt;<span class="number">1</span>) c</span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>      
+<p>查询重复的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> tb_dict a </span><br><span class="line"><span class="keyword">where</span> (a.keyword,a.nature, a.freq) <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> keyword,nature, freq <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature, freq <span class="keyword">having</span> <span class="keyword">count</span>(*) &gt; <span class="number">1</span></span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>删除重复的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">delete</span> a <span class="keyword">from</span> tb_dict a</span><br><span class="line"><span class="keyword">where</span> (a.keyword,a.nature) <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> keyword,nature <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature <span class="keyword">having</span> <span class="keyword">count</span>(*) &gt; <span class="number">1</span>) b</span><br><span class="line">) </span><br><span class="line"><span class="keyword">and</span> a.id <span class="keyword">not</span> <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> <span class="keyword">min</span>(id) <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature <span class="keyword">having</span> <span class="keyword">count</span>(*)&gt;<span class="number">1</span>) c</span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>]]>
+    
+    </summary>
+    
+      <category term="sql" scheme="http://www.haiyue.me/tags/sql/"/>
+    
+      <category term="编程" scheme="http://www.haiyue.me/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[mysql 批量删除错误分析]]></title>
     <link href="http://www.haiyue.me/2016/05/26/mysql-batch-delete/"/>
     <id>http://www.haiyue.me/2016/05/26/mysql-batch-delete/</id>
@@ -275,31 +436,6 @@ pool.getConnection(<span class="function"><span class="keyword">function</span> 
 ]]></content>
     <summary type="html">
     <![CDATA[<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="]]>
-    </summary>
-    
-      <category term="sql" scheme="http://www.haiyue.me/tags/sql/"/>
-    
-      <category term="编程" scheme="http://www.haiyue.me/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[sql 操作]]></title>
-    <link href="http://www.haiyue.me/2016/05/26/sql/"/>
-    <id>http://www.haiyue.me/2016/05/26/sql/</id>
-    <published>2016-05-25T16:00:00.000Z</published>
-    <updated>2016-05-26T09:49:12.000Z</updated>
-    <content type="html"><![CDATA[<p>删除重复的数据</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">delete</span> a <span class="keyword">from</span> tb_dict a</span><br><span class="line"><span class="keyword">where</span> (a.keyword,a.nature) <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> keyword,nature <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature <span class="keyword">having</span> <span class="keyword">count</span>(*) &gt; <span class="number">1</span>) b</span><br><span class="line">) </span><br><span class="line"><span class="keyword">and</span> a.id <span class="keyword">not</span> <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> <span class="keyword">min</span>(id) <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature <span class="keyword">having</span> <span class="keyword">count</span>(*)&gt;<span class="number">1</span>) c</span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
-<a id="more"></a>      
-<p>查询重复的数据</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> tb_dict a </span><br><span class="line"><span class="keyword">where</span> (a.keyword,a.nature, a.freq) <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> keyword,nature, freq <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature, freq <span class="keyword">having</span> <span class="keyword">count</span>(*) &gt; <span class="number">1</span></span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
-<p><br></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>删除重复的数据</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">delete</span> a <span class="keyword">from</span> tb_dict a</span><br><span class="line"><span class="keyword">where</span> (a.keyword,a.nature) <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> keyword,nature <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature <span class="keyword">having</span> <span class="keyword">count</span>(*) &gt; <span class="number">1</span>) b</span><br><span class="line">) </span><br><span class="line"><span class="keyword">and</span> a.id <span class="keyword">not</span> <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> <span class="keyword">min</span>(id) <span class="keyword">from</span> tb_dict <span class="keyword">group</span> <span class="keyword">by</span> keyword, nature <span class="keyword">having</span> <span class="keyword">count</span>(*)&gt;<span class="number">1</span>) c</span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>]]>
-    
     </summary>
     
       <category term="sql" scheme="http://www.haiyue.me/tags/sql/"/>
@@ -590,6 +726,179 @@ customName(); <span class="comment">// 'foo'</span>
   </entry>
   
   <entry>
+    <title><![CDATA[ES6-Class基本语法]]></title>
+    <link href="http://www.haiyue.me/2016/02/02/es6-class/"/>
+    <id>http://www.haiyue.me/2016/02/02/es6-class/</id>
+    <published>2016-02-01T16:00:00.000Z</published>
+    <updated>2016-02-02T10:37:02.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="Class基本语法">Class基本语法</h2><p>ES6的class可以看作只是一个语法糖，它的绝大部分功能，ES5都可以做到，新的class写法只是让对象原型的写法更加清晰、更像面向对象编程的语法而已。</p>
+<pre><code><span class="comment">// old</span>
+  <span class="function"><span class="keyword">function</span> <span class="title">Point</span><span class="params">(x,y)</span></span>{
+  <span class="keyword">this</span>.x = x;
+  <span class="keyword">this</span>.y = y;
+}
+Point.prototype.toString = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
+  <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
+}
+<span class="comment">// new</span>
+<span class="keyword">class</span> Point {
+  <span class="constructor"><span class="keyword">constructor</span>(x, y) </span>{
+    <span class="keyword">this</span>.x = x;
+    <span class="keyword">this</span>.y = y;
+  }
+  toString() {
+    <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
+  }   
+}
+</code></pre><a id="more"></a> 
+<p>Point类除了构造方法，还定义了一个toString方法。注意，定义“类”的方法的时候，前面不需要加上function这个保留字，直接把函数定义放进去了就可以了。另外，方法之间不需要逗号分隔，加了会报错。<br>构造函数的prototype属性，在ES6的“类”上面继续存在。事实上，类的所有方法都定义在类的prototype属性上面。<br>类的内部所有定义的方法，都是不可枚举的（enumerable）。这一点与ES5的行为不一致。</p>
+<pre><code><span class="keyword">class</span> Point {
+  <span class="constructor"><span class="keyword">constructor</span>(x, y) </span>{}
+  toString() {}
+}
+<span class="built_in">Object</span>.keys(Point.prototype) <span class="comment">// []</span>
+<span class="built_in">Object</span>.getOwnPropertyNames(Point.prototype) <span class="comment">// ["constructor","toString"]</span>
+</code></pre><p>constructor方法是类的默认方法，通过new命令生成对象实例时，自动调用该方法。一个类必须有constructor方法，如果没有显式定义，一个空的constructor方法会被默认添加。<br>constructor方法默认返回实例对象（即this），完全可以指定返回另外一个对象。</p>
+<pre><code><span class="keyword">class</span> Foo {
+  <span class="constructor"><span class="keyword">constructor</span>() </span>{
+    <span class="keyword">return</span> <span class="built_in">Object</span>.create(<span class="literal">null</span>);
+  }
+}
+<span class="keyword">new</span> Foo() <span class="keyword">instanceof</span> Foo; <span class="comment">// false </span>
+</code></pre><p>生成实例对象的写法，与ES5完全一样，也是使用new命令。如果忘记加上new，像函数那样调用Class，将会报错。<br>与ES5一样，实例的属性除非显式定义在其本身（即定义在this对象上），否则都是定义在原型上（即定义在class上）<br>与ES5一样，类的所有实例共享一个原型对象。所以<strong>proto</strong>属性是相等的。<br>name属性总是返回紧跟在class关键字后面的类名。</p>
+<pre><code>class <span class="keyword">Point</span> <span class="list">{}</span>
+<span class="keyword">Point</span>.name // <span class="string">"Point"</span>
+</code></pre><p>下面代码使用表达式定义了一个类。需要注意的是，这个类的名字是MyClass而不是Me，Me只在Class的内部代码可用，指代当前类。</p>
+<pre><code><span class="keyword">const</span> MyClass = <span class="class"><span class="keyword">class</span> <span class="title">Me</span> </span>{
+  getClassName() {
+    <span class="keyword">return</span> Me.name;
+  }
+};
+</code></pre><p>如果Class内部没用到的话，可以省略Me。<br>采用Class表达式，可以写出立即执行的Class。<br>Class不存在变量提升（hoist），这一点与ES5完全不同。</p>
+<pre><code><span class="keyword">new</span> Foo(); <span class="comment">// ReferenceError</span>
+<span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>{}
+</code></pre><p>类和模块的内部，默认就是严格模式，所以不需要使用use strict指定运行模式。<br>考虑到未来所有的代码，其实都是运行在模块之中，所以ES6实际上把整个语言升级到了严格模式。</p>
+<h2 id="Class的继承">Class的继承</h2><p>Class之间可以通过extends关键字实现继承，这比ES5的通过修改原型链实现继承，要清晰和方便很多。</p>
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">ColorPoint</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Point</span> {</span>}
+</code></pre><p>下面代码中，constructor方法和toString方法之中，都出现了super关键字，它指代父类的实例（即父类的this对象）。</p>
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">ColorPoint</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Point</span> {</span>
+  constructor(x, y, color) {
+    <span class="keyword">super</span>(x, y); <span class="comment">// 调用父类的constructor(x, y)</span>
+    <span class="keyword">this</span>.color = color;
+  }
+  toString() {
+    <span class="keyword">return</span> <span class="keyword">this</span>.color + ' ' + <span class="keyword">super</span>.toString(); <span class="comment">// 调用父类的toString()</span>
+  }
+}
+</code></pre><p>子类必须在constructor方法中调用super方法，否则新建实例时会报错。这是因为子类没有自己的this对象，而是继承父类的this对象，然后对其进行加工。如果不调用super方法，子类就得不到this对象。<br>子类实例的<strong>proto</strong>属性的<strong>proto</strong>属性，指向父类实例的<strong>proto</strong>属性。也就是说，子类的原型的原型，是父类的原型。</p>
+<h2 id="原生构造函数的继承">原生构造函数的继承</h2><p>原生构造函数是指语言内置的构造函数，通常用来生成数据结构。<br>ES6允许继承原生构造函数定义子类，因为ES6是先新建父类的实例对象this，然后再用子类的构造函数修饰this，使得父类的所有行为都可以继承。</p>
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">MyArray</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Array</span> {</span>
+  constructor(...args) {
+    <span class="keyword">super</span>(...args);
+  }
+}
+<span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="type">MyArray</span>();
+arr[<span class="number">0</span>] = <span class="number">12</span>;
+arr.length <span class="comment">// 1</span>
+arr.length = <span class="number">0</span>;
+arr[<span class="number">0</span>] <span class="comment">// undefined</span>
+</code></pre><h2 id="Class的取值函数（getter）和存值函数（setter）">Class的取值函数（getter）和存值函数（setter）</h2><p>与ES5一样，在Class内部可以使用get和set关键字，对某个属性设置存值函数和取值函数，拦截该属性的存取行为。</p>
+<pre><code><span class="keyword">class</span> MyClass {
+  <span class="constructor"><span class="keyword">constructor</span>() </span>{
+    <span class="comment">// ...</span>
+  }
+  <span class="keyword">get</span> prop() {
+    <span class="keyword">return</span> <span class="string">'getter'</span>;
+  }
+  <span class="keyword">set</span> prop(value) {
+    <span class="built_in">console</span>.log(<span class="string">'setter: '</span>+value);
+  }
+}
+<span class="keyword">let</span> inst = <span class="keyword">new</span> MyClass();
+inst.prop = <span class="number">123</span>; <span class="comment">// setter: 123</span>
+inst.prop <span class="comment">// 'getter'</span>
+</code></pre><h2 id="Class的静态方法">Class的静态方法</h2><p>类相当于实例的原型，所有在类中定义的方法，都会被实例继承。如果在一个方法前，加上static关键字，就表示该方法不会被实例继承，而是直接通过类来调用，这就称为“静态方法”。</p>
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> {</span>
+  static classMethod() {
+    <span class="keyword">return</span> <span class="string">'hello'</span>;
+  }
+}
+Foo.classMethod() <span class="regexp">//</span> <span class="string">'hello'</span>
+<span class="reserved">var</span> foo = <span class="keyword">new</span> Foo();
+foo.classMethod() <span class="regexp">//</span> <span class="attribute">TypeError</span>: <span class="literal">undefined</span> <span class="keyword">is</span> <span class="keyword">not</span> a <span class="reserved">function</span>
+</code></pre><p>父类的静态方法，可以被子类继承。<br>静态方法也是可以从super对象上调用的。</p>
+<h2 id="Class的静态属性">Class的静态属性</h2><p>静态属性指的是Class本身的属性，即Class.propname，而不是定义在实例对象（this）上的属性。</p>
+<pre><code><span class="keyword">class</span> Foo {
+}
+Foo.<span class="keyword">prop</span> = 1;
+Foo.<span class="keyword">prop</span> <span class="comment">// 1</span>
+</code></pre><p>目前，只有这种写法可行，因为ES6明确规定，Class内部只有静态方法，没有静态属性。</p>
+<h2 id="new-target属性">new.target属性</h2><p>new是从构造函数生成实例的命令。ES6为new命令引入了一个new.target属性，（在构造函数中）返回new命令作用于的那个构造函数。如果构造函数不是通过new命令调用的，new.target会返回undefined，因此这个属性可以用来确定构造函数是怎么调用的。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">(name)</span> </span>{
+  <span class="keyword">if</span> (<span class="keyword">new</span>.target !== <span class="literal">undefined</span>) {
+    <span class="keyword">this</span>.name = name;
+  } <span class="keyword">else</span> {
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'必须使用new生成实例'</span>);
+  }
+}
+<span class="comment">// 另一种写法</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">(name)</span> </span>{
+  <span class="keyword">if</span> (<span class="keyword">new</span>.target === Person) {
+    <span class="keyword">this</span>.name = name;
+  } <span class="keyword">else</span> {
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'必须使用new生成实例'</span>);
+  }
+}
+<span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">'张三'</span>); <span class="comment">// 正确</span>
+<span class="keyword">var</span> notAPerson = Person.call(person, <span class="string">'张三'</span>); <span class="comment">// 报错</span>
+</code></pre><p>Class内部调用new.target，返回当前Class。<br>子类继承父类时，new.target会返回子类。</p>
+<pre><code><span class="keyword">class</span> Rectangle {
+  <span class="constructor"><span class="keyword">constructor</span>(length, width) </span>{
+    <span class="built_in">console</span>.log(<span class="keyword">new</span>.target === Rectangle);
+    <span class="comment">// ...</span>
+  }
+}
+<span class="keyword">class</span> Square extends Rectangle {
+  <span class="constructor"><span class="keyword">constructor</span>(length) </span>{
+    <span class="keyword">super</span>(length, length);
+  }
+}
+<span class="keyword">var</span> obj = <span class="keyword">new</span> Square(<span class="number">3</span>); <span class="comment">// 输出 false</span>
+</code></pre><p>利用这个特点，可以写出不能独立使用、必须继承后才能使用的类。</p>
+<h2 id="类的修饰">类的修饰</h2><p>修饰器（Decorator）是一个表达式，用来修改类的行为。这是ES7的一个提案，目前Babel转码器已经支持。<br>修饰器对类的行为的改变，是代码编译时发生的，而不是在运行时。这意味着，修饰器能在编译阶段运行代码。  </p>
+<p>读阮一峰老师《ECMAScript6入门》一书的笔记<br><br></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="Class基本语法">Class基本语法</h2><p>ES6的class可以看作只是一个语法糖，它的绝大部分功能，ES5都可以做到，新的class写法只是让对象原型的写法更加清晰、更像面向对象编程的语法而已。</p>
+<pre><code><span class="comment">// old</span>
+  <span class="function"><span class="keyword">function</span> <span class="title">Point</span><span class="params">(x,y)</span></span>{
+  <span class="keyword">this</span>.x = x;
+  <span class="keyword">this</span>.y = y;
+}
+Point.prototype.toString = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
+  <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
+}
+<span class="comment">// new</span>
+<span class="keyword">class</span> Point {
+  <span class="constructor"><span class="keyword">constructor</span>(x, y) </span>{
+    <span class="keyword">this</span>.x = x;
+    <span class="keyword">this</span>.y = y;
+  }
+  toString() {
+    <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
+  }   
+}
+</code></pre>]]>
+    
+    </summary>
+    
+      <category term="ECMAScript6入门" scheme="http://www.haiyue.me/tags/ECMAScript6%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="笔记" scheme="http://www.haiyue.me/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[ES6-Module]]></title>
     <link href="http://www.haiyue.me/2016/02/02/es6-style/"/>
     <id>http://www.haiyue.me/2016/02/02/es6-style/</id>
@@ -785,197 +1094,6 @@ export <span class="keyword">default</span> makeStyleGuide;
   </entry>
   
   <entry>
-    <title><![CDATA[ES6-Class基本语法]]></title>
-    <link href="http://www.haiyue.me/2016/02/02/es6-class/"/>
-    <id>http://www.haiyue.me/2016/02/02/es6-class/</id>
-    <published>2016-02-01T16:00:00.000Z</published>
-    <updated>2016-02-02T10:37:02.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="Class基本语法">Class基本语法</h2><p>ES6的class可以看作只是一个语法糖，它的绝大部分功能，ES5都可以做到，新的class写法只是让对象原型的写法更加清晰、更像面向对象编程的语法而已。</p>
-<pre><code><span class="comment">// old</span>
-  <span class="function"><span class="keyword">function</span> <span class="title">Point</span><span class="params">(x,y)</span></span>{
-  <span class="keyword">this</span>.x = x;
-  <span class="keyword">this</span>.y = y;
-}
-Point.prototype.toString = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
-  <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
-}
-<span class="comment">// new</span>
-<span class="keyword">class</span> Point {
-  <span class="constructor"><span class="keyword">constructor</span>(x, y) </span>{
-    <span class="keyword">this</span>.x = x;
-    <span class="keyword">this</span>.y = y;
-  }
-  toString() {
-    <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
-  }   
-}
-</code></pre><a id="more"></a> 
-<p>Point类除了构造方法，还定义了一个toString方法。注意，定义“类”的方法的时候，前面不需要加上function这个保留字，直接把函数定义放进去了就可以了。另外，方法之间不需要逗号分隔，加了会报错。<br>构造函数的prototype属性，在ES6的“类”上面继续存在。事实上，类的所有方法都定义在类的prototype属性上面。<br>类的内部所有定义的方法，都是不可枚举的（enumerable）。这一点与ES5的行为不一致。</p>
-<pre><code><span class="keyword">class</span> Point {
-  <span class="constructor"><span class="keyword">constructor</span>(x, y) </span>{}
-  toString() {}
-}
-<span class="built_in">Object</span>.keys(Point.prototype) <span class="comment">// []</span>
-<span class="built_in">Object</span>.getOwnPropertyNames(Point.prototype) <span class="comment">// ["constructor","toString"]</span>
-</code></pre><p>constructor方法是类的默认方法，通过new命令生成对象实例时，自动调用该方法。一个类必须有constructor方法，如果没有显式定义，一个空的constructor方法会被默认添加。<br>constructor方法默认返回实例对象（即this），完全可以指定返回另外一个对象。</p>
-<pre><code><span class="keyword">class</span> Foo {
-  <span class="constructor"><span class="keyword">constructor</span>() </span>{
-    <span class="keyword">return</span> <span class="built_in">Object</span>.create(<span class="literal">null</span>);
-  }
-}
-<span class="keyword">new</span> Foo() <span class="keyword">instanceof</span> Foo; <span class="comment">// false </span>
-</code></pre><p>生成实例对象的写法，与ES5完全一样，也是使用new命令。如果忘记加上new，像函数那样调用Class，将会报错。<br>与ES5一样，实例的属性除非显式定义在其本身（即定义在this对象上），否则都是定义在原型上（即定义在class上）<br>与ES5一样，类的所有实例共享一个原型对象。所以<strong>proto</strong>属性是相等的。<br>name属性总是返回紧跟在class关键字后面的类名。</p>
-<pre><code>class <span class="keyword">Point</span> <span class="list">{}</span>
-<span class="keyword">Point</span>.name // <span class="string">"Point"</span>
-</code></pre><p>下面代码使用表达式定义了一个类。需要注意的是，这个类的名字是MyClass而不是Me，Me只在Class的内部代码可用，指代当前类。</p>
-<pre><code><span class="keyword">const</span> MyClass = <span class="class"><span class="keyword">class</span> <span class="title">Me</span> </span>{
-  getClassName() {
-    <span class="keyword">return</span> Me.name;
-  }
-};
-</code></pre><p>如果Class内部没用到的话，可以省略Me。<br>采用Class表达式，可以写出立即执行的Class。<br>Class不存在变量提升（hoist），这一点与ES5完全不同。</p>
-<pre><code><span class="keyword">new</span> Foo(); <span class="comment">// ReferenceError</span>
-<span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>{}
-</code></pre><p>类和模块的内部，默认就是严格模式，所以不需要使用use strict指定运行模式。<br>考虑到未来所有的代码，其实都是运行在模块之中，所以ES6实际上把整个语言升级到了严格模式。</p>
-<h2 id="Class的继承">Class的继承</h2><p>Class之间可以通过extends关键字实现继承，这比ES5的通过修改原型链实现继承，要清晰和方便很多。</p>
-<pre><code><span class="class"><span class="keyword">class</span> <span class="title">ColorPoint</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Point</span> {</span>}
-</code></pre><p>下面代码中，constructor方法和toString方法之中，都出现了super关键字，它指代父类的实例（即父类的this对象）。</p>
-<pre><code><span class="class"><span class="keyword">class</span> <span class="title">ColorPoint</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Point</span> {</span>
-  constructor(x, y, color) {
-    <span class="keyword">super</span>(x, y); <span class="comment">// 调用父类的constructor(x, y)</span>
-    <span class="keyword">this</span>.color = color;
-  }
-  toString() {
-    <span class="keyword">return</span> <span class="keyword">this</span>.color + ' ' + <span class="keyword">super</span>.toString(); <span class="comment">// 调用父类的toString()</span>
-  }
-}
-</code></pre><p>子类必须在constructor方法中调用super方法，否则新建实例时会报错。这是因为子类没有自己的this对象，而是继承父类的this对象，然后对其进行加工。如果不调用super方法，子类就得不到this对象。<br>子类实例的<strong>proto</strong>属性的<strong>proto</strong>属性，指向父类实例的<strong>proto</strong>属性。也就是说，子类的原型的原型，是父类的原型。</p>
-<h2 id="原生构造函数的继承">原生构造函数的继承</h2><p>原生构造函数是指语言内置的构造函数，通常用来生成数据结构。<br>ES6允许继承原生构造函数定义子类，因为ES6是先新建父类的实例对象this，然后再用子类的构造函数修饰this，使得父类的所有行为都可以继承。</p>
-<pre><code><span class="class"><span class="keyword">class</span> <span class="title">MyArray</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Array</span> {</span>
-  constructor(...args) {
-    <span class="keyword">super</span>(...args);
-  }
-}
-<span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="type">MyArray</span>();
-arr[<span class="number">0</span>] = <span class="number">12</span>;
-arr.length <span class="comment">// 1</span>
-arr.length = <span class="number">0</span>;
-arr[<span class="number">0</span>] <span class="comment">// undefined</span>
-</code></pre><h2 id="Class的取值函数（getter）和存值函数（setter）">Class的取值函数（getter）和存值函数（setter）</h2><p>与ES5一样，在Class内部可以使用get和set关键字，对某个属性设置存值函数和取值函数，拦截该属性的存取行为。</p>
-<pre><code><span class="keyword">class</span> MyClass {
-  <span class="constructor"><span class="keyword">constructor</span>() </span>{
-    <span class="comment">// ...</span>
-  }
-  <span class="keyword">get</span> prop() {
-    <span class="keyword">return</span> <span class="string">'getter'</span>;
-  }
-  <span class="keyword">set</span> prop(value) {
-    <span class="built_in">console</span>.log(<span class="string">'setter: '</span>+value);
-  }
-}
-<span class="keyword">let</span> inst = <span class="keyword">new</span> MyClass();
-inst.prop = <span class="number">123</span>; <span class="comment">// setter: 123</span>
-inst.prop <span class="comment">// 'getter'</span>
-</code></pre><h2 id="Class的静态方法">Class的静态方法</h2><p>类相当于实例的原型，所有在类中定义的方法，都会被实例继承。如果在一个方法前，加上static关键字，就表示该方法不会被实例继承，而是直接通过类来调用，这就称为“静态方法”。</p>
-<pre><code><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> {</span>
-  static classMethod() {
-    <span class="keyword">return</span> <span class="string">'hello'</span>;
-  }
-}
-Foo.classMethod() <span class="regexp">//</span> <span class="string">'hello'</span>
-<span class="reserved">var</span> foo = <span class="keyword">new</span> Foo();
-foo.classMethod() <span class="regexp">//</span> <span class="attribute">TypeError</span>: <span class="literal">undefined</span> <span class="keyword">is</span> <span class="keyword">not</span> a <span class="reserved">function</span>
-</code></pre><p>父类的静态方法，可以被子类继承。<br>静态方法也是可以从super对象上调用的。</p>
-<h2 id="Class的静态属性">Class的静态属性</h2><p>静态属性指的是Class本身的属性，即Class.propname，而不是定义在实例对象（this）上的属性。</p>
-<pre><code><span class="keyword">class</span> Foo {
-}
-Foo.<span class="keyword">prop</span> = 1;
-Foo.<span class="keyword">prop</span> <span class="comment">// 1</span>
-</code></pre><p>目前，只有这种写法可行，因为ES6明确规定，Class内部只有静态方法，没有静态属性。</p>
-<h2 id="new-target属性">new.target属性</h2><p>new是从构造函数生成实例的命令。ES6为new命令引入了一个new.target属性，（在构造函数中）返回new命令作用于的那个构造函数。如果构造函数不是通过new命令调用的，new.target会返回undefined，因此这个属性可以用来确定构造函数是怎么调用的。</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">(name)</span> </span>{
-  <span class="keyword">if</span> (<span class="keyword">new</span>.target !== <span class="literal">undefined</span>) {
-    <span class="keyword">this</span>.name = name;
-  } <span class="keyword">else</span> {
-    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'必须使用new生成实例'</span>);
-  }
-}
-<span class="comment">// 另一种写法</span>
-<span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">(name)</span> </span>{
-  <span class="keyword">if</span> (<span class="keyword">new</span>.target === Person) {
-    <span class="keyword">this</span>.name = name;
-  } <span class="keyword">else</span> {
-    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'必须使用new生成实例'</span>);
-  }
-}
-<span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">'张三'</span>); <span class="comment">// 正确</span>
-<span class="keyword">var</span> notAPerson = Person.call(person, <span class="string">'张三'</span>); <span class="comment">// 报错</span>
-</code></pre><p>Class内部调用new.target，返回当前Class。<br>子类继承父类时，new.target会返回子类。</p>
-<pre><code><span class="keyword">class</span> Rectangle {
-  <span class="constructor"><span class="keyword">constructor</span>(length, width) </span>{
-    <span class="built_in">console</span>.log(<span class="keyword">new</span>.target === Rectangle);
-    <span class="comment">// ...</span>
-  }
-}
-<span class="keyword">class</span> Square extends Rectangle {
-  <span class="constructor"><span class="keyword">constructor</span>(length) </span>{
-    <span class="keyword">super</span>(length, length);
-  }
-}
-<span class="keyword">var</span> obj = <span class="keyword">new</span> Square(<span class="number">3</span>); <span class="comment">// 输出 false</span>
-</code></pre><p>利用这个特点，可以写出不能独立使用、必须继承后才能使用的类。</p>
-<h2 id="类的修饰">类的修饰</h2><p>修饰器（Decorator）是一个表达式，用来修改类的行为。这是ES7的一个提案，目前Babel转码器已经支持。<br>修饰器对类的行为的改变，是代码编译时发生的，而不是在运行时。这意味着，修饰器能在编译阶段运行代码。  </p>
-<p>读阮一峰老师《ECMAScript6入门》一书的笔记<br><br></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="Class基本语法">Class基本语法</h2><p>ES6的class可以看作只是一个语法糖，它的绝大部分功能，ES5都可以做到，新的class写法只是让对象原型的写法更加清晰、更像面向对象编程的语法而已。</p>
-<pre><code><span class="comment">// old</span>
-  <span class="function"><span class="keyword">function</span> <span class="title">Point</span><span class="params">(x,y)</span></span>{
-  <span class="keyword">this</span>.x = x;
-  <span class="keyword">this</span>.y = y;
-}
-Point.prototype.toString = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{
-  <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
-}
-<span class="comment">// new</span>
-<span class="keyword">class</span> Point {
-  <span class="constructor"><span class="keyword">constructor</span>(x, y) </span>{
-    <span class="keyword">this</span>.x = x;
-    <span class="keyword">this</span>.y = y;
-  }
-  toString() {
-    <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;
-  }   
-}
-</code></pre>]]>
-    
-    </summary>
-    
-      <category term="ECMAScript6入门" scheme="http://www.haiyue.me/tags/ECMAScript6%E5%85%A5%E9%97%A8/"/>
-    
-      <category term="笔记" scheme="http://www.haiyue.me/categories/%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[蓝色港湾跨年夜]]></title>
-    <link href="http://www.haiyue.me/2016/01/06/photo/lansegangwan/"/>
-    <id>http://www.haiyue.me/2016/01/06/photo/lansegangwan/</id>
-    <published>2016-01-05T16:00:00.000Z</published>
-    <updated>2016-02-01T10:18:33.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_75423232.jpg" alt=""><br>    跨年夜无聊去蓝色港湾看灯展，还是挺好看的。<br><a id="more"></a><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7560.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7515.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7461.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7466.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7610.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7616.JPG" alt="">  </p>
-<p><br></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_75423232.jpg" alt=""><br>    跨年夜无聊去蓝色港湾看灯展，还是挺好看的。<br>]]>
-    
-    </summary>
-    
-      <category term="摄影" scheme="http://www.haiyue.me/categories/%E6%91%84%E5%BD%B1/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[北京大雪]]></title>
     <link href="http://www.haiyue.me/2016/01/06/photo/beijingdaxue/"/>
     <id>http://www.haiyue.me/2016/01/06/photo/beijingdaxue/</id>
@@ -994,16 +1112,16 @@ Point.prototype.toString = <span class="function"><span class="keyword">function
   </entry>
   
   <entry>
-    <title><![CDATA[香山红叶节]]></title>
-    <link href="http://www.haiyue.me/2015/10/28/photo/xiangshan/"/>
-    <id>http://www.haiyue.me/2015/10/28/photo/xiangshan/</id>
-    <published>2015-10-27T16:00:00.000Z</published>
-    <updated>2016-02-01T10:22:39.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/IMG_70742324.jpg" alt=""><br>老早爬起来去香山看红叶，没有想象中的那么好，红叶不多，可能去的还不是时候。<br><a id="more"></a><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_6998.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7008.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7035.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7060.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7093.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7095.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7152.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7202.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7251.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7257.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7263.JPG" alt=""></p>
+    <title><![CDATA[蓝色港湾跨年夜]]></title>
+    <link href="http://www.haiyue.me/2016/01/06/photo/lansegangwan/"/>
+    <id>http://www.haiyue.me/2016/01/06/photo/lansegangwan/</id>
+    <published>2016-01-05T16:00:00.000Z</published>
+    <updated>2016-02-01T10:18:33.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_75423232.jpg" alt=""><br>    跨年夜无聊去蓝色港湾看灯展，还是挺好看的。<br><a id="more"></a><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7560.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7515.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7461.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7466.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7610.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_7616.JPG" alt="">  </p>
 <p><br></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/IMG_70742324.jpg" alt=""><br>老早爬起来去香山看红叶，没有想象中的那么好，红叶不多，可能去的还不是时候。<br>]]>
+    <![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/lsgwIMG_75423232.jpg" alt=""><br>    跨年夜无聊去蓝色港湾看灯展，还是挺好看的。<br>]]>
     
     </summary>
     
@@ -1112,148 +1230,20 @@ hw.<span class="built_in">next</span>() // { value: undefined, done: <span class
   </entry>
   
   <entry>
-    <title><![CDATA[ES6-字符串的扩展]]></title>
-    <link href="http://www.haiyue.me/2015/10/26/es6-string/"/>
-    <id>http://www.haiyue.me/2015/10/26/es6-string/</id>
-    <published>2015-10-25T16:00:00.000Z</published>
-    <updated>2016-02-01T09:22:12.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="字符的Unicode表示法">字符的Unicode表示法</h2><p>   之前不识别在“\u”后面跟上超过0xFFFF的数值（比如\u20BB7），现在用只要将码点放入大括号中就能识别了（比如\u{20BB7}）<br>   所以现在JavaScript共有6种方法可以表示一个字符</p>
-<pre><code><span class="string">'\z'</span> === <span class="string">'z'</span>  <span class="comment">// true  </span>
-<span class="string">'\172'</span> === <span class="string">'z'</span> <span class="comment">// true  </span>
-<span class="string">'\x7A'</span> === <span class="string">'z'</span> <span class="comment">// true  </span>
-<span class="string">'\u007A'</span> === <span class="string">'z'</span> <span class="comment">// true  </span>
-<span class="string">'\u{7A}'</span> === <span class="string">'z'</span> <span class="comment">// true        </span>
-</code></pre><a id="more"></a>      
-<h2 id="codePointAt()_//_?">codePointAt() // ?</h2><p>   JavaScript内部，字符以UTF-16的格式储存，每个字符固定为2个字节。对于那些需要4个字节储存的字符（Unicode码点大于0xFFFF的字符），JavaScript会认为它们是两个字符。</p>
-<pre><code><span class="keyword">var</span> s = <span class="string">"𠮷"</span>;
-s.length <span class="comment">// 2</span>
-s.charAt(<span class="number">0</span>) <span class="comment">// ''</span>
-s.charAt(<span class="number">1</span>) <span class="comment">// ''</span>
-s.charCodeAt(<span class="number">0</span>) <span class="comment">// 55362</span>
-s.charCodeAt(<span class="number">1</span>) <span class="comment">// 57271</span>
-</code></pre><p>   ES6提供了codePointAt方法，能够正确处理4个字节储存的字符，返回一个字符的码点。</p>
-<h2 id="String-fromCodePoint()">String.fromCodePoint()</h2><p>   ES5提供String.fromCharCode方法，用于从码点返回对应字符，但是这个方法不能识别辅助平面的字符（编号大于0xFFFF）。</p>
-<pre><code>String.<span class="function"><span class="title">fromCharCode</span><span class="params">(<span class="number">0</span>x20BB7)</span></span> <span class="comment">// "ஷ"</span>
-</code></pre><p>   ES6提供了String.fromCodePoint方法，可以识别0xFFFF的字符，弥补了String.fromCharCode方法的不足。</p>
-<pre><code>String.<span class="function"><span class="title">fromCodePoint</span><span class="params">(<span class="number">0</span>x20BB7)</span></span> <span class="comment">// "𠮷"</span>
-</code></pre><h2 id="字符串的遍历器接口">字符串的遍历器接口</h2><p>   ES6为字符串添加了遍历器接口，使得字符串可以被for…of循环遍历。<br>   除了遍历字符串，这个遍历器最大的优点是可以识别大于0xFFFF的码点，传统的for循环无法识别这样的码点。</p>
-<h2 id="at()_//_ES7">at() // ES7</h2><p>   ES5对字符串对象提供charAt方法，返回字符串给定位置的字符。该方法不能识别码点大于0xFFFF的字符。<br>   ES7提供了字符串实例的at方法，可以识别Unicode编号大于0xFFFF的字符，返回正确的字符。</p>
-<h2 id="normalize()_//_?">normalize() // ?</h2><p>   ES6提供String.prototype.normalize()方法，用来将字符的不同表示方法统一为同样的形式，这称为Unicode正规化。</p>
-<h2 id="includes(),_startsWith(),_endsWith()">includes(), startsWith(), endsWith()</h2><p>   传统上，JavaScript只有indexOf方法，可以用来确定一个字符串是否包含在另一个字符串中。ES6又提供了三种新方法。  </p>
-<pre><code><span class="function"><span class="title">includes</span><span class="params">()</span></span>：返回布尔值，表示是否找到了参数字符串。
-<span class="function"><span class="title">startsWith</span><span class="params">()</span></span>：返回布尔值，表示参数字符串是否在源字符串的头部。
-<span class="function"><span class="title">endsWith</span><span class="params">()</span></span>：返回布尔值，表示参数字符串是否在源字符串的尾部。
-</code></pre><p>   这三个方法都支持第二个参数，endsWith的第二个参数表示它针对前n个字符，而其他两个方法针对从第n个位置直到字符串结束。</p>
-<pre><code>var s = <span class="string">'Hello world!'</span>;
-s.<span class="keyword">startsWith</span>(<span class="string">'world'</span>, <span class="number">6</span>) <span class="comment">// true</span>
-s.<span class="keyword">endsWith</span>(<span class="string">'Hello'</span>, <span class="number">5</span>) <span class="comment">// true</span>
-s.includes(<span class="string">'Hello'</span>, <span class="number">6</span>) <span class="comment">// false</span>
-</code></pre><h2 id="repeat()">repeat()</h2><p>   repeat方法返回一个新字符串，表示将原字符串重复n次。</p>
-<pre><code><span class="string">'hello'</span>.<span class="function"><span class="title">repeat</span><span class="params">(<span class="number">2</span>)</span></span> <span class="comment">// "hellohello"</span>
-<span class="string">'na'</span>.<span class="function"><span class="title">repeat</span><span class="params">(<span class="number">0</span>)</span></span> <span class="comment">// ""</span>
-</code></pre><p>   参数如果是小数，会被取整。<br>   如果repeat的参数是负数或者Infinity，会报错。<br>   但是，如果参数是0到-1之间的小数，则等同于0，这是因为会先进行取整运算。0到-1之间的小数，取整以后等于-0，repeat视同为0。<br>   参数NaN等同于0。<br>   如果repeat的参数是字符串，则会先转换成数字。</p>
-<h2 id="模板字符串">模板字符串</h2><p>   模板字符串（template string）是增强版的字符串，用反引号（`）标识。它可以当作普通字符串使用，也可以用来定义多行字符串，或者在字符串中嵌入变量。<br>   如果在模板字符串中需要使用反引号，则前面要用反斜杠转义。<br>   如果使用模板字符串表示多行字符串，所有的空格和缩进都会被保留在输出之中。<br>   模板字符串中嵌入变量，需要将变量名写在${}之中。<br>   大括号内部可以放入任意的JavaScript表达式，可以进行运算，以及引用对象属性。<br>   模板字符串之中还能调用函数。<br>   如果大括号中的值不是字符串，将按照一般的规则转为字符串。比如，大括号中是一个对象，将默认调用对象的toString方法。<br>   如果模板字符串中的变量没有声明，将报错。<br>   由于模板字符串的大括号内部，就是执行JavaScript代码，因此如果大括号内部是一个字符串，将会原样输出。</p>
-<h2 id="标签模板">标签模板</h2><p>   模板字符串可以紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串。这被称为“标签模板”功能（tagged template）。<br>   tag函数的第一个参数是一个数组，该数组的成员是模板字符串中那些没有变量替换的部分，其他参数，都是模板字符串各个变量被替换后的值。</p>
-<pre><code><span class="reserved">var</span> a = <span class="number">5</span>;
-<span class="reserved">var</span> b = <span class="number">10</span>;
-<span class="reserved">function</span> tag(s, v1, v2) {
-  <span class="built_in">console</span>.log(s[<span class="number">0</span>]); <span class="regexp">//</span> <span class="string">"Hello "</span>
-  <span class="built_in">console</span>.log(s[<span class="number">1</span>]); <span class="regexp">//</span> <span class="string">" world "</span>
-  <span class="built_in">console</span>.log(s[<span class="number">2</span>]); <span class="regexp">//</span> <span class="string">""</span>
-  <span class="built_in">console</span>.log(v1); <span class="regexp">//</span> <span class="number">15</span>
-  <span class="built_in">console</span>.log(v2); <span class="regexp">//</span> <span class="number">50</span>
-  <span class="keyword">return</span> <span class="string">"OK"</span>;
-}
-tag`<span class="javascript">Hello ${ a + b } world ${ a * b}</span>`; <span class="regexp">//</span> <span class="string">"OK"</span>  等同于 tag([<span class="string">'Hello '</span>, <span class="string">' world '</span>, <span class="string">''</span>], <span class="number">15</span>, <span class="number">50</span>)
-</code></pre><p>   “标签模板”的一个重要应用，就是过滤HTML字符串，防止用户输入恶意内容。</p>
-<pre><code><span class="keyword">var</span> message = SaferHTML`&lt;p&gt;${sender} has sent you a message.&lt;/p&gt;`;
-<span class="function"><span class="keyword">function</span> <span class="title">SaferHTML</span><span class="params">(templateData)</span> </span>{
-  <span class="keyword">var</span> s = templateData[<span class="number">0</span>];
-  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; arguments.length; i++) {
-    <span class="keyword">var</span> arg = String(arguments[i]);
-    <span class="comment">// Escape special characters in the substitution.</span>
-    s += arg.replace(/&amp;/g, <span class="string">"&amp;amp;"</span>).replace(/&lt;/g, <span class="string">"&amp;lt;"</span>).replace(/&gt;/g, <span class="string">"&amp;gt;"</span>);
-    <span class="comment">// Don't escape special characters in the template.</span>
-    s += templateData[i];
-  }
-  <span class="keyword">return</span> s;
-}
-</code></pre><p>   模板处理函数的第一个参数（模板字符串数组），还有一个raw属性。该数组的成员与strings数组完全一致。两者唯一的区别，就是字符串里面的斜杠都被转义了。比如，strings.raw数组会将\n视为\和n两个字符，而不是换行符。这是为了方便取得转义之前的原始模板而设计的。</p>
-<h2 id="String-raw()">String.raw()</h2><p>   String.raw方法，往往用来充当模板字符串的处理函数，返回一个斜杠都被转义（即斜杠前面再加一个斜杠）的字符串，对应于替换变量后的模板字符串。</p>
-<pre><code>String.raw<span class="escape">`H</span>i\n${<span class="number">2</span>+<span class="number">3</span>}!<span class="escape">`;</span> // <span class="string">"Hi\\n5!"</span>
-</code></pre><p>   String.raw方法也可以作为正常的函数使用。这时，它的第一个参数，应该是一个具有raw属性的对象，且raw属性的值应该是一个数组。</p>
-<pre><code><span class="filename">String.raw({ raw</span>: <span class="string">'test'</span> }, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>); // <span class="string">'t0e1s2t'</span>, 等同于 <span class="filename">String.raw({ raw</span>: [<span class="string">'t'</span>,<span class="string">'e'</span>,<span class="string">'s'</span>,<span class="string">'t'</span>] }, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>);
-</code></pre><p>读阮一峰老师《ECMAScript6入门》一书的笔记<br><br></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="字符的Unicode表示法">字符的Unicode表示法</h2><p>   之前不识别在“\u”后面跟上超过0xFFFF的数值（比如\u20BB7），现在用只要将码点放入大括号中就能识别了（比如\u{20BB7}）<br>   所以现在JavaScript共有6种方法可以表示一个字符</p>
-<pre><code><span class="string">'\z'</span> === <span class="string">'z'</span>  <span class="comment">// true  </span>
-<span class="string">'\172'</span> === <span class="string">'z'</span> <span class="comment">// true  </span>
-<span class="string">'\x7A'</span> === <span class="string">'z'</span> <span class="comment">// true  </span>
-<span class="string">'\u007A'</span> === <span class="string">'z'</span> <span class="comment">// true  </span>
-<span class="string">'\u{7A}'</span> === <span class="string">'z'</span> <span class="comment">// true        </span>
-</code></pre>]]>
-    
-    </summary>
-    
-      <category term="ECMAScript6入门" scheme="http://www.haiyue.me/tags/ECMAScript6%E5%85%A5%E9%97%A8/"/>
-    
-      <category term="笔记" scheme="http://www.haiyue.me/categories/%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[iTerm2的使用]]></title>
-    <link href="http://www.haiyue.me/2015/07/23/iterm2/"/>
-    <id>http://www.haiyue.me/2015/07/23/iterm2/</id>
-    <published>2015-07-22T16:00:00.000Z</published>
-    <updated>2016-02-02T04:13:10.000Z</updated>
-    <content type="html"><![CDATA[<p>自从换了mac后连接远程linux服务器一直用电脑自带的终端，每次都要输密码，烦死了。看同事用iTerm挺方便的，就自己也弄了一个。</p>
-<h3 id="下载地址">下载地址</h3><p><a href="http://www.iterm2.com/" target="_blank" rel="external">http://www.iterm2.com/</a></p>
-<h3 id="记住远程服务器密码">记住远程服务器密码</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">timeout</span> <span class="number">30</span></span><br><span class="line">spawn ssh liuhaiming@<span class="number">122.92</span><span class="number">.222</span><span class="number">.122</span> -p51618</span><br><span class="line">expect <span class="string">"*password*"</span></span><br><span class="line">send “**********\n<span class="string">"</span><br><span class="line">interact</span></span><br></pre></td></tr></table></figure>
-<a id="more"></a>  
-<h3 id="替换图标">替换图标</h3><p>原图标看着不好看,替换一个喜欢的图标<br>找好自己要替换的图标<br><a href="https://dribbble.com/shots/656627-Terminal-Macintosh-Icon" target="_blank" rel="external">https://dribbble.com/shots/656627-Terminal-Macintosh-Icon</a><br>找到自己要替换图标的app<br>右键显示简介，复制下载好的图标，并选中要替换的图标 command + v 就替换好了    </p>
-<h3 id="换个自己喜欢的主题">换个自己喜欢的主题</h3><p><a href="http://iterm2colorschemes.com/" target="_blank" rel="external">http://iterm2colorschemes.com/</a></p>
-<h3 id="相关命令">相关命令</h3><p>command + O: 打开配置方便选择    </p>
+    <title><![CDATA[香山红叶节]]></title>
+    <link href="http://www.haiyue.me/2015/10/28/photo/xiangshan/"/>
+    <id>http://www.haiyue.me/2015/10/28/photo/xiangshan/</id>
+    <published>2015-10-27T16:00:00.000Z</published>
+    <updated>2016-02-01T10:22:39.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/IMG_70742324.jpg" alt=""><br>老早爬起来去香山看红叶，没有想象中的那么好，红叶不多，可能去的还不是时候。<br><a id="more"></a><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_6998.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7008.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7035.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7060.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7093.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7095.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7152.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7202.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7251.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7257.JPG" alt=""><br><img src="http://7xia33.com1.z0.glb.clouddn.com/xiangshanIMG_7263.JPG" alt=""></p>
 <p><br></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>自从换了mac后连接远程linux服务器一直用电脑自带的终端，每次都要输密码，烦死了。看同事用iTerm挺方便的，就自己也弄了一个。</p>
-<h3 id="下载地址">下载地址</h3><p><a href="http://www.iterm2.com/">http://www.iterm2.com/</a></p>
-<h3 id="记住远程服务器密码">记住远程服务器密码</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">timeout</span> <span class="number">30</span></span><br><span class="line">spawn ssh liuhaiming@<span class="number">122.92</span><span class="number">.222</span><span class="number">.122</span> -p51618</span><br><span class="line">expect <span class="string">"*password*"</span></span><br><span class="line">send “**********\n<span class="string">"</span><br><span class="line">interact</span></span><br></pre></td></tr></table></figure>]]>
+    <![CDATA[<p><img src="http://7xia33.com1.z0.glb.clouddn.com/IMG_70742324.jpg" alt=""><br>老早爬起来去香山看红叶，没有想象中的那么好，红叶不多，可能去的还不是时候。<br>]]>
     
     </summary>
     
-      <category term="软件" scheme="http://www.haiyue.me/tags/%E8%BD%AF%E4%BB%B6/"/>
-    
-      <category term="编程" scheme="http://www.haiyue.me/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[setImmediate,setTimeout,nextTick的区别是什么]]></title>
-    <link href="http://www.haiyue.me/2015/07/22/nexttick_immediate/"/>
-    <id>http://www.haiyue.me/2015/07/22/nexttick_immediate/</id>
-    <published>2015-07-21T16:00:00.000Z</published>
-    <updated>2016-02-02T04:13:35.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="区别">区别</h2><p>1、nextTick和setImmediate主要的区别在于任务插入的位置nextTick的插入位置是在当前帧的末尾、io回调之前，如果nextTick过多，会导致io回调不断延后setImmediate的插入位置是在下一帧，不会影响io回调。</p>
-<p>2、Nodejs的特点是事件驱动，异步I/O产生的高并发，产生此特点的引擎是事件循环，事件被分门别类地归到对应的事件观察者上，比如idle观察者，定时器观察者，I/O观察者等等，事件循环每次循环称为Tick，每次Tick按照先后顺序从事件观察者中取出事件进行处理。<br>调用setTimeout()时创建的计时器会被放入定时器观察者内部的红黑树中，每次Tick时，会从该红黑树中检查定时器是否超过定时时间，超过的话，就立即执行对应的回调函数。由于定时器是超时触发，这会导致触发精确度降低。</p>
-<a id="more"></a>  
-<h2 id="代码例子">代码例子</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nextTick</span><span class="params">(msg, cb)</span> </span>&#123;</span><br><span class="line">  process.nextTick(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'tick: '</span> + msg);</span><br><span class="line">    <span class="keyword">if</span> (cb) &#123;</span><br><span class="line">      cb();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">immediate</span><span class="params">(msg, cb)</span> </span>&#123;</span><br><span class="line">  setImmediate(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'immediate : '</span> + msg);</span><br><span class="line">    <span class="keyword">if</span> (cb) &#123;</span><br><span class="line">      cb();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">nextTick(<span class="string">'1'</span>);</span><br><span class="line">nextTick(<span class="string">'2'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  nextTick(<span class="string">'10'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">immediate(<span class="string">'3'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  nextTick(<span class="string">'5'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">nextTick(<span class="string">'7'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  immediate(<span class="string">'9'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">immediate(<span class="string">'4'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  nextTick(<span class="string">'8'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> n = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> timer = setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  n++;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'interval:'</span>, n);</span><br><span class="line">  nextTick(<span class="string">'tick from interval: '</span> +  n);</span><br><span class="line">  nextTick(<span class="string">'another tick from interval: '</span> +  n);</span><br><span class="line">  immediate(<span class="string">'immediate from interval: '</span> + n);</span><br><span class="line">  immediate(<span class="string">'another immediate from interval: '</span> + n);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( n === <span class="number">3</span> ) &#123;</span><br><span class="line">    clearInterval(timer);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'the last line of the program.'</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="结果">结果</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">the last line of the program.</span><br><span class="line"><span class="string">tick:</span> <span class="number">1</span></span><br><span class="line"><span class="string">tick:</span> <span class="number">2</span></span><br><span class="line"><span class="string">tick:</span> <span class="number">7</span></span><br><span class="line"><span class="string">tick:</span> <span class="number">10</span></span><br><span class="line"><span class="string">interval:</span> <span class="number">1</span></span><br><span class="line"><span class="string">tick:</span> tick from <span class="string">interval:</span> <span class="number">1</span></span><br><span class="line"><span class="string">tick:</span> another tick from <span class="string">interval:</span> <span class="number">1</span></span><br><span class="line"><span class="string">immediate :</span> <span class="number">3</span></span><br><span class="line"><span class="string">immediate :</span> <span class="number">4</span></span><br><span class="line"><span class="string">immediate :</span> <span class="number">9</span></span><br><span class="line"><span class="string">immediate :</span> immediate from <span class="string">interval:</span> <span class="number">1</span></span><br><span class="line"><span class="string">immediate :</span> another immediate from <span class="string">interval:</span> <span class="number">1</span></span><br><span class="line"><span class="string">tick:</span> <span class="number">5</span></span><br><span class="line"><span class="string">tick:</span> <span class="number">8</span></span><br><span class="line"><span class="string">interval:</span> <span class="number">2</span></span><br><span class="line"><span class="string">tick:</span> tick from <span class="string">interval:</span> <span class="number">2</span></span><br><span class="line"><span class="string">tick:</span> another tick from <span class="string">interval:</span> <span class="number">2</span></span><br><span class="line"><span class="string">immediate :</span> immediate from <span class="string">interval:</span> <span class="number">2</span></span><br><span class="line"><span class="string">immediate :</span> another immediate from <span class="string">interval:</span> <span class="number">2</span></span><br><span class="line"><span class="string">interval:</span> <span class="number">3</span></span><br><span class="line"><span class="string">tick:</span> tick from <span class="string">interval:</span> <span class="number">3</span></span><br><span class="line"><span class="string">tick:</span> another tick from <span class="string">interval:</span> <span class="number">3</span></span><br><span class="line"><span class="string">immediate :</span> immediate from <span class="string">interval:</span> <span class="number">3</span></span><br><span class="line"><span class="string">immediate :</span> another immediate from <span class="string">interval:</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
-<h2 id="Maximum_call_stack_size_exceeded错误的原因">Maximum call stack size exceeded错误的原因</h2><p>之所以会发生Maximum call stack size exceeded,因为process.maxTickDepth的缺省值是1000，如果递归调用nextTick只能调用1000次，超过1000就会报这个错，但并不是真正栈溢出，只是想给你一个提示不希望你递归调用nextTick太多次，如果nextTick递归调用，那么其他的回调事件就会等待，会造成event loop饥饿，所以官方推荐用setImmediate作为递归调用</p>
-<h2 id="资料来源">资料来源</h2><p><a href="https://cnodejs.org/topic/519b523c63e9f8a5429b25e3" target="_blank" rel="external">求科普setImmediate API</a><br><a href="http://www.cnblogs.com/kongxianghai/p/3942226.html" target="_blank" rel="external">setTimeout，setInterval，process.nextTick，setImmediate in Nodejs</a></p>
-<p><br></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="区别">区别</h2><p>1、nextTick和setImmediate主要的区别在于任务插入的位置nextTick的插入位置是在当前帧的末尾、io回调之前，如果nextTick过多，会导致io回调不断延后setImmediate的插入位置是在下一帧，不会影响io回调。</p>
-<p>2、Nodejs的特点是事件驱动，异步I/O产生的高并发，产生此特点的引擎是事件循环，事件被分门别类地归到对应的事件观察者上，比如idle观察者，定时器观察者，I/O观察者等等，事件循环每次循环称为Tick，每次Tick按照先后顺序从事件观察者中取出事件进行处理。<br>调用setTimeout()时创建的计时器会被放入定时器观察者内部的红黑树中，每次Tick时，会从该红黑树中检查定时器是否超过定时时间，超过的话，就立即执行对应的回调函数。由于定时器是超时触发，这会导致触发精确度降低。</p>]]>
-    
-    </summary>
-    
-      <category term="js" scheme="http://www.haiyue.me/tags/js/"/>
-    
-      <category term="编程" scheme="http://www.haiyue.me/categories/%E7%BC%96%E7%A8%8B/"/>
+      <category term="摄影" scheme="http://www.haiyue.me/categories/%E6%91%84%E5%BD%B1/"/>
     
   </entry>
   

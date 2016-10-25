@@ -2,8 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.haiyue.me/2016/10/25/yml-evn/</loc>
+    <lastmod>2016-10-25T06:52:51.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/2016/10/24/spring-boot-single-main/</loc>
+    <lastmod>2016-10-24T09:11:29.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.haiyue.me/2016/10/09/docker-hello-world/</loc>
+    <lastmod>2016-10-09T07:52:57.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://www.haiyue.me/2016/09/06/nginx-install/</loc>
-    <lastmod>2016-09-06T10:40:12.000Z</lastmod>
+    <lastmod>2016-09-06T10:41:21.000Z</lastmod>
   </url>
   
   <url>
