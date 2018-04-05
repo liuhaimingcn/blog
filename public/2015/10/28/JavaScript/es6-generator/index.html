@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="寻梦的尕柳的个人blog"><meta name="keywords" content="编程, java, node.js, 摄影"><title>ES6-Generator函数 | 寻梦的尕柳</title><link rel="stylesheet" type="text/css" href="//fonts.css.network/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.3.0"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=1.3.0"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">ES6-Generator函数</h1><a id="logo" href="/.">寻梦的尕柳</a><p class="description">幽幽一缕香，飘在深深旧梦中，宛如挥手袖底风，淡淡回首，也无风雨也无晴。</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">ES6-Generator函数</h1><div class="post-meta">Oct 28, 2015<span> | </span><span class="category"><a href="/categories/JavaScript/">JavaScript</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a data-thread-key="2015/10/28/JavaScript/es6-generator/" href="/2015/10/28/JavaScript/es6-generator/#comments" class="ds-thread-count"></a><div class="post-content"><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>Generator函数是ES6提供的一种异步编程解决方案<br>Generator函数有两个特征。一是，function命令与函数名之间有一个星号；二是，函数体内部使用yield语句，定义不同的内部状态。<br>调用Generator函数后，该函数并不执行，返回的是一个指向内部状态的指针对象（遍历器对象）。下一步，必须调用遍历器对象的next方法，使得指针移向下一个状态。也就是说，每次调用next方法，内部指针就从函数头部或上一次停下来的地方开始执行，直到遇到下一个yield语句（或return语句）为止。  </p>
+<pre><code>function* helloWorldGenerator() {
+  yield &apos;hello&apos;;
+  yield &apos;world&apos;;
+  return &apos;ending&apos;;
+}
+var hw = helloWorldGenerator();
+hw.next() // { value: &apos;hello&apos;, done: false }
+hw.next() // { value: &apos;world&apos;, done: false }
+hw.next() // { value: &apos;ending&apos;, done: true }
+hw.next() // { value: undefined, done: true }
+</code></pre><p>每次调用遍历器对象的next方法，就会返回一个有着value和done两个属性的对象。value属性表示当前的内部状态的值，是yield语句后面那个表达式的值；done属性是一个布尔值，表示是否遍历结束。</p>
+<a id="more"></a> 
+<p>##yield语句<br>遍历器对象的next方法的运行逻辑如下。</p>
+<pre><code>遇到yield语句，就暂停执行后面的操作，并将紧跟在yield后面的那个表达式的值，作为返回的对象的value属性值。
+下一次调用next方法时，再继续往下执行，直到遇到下一个yield语句。
+如果没有再遇到新的yield语句，就一直运行到函数结束，直到return语句为止，并将return语句后面的表达式的值，作为返回的对象的value属性值。
+如果该函数没有return语句，则返回的对象的value属性值为undefined。
+</code></pre><p>yield语句后面的表达式，只有当调用next方法、内部指针指向该语句时才会执行，因此等于为JavaScript提供了手动的“惰性求值”（Lazy Evaluation）的语法功能。<br>一个函数里面，只能执行一次（或者说一个）return语句，但是可以执行多次（或者说多个）yield语句。<br>yield语句不能用在普通函数中，否则会报错。<br>yield语句如果用在一个表达式之中，必须放在圆括号里面。yield语句用作函数参数或赋值表达式的右边，可以不加括号。</p>
+<p>##next方法的参数<br>yield句本身没有返回值，或者说总是返回undefined。next方法可以带一个参数，该参数就会被当作上一个yield语句的返回值。<br>由于next方法的参数表示上一个yield语句的返回值，所以第一次使用next方法时，不能带有参数。V8引擎直接忽略第一次使用next方法时的参数，只有从第二次使用next方法开始，参数才是有效的。</p>
+<p>##for…of循环<br>for…of循环可以自动遍历Generator函数，且此时不再需要调用next方法。这里需要注意，一旦next方法的返回对象的done属性为true，for…of循环就会中止，且不包含该返回对象。<br>for…of循环、扩展运算符（…）、解构赋值和Array.from方法内部调用的，都是遍历器接口。这意味着，它们可以将Generator函数返回的Iterator对象，作为参数。</p>
+<pre><code>function* numbers () {
+  yield 1
+  yield 2
+  return 3
+  yield 4
+}
+[...numbers()] // [1, 2]
+Array.from(numbers()) // [1, 2]
+let [x, y] = numbers();
+x // 1
+y // 2
+for (let n of numbers()) {
+  console.log(n)
+}
+// 1
+// 2
+</code></pre><p>##Generator.prototype.throw()<br>Generator函数返回的遍历器对象，都有一个throw方法，可以在函数体外抛出错误，然后在Generator函数体内捕获。<br>如果Generator函数内部没有部署try…catch代码块，那么throw方法抛出的错误，将被外部try…catch代码块捕获。<br>如果Generator函数内部部署了try…catch代码块，那么遍历器的throw方法抛出的错误，不影响下一次遍历，否则遍历直接终止。<br>Generator函数内抛出的错误，也可以被函数体外的catch捕获。</p>
+<p>##Generator.prototype.return()<br>Generator函数返回的遍历器对象，还有一个return方法，可以返回给定的值，并且终结遍历Generator函数。</p>
+<pre><code>function* gen() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+var g = gen();
+g.next()        // { value: 1, done: false }
+g.return(&quot;foo&quot;) // { value: &quot;foo&quot;, done: true }
+g.next()        // { value: undefined, done: true }
+</code></pre><p>如果return方法调用时，不提供参数，则返回值的vaule属性为undefined。<br>如果Generator函数内部有try…finally代码块，那么return方法会推迟到finally代码块执行完再执行。</p>
+<h2 id="yield-语句"><a href="#yield-语句" class="headerlink" title="yield*语句"></a>yield*语句</h2><p>yield<em>语句，用来在一个Generator函数里面执行另一个Generator函数。<br>yield</em>语句等同于在Generator函数内部，部署一个for…of循环。<br>如果yield*后面跟着一个数组，由于数组原生支持遍历器，因此就会遍历数组成员。</p>
+<pre><code>function* gen(){    
+  yield* [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
+}
+gen().next() // { value:&quot;a&quot;, done:false }
+</code></pre><p>##作为对象属性的Generator函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let obj = &#123;</div><div class="line">  * myGeneratorMethod() &#123;</div><div class="line">    ···</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>等价于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let obj = &#123;</div><div class="line">  myGeneratorMethod: function* () &#123;</div><div class="line">    // ···</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>##构造函数是Generator函数 // ？</p>
+<p>##Generator函数推导 // ?</p>
+<p>##Generator与状态机 // ?</p>
+<p>##Generator与协程 // ?</p>
+<p>##异步操作的同步化表达<br>Generator函数的暂停执行的效果，意味着可以把异步操作写在yield语句里面，等到调用next方法时再往后执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function* main() &#123;</div><div class="line">  var result = yield request(&quot;http://some.url&quot;);</div><div class="line">  var resp = JSON.parse(result);</div><div class="line">    console.log(resp.value);</div><div class="line">&#125;</div><div class="line">function request(url) &#123;</div><div class="line">  makeAjaxCall(url, function(response)&#123;</div><div class="line">    it.next(response);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line">var it = main();</div><div class="line">it.next();</div></pre></td></tr></table></figure>
+<p>##控制流管理 // ???</p>
+<p>##部署iterator接口 // ?</p>
+<p>##作为数据结构 // ?</p>
+<p>读阮一峰老师《ECMAScript6入门》一书的笔记<br><br></p>
+</div><div class="tags"><a href="/tags/note/">note</a><a href="/tags/es6/">es6</a></div><div class="post-nav"><a href="/2016/01/06/Photo/beijingdaxue/" class="pre">北京大雪</a><a href="/2015/10/28/Photo/xiangshan/" class="next">香山红叶节</a></div><div data-thread-key="2015/10/28/JavaScript/es6-generator/" data-title="ES6-Generator函数" data-url="http://haiyue.me/2015/10/28/JavaScript/es6-generator/" class="ds-share flat"><div class="ds-share-inline"><ul class="ds-share-icons-16"><li data-toggle="ds-share-icons-more"><a href="javascript:void(0);" class="ds-more">分享到:</a></li><li><a href="javascript:void(0);" data-service="weibo" class="ds-weibo">微博</a></li><li><a href="javascript:void(0);" data-service="qzone" class="ds-qzone">QQ空间</a></li><li><a href="javascript:void(0);" data-service="qqt" class="ds-qqt">腾讯微博</a></li><li><a href="javascript:void(0);" data-service="wechat" class="ds-wechat">微信</a></li></ul><div class="ds-share-icons-more"></div></div></div><div id="comments"><div data-thread-key="2015/10/28/JavaScript/es6-generator/" data-title="ES6-Generator函数" data-url="http://haiyue.me/2015/10/28/JavaScript/es6-generator/" data-author-key="1" class="ds-thread"></div></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="widget"><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="请输入关键字..."/></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architecture/">Architecture</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Photo/">Photo</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Boot/">Spring Boot</a><span class="category-list-count">4</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/note/" style="font-size: 15px;">note</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/original/" style="font-size: 15px;">original</a> <a href="/tags/jvm/" style="font-size: 15px;">jvm</a> <a href="/tags/软件/" style="font-size: 15px;">软件</a> <a href="/tags/motan/" style="font-size: 15px;">motan</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="http://godmod.cn" title="GodMod" target="_blank">GodMod</a></div><div class="widget"><div class="widget-title"><i class="fa fa-weibo"> 新浪微博</i></div><iframe width="100%" height="400" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=400&amp;fansRow=1&amp;ptype=1&amp;speed=0&amp;skin=5&amp;isTitle=0&amp;noborder=1&amp;isWeibo=1&amp;isFans=0&amp;uid=1819387822&amp;verifier=3b3e0dc8&amp;dpc=1" class="share_self"></iframe></div><div class="widget"><div class="comments-title"><i class="fa fa-commt"> 最近评论</i></div><div data-num-items="5" data-show-avatars="0" data-show-time="1" data-show-admin="0" data-excerpt-length="32" data-show-title="1" class="ds-recent-comments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/05/Linux/dns-records/">DNS Records 名词解释</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/05/Java/volatile/">理解 volatile</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/Linux/linux-kernel/">Linux调优</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/21/Architecture/jenkins/">使用jenkins进行项目的自动构建部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/16/JavaScript/尾调用优化/">尾调用优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/06/Java/jvm/">深入理解 Java 虚拟机笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/10/RPC/motan-hello/">RPC框架motan使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/04/Architecture/elk/">使用ELK管理日志</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/27/SpringBoot/spring-boot-jedis/">Spring Boot 中使用 Jedis 来操作 Redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/26/SpringBoot/spring-boot-no-beans/">Configuration 注解中使用 Autowired 注解 IDE 报错</a></li></ul></div></div></div></div><a id="totop" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.3.0" async></script><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">网站地图</a> |<a href="/atom.xml">订阅本站</a> |<span>联系博主：<a href="mailto:liuhaiming.cn@gmail.com" target="_blank" class="fa fa-email"> </a><a href="http://weibo.com/luobuxiadeyu" target="_blank" class="fa fa-weibo"></a><a href="https://github.com/liuhaimingcn" target="_blank" class="fa fa-github"> </a></span></p><p><span> Copyright &copy;<a href="/." rel="nofollow">寻梦的尕柳</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span><span><a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> Theme </a>by<a rel="nofollow" target="_blank" href="https://github.com/chaooo"> Charles.</a></span></p></div></div></div><script>var duoshuoQuery = {short_name:'liuhaiming'};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    document.getElementsByTagName('body')[0].appendChild(ds);
+})();
+</script><script type="text/javascript" src="/js/search.json.js?v=1.3.0"></script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?a7a2c4aca1cbfe4dd193dcc93b9b2012";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();</script></body></html>

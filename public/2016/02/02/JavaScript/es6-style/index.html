@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="寻梦的尕柳的个人blog"><meta name="keywords" content="编程, java, node.js, 摄影"><title>ES6-Module | 寻梦的尕柳</title><link rel="stylesheet" type="text/css" href="//fonts.css.network/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.3.0"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=1.3.0"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">ES6-Module</h1><a id="logo" href="/.">寻梦的尕柳</a><p class="description">幽幽一缕香，飘在深深旧梦中，宛如挥手袖底风，淡淡回首，也无风雨也无晴。</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">ES6-Module</h1><div class="post-meta">Feb 2, 2016<span> | </span><span class="category"><a href="/categories/JavaScript/">JavaScript</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a data-thread-key="2016/02/02/JavaScript/es6-style/" href="/2016/02/02/JavaScript/es6-style/#comments" class="ds-thread-count"></a><div class="post-content"><h1 id="规格文件"><a href="#规格文件" class="headerlink" title="规格文件"></a>规格文件</h1><p>规格文件是计算机语言的官方标准，详细描述语法规则和实现方法。<br>ECMAScript 6的规格，可以在ECMA国际标准组织的官方网站（www.ecma-international.org/ecma-262/6.0/）免费下载和在线阅读。</p>
+<a id="more"></a> 
+<h1 id="编程风格"><a href="#编程风格" class="headerlink" title="编程风格"></a>编程风格</h1><h2 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h2><p>let取代var<br>全局常量和线程安全<br>在let和const之间，建议优先使用const，尤其是在全局环境，不应该设置变量，只应设置常量。这符合函数式编程思想，有利于将来的分布式运算。</p>
+<pre><code>// bad
+var a = 1, b = 2, c = 3;
+// good
+const a = 1;
+const b = 2;
+const c = 3;
+</code></pre><p>const声明常量还有两个好处，一是阅读代码的人立刻会意识到不应该修改这个值，二是防止了无意间修改变量值所导致的错误。<br>所有的函数都应该设置为常量。</p>
+<h2 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h2><p>V8引擎只在严格模式之下，支持let。  </p>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>静态字符串一律使用单引号或反引号，不使用双引号。动态字符串使用反引号。</p>
+<pre><code>// bad
+const a = &quot;foobar&quot;;
+const b = &apos;foo&apos; + a + &apos;bar&apos;;
+// good
+const a = &apos;foobar&apos;;
+const b = `foo${a}bar`;
+</code></pre><h2 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h2><p>使用数组成员对变量赋值时，优先使用解构赋值。</p>
+<pre><code>const arr = [1, 2, 3, 4];
+// bad
+const first = arr[0];
+const second = arr[1];
+// good
+const [first, second] = arr;
+</code></pre><p>函数的参数如果是对象的成员，优先使用解构赋值。</p>
+<pre><code>// bad
+function getFullName(user) {
+  const firstName = user.firstName;
+  const lastName = user.lastName;
+}
+// best
+function getFullName({ firstName, lastName }) {
+}
+</code></pre><p>如果函数返回多个值，优先使用对象的解构赋值，而不是数组的解构赋值。这样便于以后添加返回值，以及更改返回值的顺序。</p>
+<pre><code>// bad
+function processInput(input) {
+  return [left, right, top, bottom];
+}
+// good
+function processInput(input) {
+  return { left, right, top, bottom };
+}
+const { left, right } = processInput(input);
+</code></pre><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>使用扩展运算符（…）拷贝数组。</p>
+<pre><code>// bad
+const len = items.length;
+const itemsCopy = [];
+for (let i = 0; i &lt; len; i++) {
+  itemsCopy[i] = items[i];
+}
+// good
+const itemsCopy = [...items];
+</code></pre><p>使用Array.from方法，将类似数组的对象转为数组。</p>
+<pre><code>const foo = document.querySelectorAll(&apos;.foo&apos;);
+const nodes = Array.from(foo);
+</code></pre><p>立即执行函数可以写成箭头函数的形式。</p>
+<pre><code>(() =&gt; {
+  console.log(&apos;Welcome to the Internet.&apos;);
+})();
+</code></pre><p>那些需要使用函数表达式的场合，尽量用箭头函数代替。因为这样更简洁，而且绑定了this。</p>
+<pre><code>// bad
+[1, 2, 3].map(function (x) {
+  return x * x;
+});
+// best
+[1, 2, 3].map(x =&gt; x * x);
+</code></pre><p>简单的、单行的、不会复用的函数，建议采用箭头函数。如果函数体较为复杂，行数较多，还是应该采用传统的函数写法。  </p>
+<p>不要在函数体内使用arguments变量，使用rest运算符（…）代替。因为rest运算符显式表明你想要获取参数，而且arguments是一个类似数组的对象，而rest运算符可以提供一个真正的数组。</p>
+<pre><code>// bad
+function concatenateAll() {
+  const args = Array.prototype.slice.call(arguments);
+  return args.join(&apos;&apos;);
+}
+// good
+function concatenateAll(...args) {
+  return args.join(&apos;&apos;);
+}
+</code></pre><p>使用默认值语法设置函数参数的默认值。</p>
+<pre><code>// bad
+function handleThings(opts) {
+  opts = opts || {};
+}
+// good
+function handleThings(opts = {}) {
+  // ...
+}
+</code></pre><p>所有配置项都应该集中在一个对象，放在最后一个参数，布尔值不可以直接作为参数。</p>
+<pre><code>// bad
+function divide(a, b, option = false ) {
+}
+// good
+function divide(a, b, { option = false } = {}) {
+}
+</code></pre><h2 id="Map结构"><a href="#Map结构" class="headerlink" title="Map结构"></a>Map结构</h2><p>注意区分Object和Map，只有模拟实体对象时，才使用Object。如果只是需要key: value的数据结构，使用Map结构。因为Map有内建的遍历机制。</p>
+<pre><code>let map = new Map(arr);
+for (let key of map.keys()) {
+  console.log(key);
+}
+for (let value of map.values()) {
+  console.log(value);
+}
+for (let item of map.entries()) {
+  console.log(item[0], item[1]);
+}
+</code></pre><h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><p>总是用Class，取代需要prototype的操作。因为Class的写法更简洁，更易于理解。</p>
+<pre><code>// bad
+function Queue(contents = []) {
+  this._queue = [...contents];
+}
+Queue.prototype.pop = function() {
+  const value = this._queue[0];
+  this._queue.splice(0, 1);
+  return value;
+}
+// good
+class Queue {
+  constructor(contents = []) {
+    this._queue = [...contents];
+  }
+  pop() {
+    const value = this._queue[0];
+    this._queue.splice(0, 1);
+    return value;
+  }
+}
+</code></pre><p>使用extends实现继承，因为这样更简单，不会有破坏instanceof运算的危险。</p>
+<pre><code>// bad
+const inherits = require(&apos;inherits&apos;);
+function PeekableQueue(contents) {
+  Queue.apply(this, contents);
+}
+inherits(PeekableQueue, Queue);
+PeekableQueue.prototype.peek = function() {
+  return this._queue[0];
+}
+// good
+class PeekableQueue extends Queue {
+  peek() {
+    return this._queue[0];
+  }
+}
+</code></pre><h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>Module语法是JavaScript模块的标准写法，坚持使用这种写法。使用import取代require。</p>
+<pre><code>// bad
+const moduleA = require(&apos;moduleA&apos;);
+const func1 = moduleA.func1;
+const func2 = moduleA.func2;
+// good
+import { func1, func2 } from &apos;moduleA&apos;;
+</code></pre><p>使用export取代module.exports。<br>如果模块只有一个输出值，就使用export default，如果模块有多个输出值，就不使用export default，不要export default与普通的export同时使用。</p>
+<pre><code>// commonJS的写法
+var React = require(&apos;react&apos;);
+var Breadcrumbs = React.createClass({
+  render() {
+    return &lt;nav /&gt;;
+  }
+});
+module.exports = Breadcrumbs;
+// ES6的写法
+import React from &apos;react&apos;;
+const Breadcrumbs = React.createClass({
+  render() {
+    return &lt;nav /&gt;;
+  }
+});
+export default Breadcrumbs
+</code></pre><p>如果模块默认输出一个函数，函数名的首字母应该小写。</p>
+<pre><code>function makeStyleGuide() {
+}
+export default makeStyleGuide;
+</code></pre><p>如果模块默认输出一个对象，对象名的首字母应该大写。</p>
+<pre><code>const StyleGuide = {
+  es6: {
+  }
+};
+export default StyleGuide;
+</code></pre><p>读阮一峰老师《ECMAScript6入门》一书的笔记<br><br></p>
+</div><div class="tags"><a href="/tags/note/">note</a><a href="/tags/es6/">es6</a></div><div class="post-nav"><a href="/2016/02/02/JavaScript/es6-class/" class="pre">ES6-Class基本语法</a><a href="/2016/02/02/JavaScript/es6-module/" class="next">ES6-Module</a></div><div data-thread-key="2016/02/02/JavaScript/es6-style/" data-title="ES6-Module" data-url="http://haiyue.me/2016/02/02/JavaScript/es6-style/" class="ds-share flat"><div class="ds-share-inline"><ul class="ds-share-icons-16"><li data-toggle="ds-share-icons-more"><a href="javascript:void(0);" class="ds-more">分享到:</a></li><li><a href="javascript:void(0);" data-service="weibo" class="ds-weibo">微博</a></li><li><a href="javascript:void(0);" data-service="qzone" class="ds-qzone">QQ空间</a></li><li><a href="javascript:void(0);" data-service="qqt" class="ds-qqt">腾讯微博</a></li><li><a href="javascript:void(0);" data-service="wechat" class="ds-wechat">微信</a></li></ul><div class="ds-share-icons-more"></div></div></div><div id="comments"><div data-thread-key="2016/02/02/JavaScript/es6-style/" data-title="ES6-Module" data-url="http://haiyue.me/2016/02/02/JavaScript/es6-style/" data-author-key="1" class="ds-thread"></div></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="widget"><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="请输入关键字..."/></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architecture/">Architecture</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Photo/">Photo</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Boot/">Spring Boot</a><span class="category-list-count">4</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/note/" style="font-size: 15px;">note</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/original/" style="font-size: 15px;">original</a> <a href="/tags/jvm/" style="font-size: 15px;">jvm</a> <a href="/tags/软件/" style="font-size: 15px;">软件</a> <a href="/tags/motan/" style="font-size: 15px;">motan</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="http://godmod.cn" title="GodMod" target="_blank">GodMod</a></div><div class="widget"><div class="widget-title"><i class="fa fa-weibo"> 新浪微博</i></div><iframe width="100%" height="400" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=400&amp;fansRow=1&amp;ptype=1&amp;speed=0&amp;skin=5&amp;isTitle=0&amp;noborder=1&amp;isWeibo=1&amp;isFans=0&amp;uid=1819387822&amp;verifier=3b3e0dc8&amp;dpc=1" class="share_self"></iframe></div><div class="widget"><div class="comments-title"><i class="fa fa-commt"> 最近评论</i></div><div data-num-items="5" data-show-avatars="0" data-show-time="1" data-show-admin="0" data-excerpt-length="32" data-show-title="1" class="ds-recent-comments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/05/Linux/dns-records/">DNS Records 名词解释</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/05/Java/volatile/">理解 volatile</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/Linux/linux-kernel/">Linux调优</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/21/Architecture/jenkins/">使用jenkins进行项目的自动构建部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/16/JavaScript/尾调用优化/">尾调用优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/06/Java/jvm/">深入理解 Java 虚拟机笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/10/RPC/motan-hello/">RPC框架motan使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/04/Architecture/elk/">使用ELK管理日志</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/27/SpringBoot/spring-boot-jedis/">Spring Boot 中使用 Jedis 来操作 Redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/26/SpringBoot/spring-boot-no-beans/">Configuration 注解中使用 Autowired 注解 IDE 报错</a></li></ul></div></div></div></div><a id="totop" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.3.0" async></script><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">网站地图</a> |<a href="/atom.xml">订阅本站</a> |<span>联系博主：<a href="mailto:liuhaiming.cn@gmail.com" target="_blank" class="fa fa-email"> </a><a href="http://weibo.com/luobuxiadeyu" target="_blank" class="fa fa-weibo"></a><a href="https://github.com/liuhaimingcn" target="_blank" class="fa fa-github"> </a></span></p><p><span> Copyright &copy;<a href="/." rel="nofollow">寻梦的尕柳</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span><span><a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> Theme </a>by<a rel="nofollow" target="_blank" href="https://github.com/chaooo"> Charles.</a></span></p></div></div></div><script>var duoshuoQuery = {short_name:'liuhaiming'};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    document.getElementsByTagName('body')[0].appendChild(ds);
+})();
+</script><script type="text/javascript" src="/js/search.json.js?v=1.3.0"></script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?a7a2c4aca1cbfe4dd193dcc93b9b2012";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();</script></body></html>
