@@ -1,0 +1,76 @@
+# Theme version
+version: 1.3.0
+
+# Header
+menu:
+  - page: home
+    directory: .
+    icon: fa-home
+  - page: archive
+    directory: archives/
+    icon: fa-archive
+  - page: about
+    directory: about/
+    icon: fa-user
+  - page: rss
+    directory: atom.xml
+    icon: fa-rss
+
+# Sidebar
+widgets:
+  - search
+  - category
+  - tag
+  - links
+  - weibo
+  - recent_comments
+  - recent_posts
+
+# Static files
+js: js
+css: css
+
+# Extensions
+Plugins:
+  hexo-generator-feed
+  hexo-generator-sitemap
+  hexo-generator-baidu-sitemap
+
+#Feed Atom
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+#sitemap
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
+
+#Local search
+local_search: true ## Use a javascript-based local search engine, true/false.
+
+#Cmments
+duoshuo: liuhaiming ## Your duoshuo_shortname, e.g. username
+
+# About page 
+about:
+  photo_url: http://luobuxiadeyu.oss-cn-beijing.aliyuncs.com/%E5%A4%B4%E5%83%8F.jpg ## Your photo e.g. http://obzf7z93c.bkt.clouddn.com/themeauthor.jpg
+  email: liuhaiming.cn@gmail.com ## Your email e.g.  zhenggchaoo@gmail.com
+  weibo_url: http://weibo.com/luobuxiadeyu ## Your weibo's url e.g.  http://weibo.com/zhengchaooo
+  weibo_name: 寻梦的尕柳 ## Your weibo's name e.g.  秋过冬漫长
+  github_url: https://github.com/liuhaimingcn ## Your github'url e.g.  https://github.com/chaooo
+  github_name: 寻梦的尕柳 ## Your github'name e.g.  chaooo
+
+# Friend link
+links:
+  - title: GodMod
+    url: http://godmod.cn
+
+
+# Miscellaneous
+show_category_count: true ## If you want to show the count of categories in the sidebar widget please set the value to true.
+widgets_on_small_screens: true ## Set to true to enable widgets on small screens.
+busuanzi: true ## If you want to use Busuanzi page views please set the value to true.
+# google_analytics: ## Your Google Analytics tracking id, e.g. UA-42425684-2
+baidu_analytics: a7a2c4aca1cbfe4dd193dcc93b9b2012 ## Your Baidu Analytics tracking id, e.g. 8006843039519956000
